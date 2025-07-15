@@ -1,0 +1,29 @@
+Command: ninja all
+[1/9] Performing build step for 'bootloader'
+[1/1] cd /home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/bootloader/esp-idf/esptool_py && /home/sulicat/.espressif/python_env/idf5.5_py3.10_env/bin/python /home/sulicat/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 /home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/bootloader/bootloader.bin
+Bootloader binary size 0x52a0 bytes. 0x2d60 bytes (35%) free.
+[2/7] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/ReMapper.c.obj
+/home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/main/ReMapper.c: In function 'parse_hid_packet':
+/home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/main/ReMapper.c:95:10: warning: unused variable 'is_cmd' [-Wunused-variable]
+   95 |     bool is_cmd = is_l_cmd || is_r_cmd;
+      |          ^~~~~~
+/home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/main/ReMapper.c:94:10: warning: unused variable 'is_alt' [-Wunused-variable]
+   94 |     bool is_alt = is_l_alt || is_r_alt;
+      |          ^~~~~~
+/home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/main/ReMapper.c:93:10: warning: unused variable 'is_ctrl' [-Wunused-variable]
+   93 |     bool is_ctrl = is_l_ctrl || is_r_ctrl;
+      |          ^~~~~~~
+/home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/main/ReMapper.c:81:10: warning: unused variable 'modifier' [-Wunused-variable]
+   81 |     char modifier = data[0];
+      |          ^~~~~~~~
+[3/7] Linking C static library esp-idf/main/libmain.a
+[4/7] Generating ld/sections.ld
+[5/7] Linking CXX executable ReMapper.elf
+[6/7] Generating binary image from built executable
+esptool.py v4.9.dev6
+Creating esp32s3 image...
+Merged 2 ELF sections
+Successfully created esp32s3 image.
+Generated /home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/ReMapper.bin
+[7/7] cd /home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/esp-idf/esptool_py && /home/sulicat/.espressif/python_env/idf5.5_py3.10_env/bin/python /home/sulicat/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/partition_table/partition-table.bin /home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/ReMapper.bin
+ReMapper.bin binary size 0x40380 bytes. Smallest app partition is 0x100000 bytes. 0xbfc80 bytes (75%) free.

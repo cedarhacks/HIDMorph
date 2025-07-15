@@ -1,0 +1,2 @@
+source /home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/gdbinit/symbols
+source /home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/gdbinit/connect

@@ -1,0 +1,16 @@
+Command: ninja all
+[0/1] Re-running CMake...
+-- Minimal build - OFF
+-- Building ESP-IDF components for target esp32s3
+NOTICE: 
+Following dependencies have new versions available:
+Dependency "espressif/esp_tinyusb": "1.7.4" -> "1.7.6"
+Consider running "idf.py update-dependencies" to update your lock file.
+NOTICE: Processing 3 dependencies:
+NOTICE: [1/3] espressif/esp_tinyusb (1.7.4)
+NOTICE: [2/3] espressif/tinyusb (0.18.0~2)
+NOTICE: [3/3] idf (5.5.0)
+-- Configuring incomplete, errors occurred!
+See also "/home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/CMakeFiles/CMakeOutput.log".
+FAILED: build.ninja 
+/usr/bin/cmake --regenerate-during-build -S/home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper -B/home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build

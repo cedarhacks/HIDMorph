@@ -1,0 +1,19 @@
+Command: cmake -G Ninja -DPYTHON_DEPS_CHECKED=1 -DPYTHON=/home/sulicat/.espressif/python_env/idf5.5_py3.10_env/bin/python -DESP_PLATFORM=1 -DCCACHE_ENABLE=0 /home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper
+CMake Error at /home/sulicat/esp/esp-idf/tools/cmake/component.cmake:491 (add_library):
+  Cannot find source file:
+
+    /home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/main/ReMapper.c gamepad_hid.c
+
+  Tried extensions .c .C .c++ .cc .cpp .cxx .cu .mpp .m .M .mm .ixx .cppm .h
+  .hh .h++ .hm .hpp .hxx .in .txx .f .F .for .f77 .f90 .f95 .f03 .hip .ispc
+Call Stack (most recent call first):
+  main/CMakeLists.txt:1 (idf_component_register)
+
+
+CMake Error at /home/sulicat/esp/esp-idf/tools/cmake/component.cmake:491 (add_library):
+  No SOURCES given to target: __idf_main
+Call Stack (most recent call first):
+  main/CMakeLists.txt:1 (idf_component_register)
+
+
+CMake Generate step failed.  Build files cannot be regenerated correctly.
