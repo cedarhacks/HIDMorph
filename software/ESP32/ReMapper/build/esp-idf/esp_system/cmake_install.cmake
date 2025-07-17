@@ -39,6 +39,6 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/esp-idf/esp_system/port/cmake_install.cmake")
+  include("/home/sulicat/cedarhacks/ReMapper/software/ESP32/ReMapper/build/esp-idf/esp_system/port/cmake_install.cmake")
 endif()
 

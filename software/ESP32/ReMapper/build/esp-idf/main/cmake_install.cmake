@@ -1,4 +1,4 @@
-# Install script for directory: /home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/main
+# Install script for directory: /home/sulicat/cedarhacks/ReMapper/software/ESP32/ReMapper/main
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

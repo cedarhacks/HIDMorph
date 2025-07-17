@@ -1,4 +1,4 @@
-/* * Data converted from /home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/esp-idf/mbedtls/x509_crt_bundle
+/* * Data converted from /home/sulicat/cedarhacks/ReMapper/software/ESP32/ReMapper/build/esp-idf/mbedtls/x509_crt_bundle
  */
 .data
 #if !defined (__APPLE__) && !defined (__linux__)

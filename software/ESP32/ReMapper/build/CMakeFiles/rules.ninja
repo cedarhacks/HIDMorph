@@ -1917,7 +1917,7 @@ rule C_STATIC_LIBRARY_LINKER____idf_main_
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /usr/bin/cmake --regenerate-during-build -S/home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper -B/home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build
+  command = /usr/bin/cmake --regenerate-during-build -S/home/sulicat/cedarhacks/ReMapper/software/ESP32/ReMapper -B/home/sulicat/cedarhacks/ReMapper/software/ESP32/ReMapper/build
   description = Re-running CMake...
   generator = 1
 

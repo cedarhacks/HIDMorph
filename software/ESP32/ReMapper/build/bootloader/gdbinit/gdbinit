@@ -1,2 +1,2 @@
-source /home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/bootloader/gdbinit/symbols
-source /home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/bootloader/gdbinit/connect
+source /home/sulicat/cedarhacks/ReMapper/software/ESP32/ReMapper/build/bootloader/gdbinit/symbols
+source /home/sulicat/cedarhacks/ReMapper/software/ESP32/ReMapper/build/bootloader/gdbinit/connect

@@ -1,4 +1,4 @@
-# Install script for directory: /home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/managed_components/espressif__esp_tinyusb
+# Install script for directory: /home/sulicat/cedarhacks/ReMapper/software/ESP32/ReMapper/managed_components/espressif__esp_tinyusb
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

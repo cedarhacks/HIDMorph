@@ -11,11 +11,11 @@
 
 const char *hid_string_descriptor[5] = {
     // array of pointer to string descriptors
-    (char[]){0x09, 0x04},    // 0: is supported language is English (0x0409)
-    "TinyUSB",               // 1: Manufacturer
-    "TinyUSB Device",        // 2: Product
-    "123456",                // 3: Serials, should use chip ID
-    "Example HID interface", // 4: HID
+    (char[]){0x09, 0x04},  // 0: is supported language is English (0x0409)
+    "CedarHacks",          // 1: Manufacturer
+    "ReMapper V1",         // 2: Product
+    "123456",              // 3: Serials, should use chip ID
+    "Game Controller HID", // 4: HID
 };
 
 const uint8_t hid_report_descriptor[] = {
@@ -37,7 +37,6 @@ void gamepad_hid_init() {
         .external_phy = false,
         .configuration_descriptor = hid_configuration_descriptor,
     };
-
 
     int stat = tinyusb_driver_install(&tusb_cfg);
 
@@ -66,9 +65,8 @@ void gamepad_hid_step() {
     temp_x += 0.1;
     temp_x = temp_x >= 100 ? 0 : temp_x;
 
-
     if (tud_mounted()) {
-        printf("Sending Gamepad report\n");
+        // printf("Sending Gamepad report\n");
 
         gamepad_report_t report = {
             .report_id = REPORT_ID_GAMEPAD,

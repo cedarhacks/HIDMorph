@@ -17,4 +17,4 @@ set confirm off
 set confirm on
 
 # Load application symbols
-file /home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/bootloader/bootloader.elf
+file /home/sulicat/cedarhacks/ReMapper/software/ESP32/ReMapper/build/bootloader/bootloader.elf

@@ -13,8 +13,8 @@ end
 
 # Load bootloader symbols
 set confirm off
-    add-symbol-file /home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/bootloader/bootloader.elf
+    add-symbol-file /home/sulicat/cedarhacks/ReMapper/software/ESP32/ReMapper/build/bootloader/bootloader.elf
 set confirm on
 
 # Load application symbols
-file /home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/ReMapper.elf
+file /home/sulicat/cedarhacks/ReMapper/software/ESP32/ReMapper/build/ReMapper.elf

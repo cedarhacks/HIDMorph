@@ -1,13 +1,13 @@
 # Target labels
  bootloader
 # Source files and their labels
-/home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/CMakeFiles/bootloader
-/home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/CMakeFiles/bootloader.rule
-/home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/CMakeFiles/bootloader-complete.rule
-/home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
-/home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
-/home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
-/home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
-/home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
-/home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
-/home/sulicat/git/hardware/ReMapper/software/ESP32/ReMapper/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
+/home/sulicat/cedarhacks/ReMapper/software/ESP32/ReMapper/build/CMakeFiles/bootloader
+/home/sulicat/cedarhacks/ReMapper/software/ESP32/ReMapper/build/CMakeFiles/bootloader.rule
+/home/sulicat/cedarhacks/ReMapper/software/ESP32/ReMapper/build/CMakeFiles/bootloader-complete.rule
+/home/sulicat/cedarhacks/ReMapper/software/ESP32/ReMapper/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+/home/sulicat/cedarhacks/ReMapper/software/ESP32/ReMapper/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/home/sulicat/cedarhacks/ReMapper/software/ESP32/ReMapper/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/home/sulicat/cedarhacks/ReMapper/software/ESP32/ReMapper/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/home/sulicat/cedarhacks/ReMapper/software/ESP32/ReMapper/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/home/sulicat/cedarhacks/ReMapper/software/ESP32/ReMapper/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/home/sulicat/cedarhacks/ReMapper/software/ESP32/ReMapper/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
