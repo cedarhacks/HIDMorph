@@ -2,6 +2,12 @@
 
 #include <string.h>
 
+#include "lwip/sockets.h"
+#include "lwip/netdb.h"
+#include "lwip/inet.h"
+#include "esp_log.h"
+
+
 void start_access_point() {
 
     // Initialize NVS
@@ -58,10 +64,67 @@ void start_webserver() {
     printf("HTTP server started\n");
 }
 
+#define DNS_PORT 53
+#define DNS_BUFFER_SIZE 512
+static const char *TAG = "dns_server";
+
 void webserver_init() {
 
     start_access_point();
     start_webserver();
+
+    struct sockaddr_in server_addr, client_addr;
+    socklen_t sock_len = sizeof(client_addr);
+    int sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+
+    if (sock < 0) {
+        ESP_LOGE(TAG, "Socket creation failed");
+        return;
+    }
+
+    memset(&server_addr, 0, sizeof(server_addr));
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+    server_addr.sin_port = htons(DNS_PORT);
+
+    bind(sock, (struct sockaddr *)&server_addr, sizeof(server_addr));
+    ESP_LOGI(TAG, "DNS server started on port %d", DNS_PORT);
+
+    uint8_t buf[DNS_BUFFER_SIZE];
+
+    while (1) {
+        int len = recvfrom(sock, buf, DNS_BUFFER_SIZE, 0, (struct sockaddr *)&client_addr, &sock_len);
+        if (len < 0) continue;
+
+        // Craft a minimal DNS response to any query
+        // This is a simple fixed format response
+        buf[2] |= 0x80; // Set response flag
+        buf[3] |= 0x80; // Set recursion available
+        buf[7] = 1;     // Answer count
+
+        // Add answer section
+        int pos = len;
+        buf[pos++] = 0xC0;
+        buf[pos++] = 0x0C; // pointer to domain name
+        buf[pos++] = 0x00;
+        buf[pos++] = 0x01; // type A
+        buf[pos++] = 0x00;
+        buf[pos++] = 0x01; // class IN
+        buf[pos++] = 0x00;
+        buf[pos++] = 0x00;
+        buf[pos++] = 0x00;
+        buf[pos++] = 0x3C; // TTL
+        buf[pos++] = 0x00;
+        buf[pos++] = 0x04; // data length
+
+        // Set IP: 192.168.4.1 (default ESP32 AP IP)
+        buf[pos++] = 192;
+        buf[pos++] = 168;
+        buf[pos++] = 4;
+        buf[pos++] = 1;
+
+        sendto(sock, buf, pos, 0, (struct sockaddr *)&client_addr, sock_len);
+    }
 }
 
 void webserver_step() {

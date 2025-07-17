@@ -1,7 +1,7 @@
 {
     "version":            "1.2",
     "project_name":       "ReMapper",
-    "project_version":    "df3ab3d-dirty",
+    "project_version":    "70e4b71-dirty",
     "project_path":       "/home/sulicat/cedarhacks/ReMapper/software/ESP32/ReMapper",
     "idf_path":           "/home/sulicat/esp/esp-idf",
     "build_dir":          "/home/sulicat/cedarhacks/ReMapper/software/ESP32/ReMapper/build",
