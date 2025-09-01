@@ -21,10 +21,9 @@ uint8_t rx_data[1024] = {0};
 #define NEW_EVENTS_SIZE (30)
 Event_t new_events[NEW_EVENTS_SIZE];
 
-// extern const unsigned char index_html_start[] asm("_text_assets_embed_index_html_start");
 
-extern const uint8_t _binary_assets_embed_index_html_start[]; // path → underscores
-extern const uint8_t _binary_assets_embed_index_html_end[];
+extern const uint8_t _binary_index_html_start[]; // path → underscores
+extern const uint8_t _binary_index_html_end[];
 
 void print_event(Event_t *event) {
     // printf("EVENT: %s %c\n", event->type == EVENT_KEY_RELEASED ? "RELEASED" : "PRESSED", event->ascii);
@@ -142,7 +141,7 @@ void app_main(void) {
     int blink_val = 0;
 
     while (1) {
-        // printf("%s\n", _binary_assets_embed_index_html_start);
+        printf("%s\n", _binary_index_html_start);
         vTaskDelay(500 / portTICK_PERIOD_MS);
         gpio_set_level(8, blink_val);
         blink_val = !blink_val;

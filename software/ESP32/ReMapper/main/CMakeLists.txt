@@ -33,6 +33,11 @@ message(STATUS "Embedding bin assets : ${SITE_ASSETS_BIN}")
 idf_component_register(
     SRCS "ReMapper.c" "gamepad_hid.c" "hid_parsing.c" "webserver.c"
     INCLUDE_DIRS "." "../../../SHARED/include/"
-    EMBED_TXTFILES ${SITE_ASSETS_TXT}
+    EMBED_TXTFILES "index.html"
     REQUIRES tinyusb esp_wifi nvs_flash esp-tls esp_netif esp_http_server
 )
+
+# idf_component_register(
+#     SRCS "test.c"
+#     EMBED_TXTFILES "index.html"
+# )
