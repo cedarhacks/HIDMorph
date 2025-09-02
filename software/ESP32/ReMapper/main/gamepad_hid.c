@@ -1,9 +1,9 @@
-#include "gamepad_hid.h"
-
 #include <string.h>
+#include "gamepad_hid.h"
 
 #include "tinyusb.h"
 #include "class/hid/hid_device.h"
+#include "esp_log.h"
 
 #define REPORT_ID_GAMEPAD 0x01
 
@@ -40,7 +40,7 @@ void gamepad_hid_init() {
 
     int stat = tinyusb_driver_install(&tusb_cfg);
 
-    printf("Install Gamepad HID driver status: %d\n", stat);
+    ESP_LOGI("[HID]", "Install Gamepad HID driver status: %d\n", stat);
 }
 
 uint8_t const *tud_hid_descriptor_report_cb(uint8_t instance) {

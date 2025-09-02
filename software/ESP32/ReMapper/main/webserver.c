@@ -7,6 +7,15 @@
 #include "lwip/inet.h"
 #include "esp_log.h"
 
+#define DNS_PORT 53
+#define DNS_BUFFER_SIZE 512
+int dns_sock;
+
+extern const uint8_t _binary_index_html_start[];
+extern const uint8_t _binary_index_html_end[];
+
+extern const uint8_t _binary_style_css_start[];
+extern const uint8_t _binary_style_css_end[];
 
 void start_access_point() {
 
@@ -36,13 +45,19 @@ void start_access_point() {
     ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_AP, &wifi_config));
     ESP_ERROR_CHECK(esp_wifi_start());
 
-    printf("ReMapper - Started WIFI\n");
+    ESP_LOGI("WIFI", "Wifi network started: %s\n", AP_SSID);
 }
 
 // -------------------------------------------------------------------------------------
 
 esp_err_t root_get_handler(httpd_req_t *req) {
-    const char *resp_str = "<html><body><h1>ReMapper V1</h1></body></html>";
+    const char *resp_str = (char*)_binary_index_html_start;
+    httpd_resp_send(req, resp_str, HTTPD_RESP_USE_STRLEN);
+    return ESP_OK;
+}
+
+esp_err_t style_get_handler(httpd_req_t *req) {
+    const char *resp_str = (char*)_binary_style_css_start;
     httpd_resp_send(req, resp_str, HTTPD_RESP_USE_STRLEN);
     return ESP_OK;
 }
@@ -52,33 +67,30 @@ void start_webserver() {
 
     httpd_handle_t server = NULL;
 
-    httpd_uri_t uri = {.uri = "/",
-                       .method = HTTP_GET,
-                       .handler = root_get_handler,
-                       .user_ctx = NULL};
+    httpd_uri_t uri_root = {.uri = "/",
+                            .method = HTTP_GET,
+                            .handler = root_get_handler,
+                            .user_ctx = NULL};
+
+    httpd_uri_t uri_style = {.uri = "/style.css",
+                             .method = HTTP_GET,
+                             .handler = style_get_handler,
+                             .user_ctx = NULL};
 
     if (httpd_start(&server, &config) == ESP_OK) {
-        httpd_register_uri_handler(server, &uri);
+        httpd_register_uri_handler(server, &uri_root);
+        httpd_register_uri_handler(server, &uri_style);
     }
 
-    printf("HTTP server started\n");
+    ESP_LOGI("WebServer", "HTTP server started!\n");
 }
 
-#define DNS_PORT 53
-#define DNS_BUFFER_SIZE 512
-static const char *TAG = "dns_server";
+void start_dns() {
+    struct sockaddr_in server_addr;
+    dns_sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
 
-void webserver_init() {
-
-    start_access_point();
-    start_webserver();
-
-    struct sockaddr_in server_addr, client_addr;
-    socklen_t sock_len = sizeof(client_addr);
-    int sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-
-    if (sock < 0) {
-        ESP_LOGE(TAG, "Socket creation failed");
+    if (dns_sock < 0) {
+        ESP_LOGE("[ReMapper DNS]", "Socket creation failed");
         return;
     }
 
@@ -87,43 +99,56 @@ void webserver_init() {
     server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
     server_addr.sin_port = htons(DNS_PORT);
 
-    bind(sock, (struct sockaddr *)&server_addr, sizeof(server_addr));
-    ESP_LOGI(TAG, "DNS server started on port %d", DNS_PORT);
+    bind(dns_sock, (struct sockaddr *)&server_addr, sizeof(server_addr));
+    ESP_LOGI("[ReMapper DNS]", "DNS server started on port %d", DNS_PORT);
+}
 
-    uint8_t buf[DNS_BUFFER_SIZE];
+void step_dns() {
+    struct sockaddr_in client_addr;
+    socklen_t sock_len = sizeof(client_addr);
+    static uint8_t dns_buf[DNS_BUFFER_SIZE];
+
+    int len = recvfrom(dns_sock, dns_buf, DNS_BUFFER_SIZE, 0, (struct sockaddr *)&client_addr, &sock_len);
+    if (len < 0) return;
+
+    // Craft a minimal DNS response to any query
+    // This is a simple fixed format response
+    dns_buf[2] |= 0x80; // Set response flag
+    dns_buf[3] |= 0x80; // Set recursion available
+    dns_buf[7] = 1;     // Answer count
+
+    // Add answer section
+    int pos = len;
+    dns_buf[pos++] = 0xC0;
+    dns_buf[pos++] = 0x0C; // pointer to domain name
+    dns_buf[pos++] = 0x00;
+    dns_buf[pos++] = 0x01; // type A
+    dns_buf[pos++] = 0x00;
+    dns_buf[pos++] = 0x01; // class IN
+    dns_buf[pos++] = 0x00;
+    dns_buf[pos++] = 0x00;
+    dns_buf[pos++] = 0x00;
+    dns_buf[pos++] = 0x3C; // TTL
+    dns_buf[pos++] = 0x00;
+    dns_buf[pos++] = 0x04; // data length
+
+    // Set IP: 192.168.4.1 (default ESP32 AP IP)
+    dns_buf[pos++] = 192;
+    dns_buf[pos++] = 168;
+    dns_buf[pos++] = 4;
+    dns_buf[pos++] = 1;
+
+    sendto(dns_sock, dns_buf, pos, 0, (struct sockaddr *)&client_addr, sock_len);
+}
+
+void webserver_init() {
+
+    start_access_point();
+    start_webserver();
+    start_dns();
 
     while (1) {
-        int len = recvfrom(sock, buf, DNS_BUFFER_SIZE, 0, (struct sockaddr *)&client_addr, &sock_len);
-        if (len < 0) continue;
-
-        // Craft a minimal DNS response to any query
-        // This is a simple fixed format response
-        buf[2] |= 0x80; // Set response flag
-        buf[3] |= 0x80; // Set recursion available
-        buf[7] = 1;     // Answer count
-
-        // Add answer section
-        int pos = len;
-        buf[pos++] = 0xC0;
-        buf[pos++] = 0x0C; // pointer to domain name
-        buf[pos++] = 0x00;
-        buf[pos++] = 0x01; // type A
-        buf[pos++] = 0x00;
-        buf[pos++] = 0x01; // class IN
-        buf[pos++] = 0x00;
-        buf[pos++] = 0x00;
-        buf[pos++] = 0x00;
-        buf[pos++] = 0x3C; // TTL
-        buf[pos++] = 0x00;
-        buf[pos++] = 0x04; // data length
-
-        // Set IP: 192.168.4.1 (default ESP32 AP IP)
-        buf[pos++] = 192;
-        buf[pos++] = 168;
-        buf[pos++] = 4;
-        buf[pos++] = 1;
-
-        sendto(sock, buf, pos, 0, (struct sockaddr *)&client_addr, sock_len);
+        step_dns();
     }
 }
 

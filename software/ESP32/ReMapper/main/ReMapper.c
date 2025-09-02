@@ -22,9 +22,6 @@ uint8_t rx_data[1024] = {0};
 Event_t new_events[NEW_EVENTS_SIZE];
 
 
-extern const uint8_t _binary_index_html_start[]; // path → underscores
-extern const uint8_t _binary_index_html_end[];
-
 void print_event(Event_t *event) {
     // printf("EVENT: %s %c\n", event->type == EVENT_KEY_RELEASED ? "RELEASED" : "PRESSED", event->ascii);
 }
@@ -64,7 +61,7 @@ void spi_master_task(void *args) {
                              &rpi_spi);
     ESP_ERROR_CHECK(ret);
 
-    printf(" -> DONE WITH SPI INITIALIZATION: spi ptr: %p\n", rpi_spi);
+    ESP_LOGI("SPI", "DONE WITH SPI INITIALIZATION: spi ptr: %p\n", rpi_spi);
 
     spi_transaction_t t = {
         .length = 8 * sizeof(HID_MESSAGE_PACKET_t),
@@ -141,7 +138,6 @@ void app_main(void) {
     int blink_val = 0;
 
     while (1) {
-        printf("%s\n", _binary_index_html_start);
         vTaskDelay(500 / portTICK_PERIOD_MS);
         gpio_set_level(8, blink_val);
         blink_val = !blink_val;
