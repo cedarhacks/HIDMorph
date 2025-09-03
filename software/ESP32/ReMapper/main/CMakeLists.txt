@@ -9,6 +9,8 @@ idf_component_register(
         "src/webserver.c"
         "src/task_webhost.c"
         "src/task_gamepad_out.c"
+        "src/programming_mode.c"
+        "src/W25Q128J.c"
     
     INCLUDE_DIRS
         "./include"
@@ -22,6 +24,7 @@ idf_component_register(
         tinyusb
         esp_wifi
         nvs_flash
+        spi_flash
         esp-tls
         esp_netif
         esp_http_server

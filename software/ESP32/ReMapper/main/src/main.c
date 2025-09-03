@@ -9,37 +9,56 @@
 #include "task_spi_usb.h"
 #include "task_webhost.h"
 #include "task_gamepad_out.h"
+#include "programming_mode.h"
+
+#include "esp_log.h"
 
 void app_main(void) {
 
-    // check the boot mode
-    xTaskCreate(task_spi_usb,
-                "spi_usb",
-                20480,
-                NULL,
-                10,
-                NULL);
+    bool is_programming_mode = true;
+    int flash_duration = 500;
 
-    xTaskCreate(task_webhost,
-                "webhost",
-                20480,
-                NULL,
-                1,
-                NULL);
+    if (is_programming_mode) {
+        flash_duration = 100;
 
-    xTaskCreate(task_gamepad_out,
-                "gamepad",
-                20480,
-                NULL,
-                10,
-                NULL);
+        ESP_LOGI("main", "Entering Programming Mode");
+
+        // should not terminate
+        run_programming_mode();
+
+
+    } else {
+        flash_duration = 1000;
+
+        // check the boot mode
+        xTaskCreate(task_spi_usb,
+                    "spi_usb",
+                    20480,
+                    NULL,
+                    10,
+                    NULL);
+
+        xTaskCreate(task_webhost,
+                    "webhost",
+                    20480,
+                    NULL,
+                    1,
+                    NULL);
+
+        xTaskCreate(task_gamepad_out,
+                    "gamepad",
+                    20480,
+                    NULL,
+                    10,
+                    NULL);
+    }
 
     gpio_reset_pin(8);
     gpio_set_direction(8, GPIO_MODE_OUTPUT);
     int blink_val = 0;
 
     while (1) {
-        vTaskDelay(500 / portTICK_PERIOD_MS);
+        vTaskDelay(flash_duration / portTICK_PERIOD_MS);
         gpio_set_level(8, blink_val);
         blink_val = !blink_val;
     }

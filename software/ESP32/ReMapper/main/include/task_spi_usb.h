@@ -1,3 +1,5 @@
+#pragma once
+
 #include "hid_messages.h"
 #include "hid_event.h"
 #include "esp_log.h"
