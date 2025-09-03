@@ -11,5 +11,4 @@ typedef struct Event {
     EventType_t type;
     uint8_t keycode;
     char ascii;
-
 } Event_t;

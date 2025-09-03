@@ -1,18 +1,12 @@
-#include <stdio.h>
+#include "task_spi_usb.h"
+#include "hid_parsing.h"
+
 #include <string.h>
+#include <stdio.h>
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "driver/gpio.h"
-#include "sdkconfig.h"
-#include "esp_log.h"
-#include "driver/spi_master.h"
-#include "driver/gpio.h"
 
-#include "ReMapper.h"
-#include "gamepad_hid.h"
-#include "hid_parsing.h"
-#include "webserver.h"
 
 // Prepare data to send
 uint8_t tx_data[1024] = {0};
@@ -21,12 +15,11 @@ uint8_t rx_data[1024] = {0};
 #define NEW_EVENTS_SIZE (30)
 Event_t new_events[NEW_EVENTS_SIZE];
 
-
 void print_event(Event_t *event) {
-    // printf("EVENT: %s %c\n", event->type == EVENT_KEY_RELEASED ? "RELEASED" : "PRESSED", event->ascii);
+    printf("EVENT: %s %c\n", event->type == EVENT_KEY_RELEASED ? "RELEASED" : "PRESSED", event->ascii);
 }
 
-void spi_master_task(void *args) {
+void task_spi_usb(void *args) {
 
     spi_device_handle_t rpi_spi;
 
@@ -89,57 +82,5 @@ void spi_master_task(void *args) {
         }
 
         vTaskDelay(1 / portTICK_PERIOD_MS);
-    }
-}
-
-void gamepad_task(void *args) {
-    gamepad_hid_init();
-
-    while (1) {
-        vTaskDelay(1 / portTICK_PERIOD_MS);
-        gamepad_hid_step();
-    }
-}
-
-void webhost_task(void *args) {
-    webserver_init();
-
-    while (1) {
-        vTaskDelay(1 / portTICK_PERIOD_MS);
-        webserver_step();
-    }
-}
-
-void app_main(void) {
-
-    xTaskCreate(spi_master_task,
-                "spi_master",
-                20480,
-                NULL,
-                10,
-                NULL);
-
-    xTaskCreate(webhost_task,
-                "webhost",
-                20480,
-                NULL,
-                5,
-                NULL);
-
-    xTaskCreate(gamepad_task,
-                "gamepad",
-                20480,
-                NULL,
-                10,
-                NULL);
-
-    gpio_reset_pin(8);
-    gpio_set_direction(8, GPIO_MODE_OUTPUT);
-    int blink_val = 0;
-
-    while (1) {
-        vTaskDelay(500 / portTICK_PERIOD_MS);
-        gpio_set_level(8, blink_val);
-        blink_val = !blink_val;
     }
 }

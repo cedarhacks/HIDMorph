@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "task_spi_usb.h": "c",
+        "task_gamepad_out.h": "c"
+    }
+}

@@ -1,12 +1,29 @@
 
 idf_component_register(
-    SRCS "ReMapper.c" "gamepad_hid.c" "hid_parsing.c" "webserver.c"
-    INCLUDE_DIRS "." "../../../SHARED/include/"
-    EMBED_TXTFILES "assets/index.html" "assets/style.css"
-    REQUIRES tinyusb esp_wifi nvs_flash esp-tls esp_netif esp_http_server
+    
+    SRCS
+        "src/main.c"
+        "src/task_spi_usb.c"
+        "src/gamepad_hid.c"
+        "src/hid_parsing.c"
+        "src/webserver.c"
+        "src/task_webhost.c"
+        "src/task_gamepad_out.c"
+    
+    INCLUDE_DIRS
+        "./include"
+        "../../../SHARED/include/"
+    
+    EMBED_TXTFILES
+        "assets/index.html"
+        "assets/style.css"
+    
+    REQUIRES
+        tinyusb
+        esp_wifi
+        nvs_flash
+        esp-tls
+        esp_netif
+        esp_http_server
 )
 
-# idf_component_register(
-#     SRCS "test.c"
-#     EMBED_TXTFILES "index.html"
-# )

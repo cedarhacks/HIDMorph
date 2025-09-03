@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ReMapper.h"
+#include "hid_event.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
