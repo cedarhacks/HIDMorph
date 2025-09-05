@@ -19,13 +19,13 @@ void app_main(void) {
     int flash_duration = 500;
 
     if (is_programming_mode) {
+
         flash_duration = 100;
 
         ESP_LOGI("main", "Entering Programming Mode");
 
         // should not terminate
         run_programming_mode();
-
 
     } else {
         flash_duration = 1000;
