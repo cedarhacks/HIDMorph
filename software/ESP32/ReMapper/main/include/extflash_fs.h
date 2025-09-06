@@ -20,6 +20,8 @@ typedef struct ExtFlashFs {
     wl_handle_t wl; // wear leveling hadnle
 } ExtFlashFs_t;
 
+bool extfs_setup(ExtFlashFs_t *fs, esp_flash_t *ext_flash, char *mount_path, char *parition_name);
+
 bool extfs_register_partion(ExtFlashFs_t *fs, esp_flash_t *flash, char *parition_name);
 bool extfs_mount_fatfs(ExtFlashFs_t *fs, char *mount_path, char *partition_name);
 bool extfs_unmount(ExtFlashFs_t *fs, const char *mount_path);

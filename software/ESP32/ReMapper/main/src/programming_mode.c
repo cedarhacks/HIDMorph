@@ -78,17 +78,9 @@ void run_programming_mode() {
 
     // now the goal is to mount an external parition to this qspi flash
     ExtFlashFs_t ext_part;
-    stat = extfs_register_partion(&ext_part, memory_chip.ext_flash, "myextfs");
-    ESP_LOGI(TAG, "Parition Register: %d", stat == true);
+    stat = extfs_setup(&ext_part, memory_chip.ext_flash, "/ext", "myextfs");
+    ESP_LOGI(TAG, "Mount External flash as vfs wl: %d", stat == true);
 
-    stat = extfs_mount_fatfs(&ext_part, "/ext", "myextfs");
-    ESP_LOGI(TAG, "Mount FS: %d", stat == true);
+    
 
-    stat = extfs_unmount(&ext_part, "/ext");
-    ESP_LOGI(TAG, "UNMOUNT FS: %d", stat == true);
-
-    stat = extfs_mount_fatfs(&ext_part, "/ext", "myextfs");
-    ESP_LOGI(TAG, "Mount FS: %d", stat == true);
-
-    fatfs_test();
 }

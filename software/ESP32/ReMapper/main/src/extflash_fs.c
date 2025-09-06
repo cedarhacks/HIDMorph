@@ -42,3 +42,11 @@ bool extfs_unmount(ExtFlashFs_t *fs, const char *mount_path) {
 
     return err == ESP_OK;
 }
+
+bool extfs_setup(ExtFlashFs_t *fs, esp_flash_t *ext_flash, char *mount_path, char *parition_name) {
+    bool stat;
+    stat = extfs_register_partion(fs, ext_flash, parition_name);
+    stat &= extfs_mount_fatfs(fs, mount_path, parition_name);
+
+    return stat == true;
+}
