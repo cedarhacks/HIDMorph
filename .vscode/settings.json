@@ -11,6 +11,9 @@
         "initializer_list": "c",
         "ranges": "c",
         "regex": "c",
-        "utility": "c"
+        "utility": "c",
+        "tusb.h": "c",
+        "tusb_config.h": "c",
+        "tusb_msc_storage.h": "c"
     }
 }
