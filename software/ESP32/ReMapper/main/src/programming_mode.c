@@ -1,5 +1,9 @@
 #include "programming_mode.h"
+#include "extflash_fs.h"
 #include "W25Q128J.h"
+#include "esp_log.h"
+
+static const char *TAG = "PROGRAMMING MODE";
 
 W25Q128J_t memory_chip;
 
@@ -19,9 +23,46 @@ void pprint_buff(uint8_t *buff, int len) {
     }
 }
 
-void run_programming_mode() {
-    // we need to initalize our qspi
+void fatfs_test(void) {
+    // 1. Write a test file
+    FILE *f = fopen("/ext/test.txt", "w"); // "/ext" = your mount point
+    if (!f) {
+        ESP_LOGE(TAG, "Failed to open file for writing");
+        return;
+    }
+    fprintf(f, "Hello FATFS! Count=%d\n", 123);
+    fclose(f);
+    ESP_LOGI(TAG, "Wrote test.txt");
 
+    // 2. Read it back
+    f = fopen("/ext/test.txt", "r");
+    if (!f) {
+        ESP_LOGE(TAG, "Failed to open file for reading");
+        return;
+    }
+    char buf[64];
+    if (fgets(buf, sizeof(buf), f)) {
+        ESP_LOGI(TAG, "Read back: %s", buf);
+    } else {
+        ESP_LOGE(TAG, "Read failed");
+    }
+    fclose(f);
+
+    // 3. Append something
+    f = fopen("/ext/test.txt", "a");
+    if (!f) {
+        ESP_LOGE(TAG, "Failed to open file for appending");
+        return;
+    }
+    fprintf(f, "Appended line!\n");
+    fclose(f);
+    ESP_LOGI(TAG, "Appended to test.txt");
+}
+
+void run_programming_mode() {
+    bool stat;
+
+    // initialize the qspi CHIP here
     memory_chip.bus.mosi_io_num = PIN_NUM_MOSI;
     memory_chip.bus.miso_io_num = PIN_NUM_MISO;
     memory_chip.bus.sclk_io_num = PIN_NUM_CLK;
@@ -29,37 +70,25 @@ void run_programming_mode() {
     memory_chip.bus.quadhd_io_num = PIN_NUM_IO3;
     memory_chip.bus.max_transfer_sz = 4096;
     memory_chip.PIN_CS = PIN_NUM_CS;
+    stat = init_W25Q128J(&memory_chip, SPI3_HOST);
 
-    init_W25Q128J(&memory_chip, SPI3_HOST);
+    ESP_LOGI(TAG, "Flash init: %d", stat == true);
+    ESP_LOGI(TAG, "Flash Size: 0x%0lx", get_size_W25Q128J(&memory_chip));
+    ESP_LOGI(TAG, "Flash ID: 0x%0lx", get_id_W25Q128J(&memory_chip));
 
-    printf("\n Flash Size: 0x%0lx\n", get_size_W25Q128J(&memory_chip));
-    printf("Flash ID: 0x%0lx\n\n", get_id_W25Q128J(&memory_chip));
+    // now the goal is to mount an external parition to this qspi flash
+    ExtFlashFs_t ext_part;
+    stat = extfs_register_partion(&ext_part, memory_chip.ext_flash, "myextfs");
+    ESP_LOGI(TAG, "Parition Register: %d", stat == true);
 
-    uint8_t read_buff[255];
+    stat = extfs_mount_fatfs(&ext_part, "/ext", "myextfs");
+    ESP_LOGI(TAG, "Mount FS: %d", stat == true);
 
-    uint8_t write_buff[255];
-    for (int i = 0; i < 255; i++)
-        write_buff[i] = i % 50;
+    stat = extfs_unmount(&ext_part, "/ext");
+    ESP_LOGI(TAG, "UNMOUNT FS: %d", stat == true);
 
-    read_W25Q128J(&memory_chip, read_buff, 0x0, 255);
-    pprint_buff(read_buff, 255);
+    stat = extfs_mount_fatfs(&ext_part, "/ext", "myextfs");
+    ESP_LOGI(TAG, "Mount FS: %d", stat == true);
 
-    printf("\n Writing now\n");
-    write_W25Q128J(&memory_chip, write_buff, 0x0, 255);
-    read_W25Q128J(&memory_chip, read_buff, 0x0, 255);
-    pprint_buff(read_buff, 255);
-
-    printf("\n erase region \n");
-    erase_region_W25Q128J(&memory_chip, 0x0, 4096); // can only erase in sector sizes
-    read_W25Q128J(&memory_chip, read_buff, 0x0, 255);
-    pprint_buff(read_buff, 255);
-
-
-    // printf("\n erase all \n");
-    // erase_all_W25Q128J(&memory_chip);
-    // read_W25Q128J(&memory_chip, read_buff, 0x0, 255);
-    // pprint_buff(read_buff, 255);
-
-
-    printf("\n Done\n");
+    fatfs_test();
 }

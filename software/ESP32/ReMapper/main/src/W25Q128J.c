@@ -1,6 +1,6 @@
 #include "W25Q128J.h"
 
-const char *TAG = "W25Q128J";
+static const char *TAG = "W25Q128J";
 
 bool init_W25Q128J(W25Q128J_t *device, int SPI_DEV) {
 

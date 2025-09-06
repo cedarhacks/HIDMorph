@@ -3,6 +3,14 @@
         "task_spi_usb.h": "c",
         "task_gamepad_out.h": "c",
         "task_webhost.h": "c",
-        "w25q128j.h": "c"
+        "w25q128j.h": "c",
+        "extflash_fs.h": "c",
+        "array": "c",
+        "bitset": "c",
+        "string_view": "c",
+        "initializer_list": "c",
+        "ranges": "c",
+        "regex": "c",
+        "utility": "c"
     }
 }
