@@ -19,25 +19,14 @@ void app_main(void) {
     bool is_programming_mode = true;
     int flash_duration = 500;
 
-    // always a USB output task going on.
-    // it gets commanded via USB command output queue by other tasks
-    xTaskCreate(task_usb_device,
-                "usb_device",
-                20480,
-                NULL,
-                10,
-                NULL);
-
-        if (is_programming_mode) {
+    if (is_programming_mode) {
 
         flash_duration = 100;
 
         ESP_LOGI("main", "Entering Programming Mode");
-
-        // should not terminate
         run_programming_mode();
-    }
-    else {
+
+    } else {
         flash_duration = 1000;
 
         // check the boot mode
@@ -62,6 +51,15 @@ void app_main(void) {
         //             10,
         //             NULL);
     }
+
+    // always a USB output task going on.
+    // it gets commanded via USB command output queue by other tasks
+    xTaskCreate(task_usb_device,
+                "usb_device",
+                20480,
+                NULL,
+                10,
+                NULL);
 
     gpio_reset_pin(8);
     gpio_set_direction(8, GPIO_MODE_OUTPUT);

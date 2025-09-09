@@ -37,7 +37,7 @@ bool extfs_unmount(ExtFlashFs_t *fs, const char *mount_path) {
 
     if (err == ESP_OK) {
         fs->mounted = false;
-        fs->wl = WL_INVALID_HANDLE;
+        // fs->wl = WL_INVALID_HANDLE;
     }
 
     return err == ESP_OK;
