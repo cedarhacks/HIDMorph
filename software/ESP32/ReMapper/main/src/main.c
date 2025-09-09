@@ -9,6 +9,7 @@
 #include "task_spi_usb.h"
 #include "task_webhost.h"
 #include "task_gamepad_out.h"
+#include "task_usb_device.h"
 #include "programming_mode.h"
 
 #include "esp_log.h"
@@ -18,7 +19,16 @@ void app_main(void) {
     bool is_programming_mode = true;
     int flash_duration = 500;
 
-    if (is_programming_mode) {
+    // always a USB output task going on.
+    // it gets commanded via USB command output queue by other tasks
+    xTaskCreate(task_usb_device,
+                "usb_device",
+                20480,
+                NULL,
+                10,
+                NULL);
+
+        if (is_programming_mode) {
 
         flash_duration = 100;
 
@@ -26,8 +36,8 @@ void app_main(void) {
 
         // should not terminate
         run_programming_mode();
-
-    } else {
+    }
+    else {
         flash_duration = 1000;
 
         // check the boot mode
@@ -45,12 +55,12 @@ void app_main(void) {
                     1,
                     NULL);
 
-        xTaskCreate(task_gamepad_out,
-                    "gamepad",
-                    20480,
-                    NULL,
-                    10,
-                    NULL);
+        // xTaskCreate(task_gamepad_out,
+        //             "gamepad",
+        //             20480,
+        //             NULL,
+        //             10,
+        //             NULL);
     }
 
     gpio_reset_pin(8);

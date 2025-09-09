@@ -19,43 +19,43 @@ ExtFlashFs_t ext_flash_fs;
 
 // ---- TinyUSB MSC Callbacks ----
 // return number of sectors
-void tud_msc_capacity_cb(uint8_t lun, uint32_t *block_count, uint16_t *block_size) {
-    (void)lun;
-    size_t size = wl_size(ext_flash_fs.wl); // total bytes
-    size_t sec_size = SECTOR_SIZE;
-    *block_count = size / sec_size;
-    *block_size = sec_size;
-}
+// void tud_msc_capacity_cb(uint8_t lun, uint32_t *block_count, uint16_t *block_size) {
+//     (void)lun;
+//     size_t size = wl_size(ext_flash_fs.wl); // total bytes
+//     size_t sec_size = SECTOR_SIZE;
+//     *block_count = size / sec_size;
+//     *block_size = sec_size;
+// }
 
-int32_t tud_msc_read10_cb(uint8_t lun, uint32_t lba, uint32_t offset,
-                          void *buffer, uint32_t bufsize) {
+// int32_t tud_msc_read10_cb(uint8_t lun, uint32_t lba, uint32_t offset,
+//                           void *buffer, uint32_t bufsize) {
 
-    esp_err_t err = wl_read(ext_flash_fs.wl,
-                            lba * SECTOR_SIZE + offset,
-                            buffer,
-                            bufsize);
-    return (err == ESP_OK);
-}
-int32_t tud_msc_write10_cb(uint8_t lun, uint32_t lba, uint32_t offset,
-                           uint8_t *buffer, uint32_t bufsize) {
+//     esp_err_t err = wl_read(ext_flash_fs.wl,
+//                             lba * SECTOR_SIZE + offset,
+//                             buffer,
+//                             bufsize);
+//     return (err == ESP_OK);
+// }
+// int32_t tud_msc_write10_cb(uint8_t lun, uint32_t lba, uint32_t offset,
+//                            uint8_t *buffer, uint32_t bufsize) {
 
-    esp_err_t err = wl_write(ext_flash_fs.wl,
-                             lba * SECTOR_SIZE + offset,
-                             buffer,
-                             bufsize);
-    return (err == ESP_OK);
-}
+//     esp_err_t err = wl_write(ext_flash_fs.wl,
+//                              lba * SECTOR_SIZE + offset,
+//                              buffer,
+//                              bufsize);
+//     return (err == ESP_OK);
+// }
 
-void tud_msc_inquiry_cb(uint8_t lun, uint8_t vendor_id[8],
-                        uint8_t product_id[16], uint8_t product_rev[4]) {
+// void tud_msc_inquiry_cb(uint8_t lun, uint8_t vendor_id[8],
+//                         uint8_t product_id[16], uint8_t product_rev[4]) {
 
-    const char vid[] = "CEDARHCK";
-    const char pid[] = "EXTFLASH";
-    const char rev[] = "1.0";
-    memcpy(vendor_id, vid, strlen(vid));
-    memcpy(product_id, pid, strlen(pid));
-    memcpy(product_rev, rev, strlen(rev));
-}
+//     const char vid[] = "CEDARHCK";
+//     const char pid[] = "EXTFLASH";
+//     const char rev[] = "1.0";
+//     memcpy(vendor_id, vid, strlen(vid));
+//     memcpy(product_id, pid, strlen(pid));
+//     memcpy(product_rev, rev, strlen(rev));
+// }
 
 int32_t tud_msc_scsi_cb(uint8_t lun, uint8_t const scsi_cmd[16], void *buffer, uint16_t bufsize) {
     int32_t ret;
@@ -154,16 +154,16 @@ void run_programming_mode() {
     // now the goal is to mount an external parition to this qspi flash
     stat = extfs_setup(&ext_flash_fs, memory_chip.ext_flash, "/ext", "myextfs");
     ESP_LOGI(TAG, "Mount External flash as vfs wl: %d", stat == true);
+    extfs_unmount(&ext_flash_fs, "/ext"); // no reason for the partition to be mounted, we just needed to create it
 
-    extfs_unmount(&ext_flash_fs, "/ext");
-    tud_init(BOARD_TUD_RHPORT); // start MSC
+    // tud_init(BOARD_TUD_RHPORT); // start MSC
 
-    while (1) {
-        tud_task(); // TinyUSB background task
-        vTaskDelay(1);
-    }
+    // while (1) {
+    //     tud_task(); // TinyUSB background task
+    //     vTaskDelay(1);
+    // }
 
-    tud_deinit(BOARD_TUD_RHPORT); // stop MSC
+    // tud_deinit(BOARD_TUD_RHPORT); // stop MSC
 
-    extfs_mount_fatfs(&ext_flash_fs, "/ext", "myextfs");
+    // extfs_mount_fatfs(&ext_flash_fs, "/ext", "myextfs");
 }
