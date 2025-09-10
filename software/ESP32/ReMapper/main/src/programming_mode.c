@@ -72,7 +72,6 @@ void fatfs_test(void) {
 void run_programming_mode() {
     bool stat;
 
-
     // initialize the qspi CHIP here
     memory_chip.bus.mosi_io_num = PIN_NUM_MOSI;
     memory_chip.bus.miso_io_num = PIN_NUM_MISO;
@@ -96,7 +95,5 @@ void run_programming_mode() {
     fatfs_test();
 
     ESP_LOGI(TAG, "WL handler: %d\n", ext_flash_fs.wl);
-
-    // extfs_unmount(&ext_flash_fs, "/ext"); // no reason for the partition to be mounted, we just needed to create it
 
 }

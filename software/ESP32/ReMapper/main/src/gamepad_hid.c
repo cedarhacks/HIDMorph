@@ -5,9 +5,14 @@
 #include "class/hid/hid_device.h"
 #include "esp_log.h"
 
-#define REPORT_ID_GAMEPAD 0x01
+#include "tusb_msc_storage.h"
+#include "class/msc/msc_device.h"
 
+#define REPORT_ID_GAMEPAD 0x01
 #define TUSB_DESC_TOTAL_LEN (TUD_CONFIG_DESC_LEN + CFG_TUD_HID * TUD_HID_DESC_LEN)
+
+
+// ---------------------------------------------
 
 const char *hid_string_descriptor[5] = {
     // array of pointer to string descriptors
@@ -28,21 +33,6 @@ static const uint8_t hid_configuration_descriptor[] = {
     TUD_HID_DESCRIPTOR(0, 4, false, sizeof(hid_report_descriptor), 0x81, 16, 10),
 };
 
-void gamepad_hid_init() {
-
-    const tinyusb_config_t tusb_cfg = {
-        .device_descriptor = NULL,
-        .string_descriptor = hid_string_descriptor,
-        .string_descriptor_count = sizeof(hid_string_descriptor) / sizeof(hid_string_descriptor[0]),
-        .external_phy = false,
-        .configuration_descriptor = hid_configuration_descriptor,
-    };
-
-    int stat = tinyusb_driver_install(&tusb_cfg);
-
-    ESP_LOGI("[HID]", "Install Gamepad HID driver status: %d\n", stat);
-}
-
 uint8_t const *tud_hid_descriptor_report_cb(uint8_t instance) {
     // We use only one interface and one HID report descriptor, so we can ignore parameter 'instance'
     return hid_report_descriptor;
@@ -58,6 +48,21 @@ uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id, hid_report_t
 }
 
 void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_t report_type, uint8_t const *buffer, uint16_t bufsize) {
+}
+
+void gamepad_hid_init() {
+
+    const tinyusb_config_t tusb_cfg = {
+        .device_descriptor = NULL,
+        .string_descriptor = hid_string_descriptor,
+        .string_descriptor_count = sizeof(hid_string_descriptor) / sizeof(hid_string_descriptor[0]),
+        .external_phy = false,
+        .configuration_descriptor = hid_configuration_descriptor,
+    };
+
+    int stat = tinyusb_driver_install(&tusb_cfg);
+
+    ESP_LOGI("[HID]", "Install Gamepad HID driver status: %d\n", stat);
 }
 
 void gamepad_hid_step() {

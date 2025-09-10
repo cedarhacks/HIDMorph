@@ -8,4 +8,4 @@
 
 
 // this task will take up the USB lines an register a Composite USB device
-void task_usb_device( void* argv );
+void task_usb_storage_device( void* argv );

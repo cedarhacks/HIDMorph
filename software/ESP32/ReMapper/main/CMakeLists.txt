@@ -11,7 +11,8 @@ idf_component_register(
         "src/programming_mode.c"
         "src/W25Q128J.c"
         "src/extflash_fs.c"
-        "src/task_usb_device.c"
+        "src/task_usb_storage_device.c"
+        "src/task_gamepad_out.c"
         "src/tusb_descriptors.c"
 
     INCLUDE_DIRS

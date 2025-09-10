@@ -9,22 +9,32 @@
 #include "task_spi_usb.h"
 #include "task_webhost.h"
 #include "task_gamepad_out.h"
-#include "task_usb_device.h"
+#include "task_usb_storage_device.h"
 #include "programming_mode.h"
 
 #include "esp_log.h"
 
+int flash_duration = 500;
+
 void app_main(void) {
 
-    bool is_programming_mode = true;
-    int flash_duration = 500;
+    volatile bool is_programming_mode = false;
 
     if (is_programming_mode) {
-
         flash_duration = 100;
 
         ESP_LOGI("main", "Entering Programming Mode");
+
+        // sets up the file system in the qspi
         run_programming_mode();
+
+        // in progamming mode we run the MSC task to allow the user to edit programs
+        xTaskCreate(task_usb_storage_device,
+                    "usb_storage",
+                    20480,
+                    NULL,
+                    10,
+                    NULL);
 
     } else {
         flash_duration = 1000;
@@ -37,29 +47,21 @@ void app_main(void) {
                     10,
                     NULL);
 
-        xTaskCreate(task_webhost,
-                    "webhost",
-                    20480,
-                    NULL,
-                    1,
-                    NULL);
-
-        // xTaskCreate(task_gamepad_out,
-        //             "gamepad",
+        // no web task 
+        // xTaskCreate(task_webhost,
+        //             "webhost",
         //             20480,
         //             NULL,
-        //             10,
+        //             1,
         //             NULL);
-    }
 
-    // always a USB output task going on.
-    // it gets commanded via USB command output queue by other tasks
-    xTaskCreate(task_usb_device,
-                "usb_device",
-                20480,
-                NULL,
-                10,
-                NULL);
+        xTaskCreate(task_gamepad_out,
+                    "gamepad",
+                    20480,
+                    NULL,
+                    10,
+                    NULL);
+    }
 
     gpio_reset_pin(8);
     gpio_set_direction(8, GPIO_MODE_OUTPUT);
