@@ -1,7 +1,6 @@
 # ReMapper
 
 ## TODO
-### Sep 2, 2025
  - [x] Switch from webserver to file system in programming mode
    - [x] Programming Mode switch with LED indication - electrical
    - [x] Show file system when plugged in programming mode - software
