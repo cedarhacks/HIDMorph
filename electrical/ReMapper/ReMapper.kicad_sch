@@ -4,6 +4,11 @@
 	(generator_version "9.0")
 	(uuid "facd47ac-9f29-4b3c-ae50-ce7a688e305d")
 	(paper "A3")
+	(title_block
+		(title "ReMapper")
+		(rev "3")
+		(company "CedarHacks")
+	)
 	(lib_symbols
 		(symbol "Connector:Conn_01x02_Pin"
 			(pin_names

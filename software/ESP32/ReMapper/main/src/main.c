@@ -18,7 +18,18 @@ int flash_duration = 500;
 
 void app_main(void) {
 
-    volatile bool is_programming_mode = false;
+    int programming_mode_gpio = GPIO_NUM_1;
+
+    // Programming Mode switch  -> pullup
+    gpio_config_t io_conf = {
+        .pin_bit_mask = (1ULL << programming_mode_gpio),
+        .mode = GPIO_MODE_INPUT,
+        .pull_up_en = GPIO_PULLUP_ENABLE,
+        .pull_down_en = GPIO_PULLDOWN_DISABLE,
+        .intr_type = GPIO_INTR_DISABLE};
+    gpio_config(&io_conf);
+
+    volatile bool is_programming_mode = gpio_get_level(programming_mode_gpio) == 1;
 
     if (is_programming_mode) {
         flash_duration = 100;
@@ -47,7 +58,7 @@ void app_main(void) {
                     10,
                     NULL);
 
-        // no web task 
+        // no web task
         // xTaskCreate(task_webhost,
         //             "webhost",
         //             20480,

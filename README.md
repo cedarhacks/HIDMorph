@@ -12,4 +12,7 @@
    - [x] Neesd to accept commands either for HID or handle the file storage (It will have the handle)
  - [ ] Read and parse files in qspi
  - [ ] Add LCD to schematic
- - [ ] Add 1 switch + 2 buttons to schematic 
+ - [ ] Add 1 switch + 2 buttons to schematic
+   - [ ] switch to IO1
+   - [ ] button 1 to IO2
+   - [ ] button 2 to IO3
