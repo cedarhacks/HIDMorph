@@ -11,7 +11,11 @@
    - [x] Needs to be able to initialize either as a MSC or HID (or both??) 
    - [x] Neesd to accept commands either for HID or handle the file storage (It will have the handle)
  - [ ] Read and parse files in qspi
+ - [x] Write OLED Driver
+   - [ ] Done here: https://github.com/cedarhacks/SSD1306_esp32_driver
  - [ ] Add LCD to schematic
+   - [ ] i2C IO15 data
+   - [ ] i2C IO16 CLK
  - [ ] Add 1 switch + 2 buttons to schematic
    - [ ] switch to IO1
    - [ ] button 1 to IO2
