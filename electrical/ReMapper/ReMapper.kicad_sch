@@ -10,6 +10,169 @@
 		(company "CedarHacks")
 	)
 	(lib_symbols
+		(symbol "Connector:Conn_01x02_Pin"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_01x02_Pin"
+				(at 0 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Generic connector, single row, 01x02, script generated"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Conn_01x02_Pin_1_1"
+				(rectangle
+					(start 0.8636 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy 0.8636 0)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -2.54) (xy 0.8636 -2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -2.54 180)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Connector:Conn_01x04_Pin"
 			(pin_names
 				(offset 1.016)
@@ -4430,182 +4593,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Switch:SW_SPDT"
-			(pin_names
-				(offset 0)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "SW"
-				(at 0 5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "SW_SPDT"
-				(at 0 -5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 0 -7.62 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Switch, single pole double throw"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "switch single-pole double-throw spdt ON-ON"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "SW_SPDT_0_1"
-				(circle
-					(center -2.032 0)
-					(radius 0.4572)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.651 0.254) (xy 1.651 2.286)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center 2.032 2.54)
-					(radius 0.4572)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center 2.032 -2.54)
-					(radius 0.4572)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "SW_SPDT_1_1"
-				(rectangle
-					(start -3.175 3.81)
-					(end 3.175 -3.81)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(pin passive line
-					(at -5.08 0 0)
-					(length 2.54)
-					(name "B"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 5.08 2.54 180)
-					(length 2.54)
-					(name "A"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 5.08 -2.54 180)
-					(length 2.54)
-					(name "C"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "power:GND"
 			(power)
 			(pin_numbers
@@ -5651,16 +5638,6 @@
 	)
 	(wire
 		(pts
-			(xy 386.08 208.28) (xy 386.08 209.55)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1d0e37f6-ef14-47ed-9da0-fba08230feca")
-	)
-	(wire
-		(pts
 			(xy 102.87 44.45) (xy 105.41 44.45)
 		)
 		(stroke
@@ -5878,6 +5855,16 @@
 			(type default)
 		)
 		(uuid "3cbf8f2a-b492-4aa5-83b6-6939e71c5b61")
+	)
+	(wire
+		(pts
+			(xy 377.19 205.74) (xy 377.19 209.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3d133a65-3dc6-4657-8a5d-3a47fca01b1a")
 	)
 	(wire
 		(pts
@@ -6138,16 +6125,6 @@
 			(type default)
 		)
 		(uuid "59774f57-79b2-427b-8548-1f5525e07445")
-	)
-	(wire
-		(pts
-			(xy 381 208.28) (xy 386.08 208.28)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "59d130ac-616d-47e3-99b4-4ca5d0a177ac")
 	)
 	(wire
 		(pts
@@ -6681,7 +6658,7 @@
 	)
 	(wire
 		(pts
-			(xy 369.57 205.74) (xy 370.84 205.74)
+			(xy 369.57 205.74) (xy 374.65 205.74)
 		)
 		(stroke
 			(width 0)
@@ -9088,9 +9065,9 @@
 		(at 361.95 128.27 90)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "25b7da16-1758-43ec-8563-c059f3cf0bde")
 		(property "Reference" "S5"
@@ -9102,7 +9079,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "SKRPABE010"
+		(property "Value" "ESP BUTTON 1"
 			(at 363.22 129.5399 90)
 			(effects
 				(font
@@ -9111,7 +9088,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "SKRPABE010:SW_SKRPABE010"
+		(property "Footprint" "footprints:push_button_SKRPABE010"
 			(at 361.95 128.27 0)
 			(effects
 				(font
@@ -9261,19 +9238,19 @@
 		(at 166.37 254 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "2c6c3642-b81e-45ca-97ed-8f7b7e9e515c")
 		(property "Reference" "J2"
-			(at 166.37 244.094 0)
+			(at 167.386 243.586 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "Conn_01x04_Pin"
+		(property "Value" "I2C Display"
 			(at 171.958 246.634 0)
 			(effects
 				(font
@@ -9281,7 +9258,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical"
 			(at 166.37 254 0)
 			(effects
 				(font
@@ -10327,7 +10304,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 386.08 209.55 0)
+		(at 377.19 209.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10336,7 +10313,7 @@
 		(fields_autoplaced yes)
 		(uuid "4fcb48ac-fabb-4a87-9c46-50ce0c116a45")
 		(property "Reference" "#PWR036"
-			(at 386.08 215.9 0)
+			(at 377.19 215.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10345,7 +10322,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 386.08 214.63 0)
+			(at 377.19 214.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10353,7 +10330,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 386.08 209.55 0)
+			(at 377.19 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10362,7 +10339,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 386.08 209.55 0)
+			(at 377.19 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10371,7 +10348,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 386.08 209.55 0)
+			(at 377.19 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10386,6 +10363,76 @@
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
 					(reference "#PWR036")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x02_Pin")
+		(at 377.19 200.66 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "50d1f333-981f-4680-ad95-6b1173d8dd4e")
+		(property "Reference" "J5"
+			(at 378.46 200.0249 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Programming Mode SW"
+			(at 378.46 202.5649 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
+			(at 377.19 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 377.19 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x02, script generated"
+			(at 377.19 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "20c58be1-faad-4c30-9794-7d4600ffde3b")
+		)
+		(pin "2"
+			(uuid "18097167-fe84-4813-9656-20ad9b0f68e6")
+		)
+		(instances
+			(project ""
+				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
+					(reference "J5")
 					(unit 1)
 				)
 			)
@@ -11516,9 +11563,9 @@
 		(at 383.54 128.27 90)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "82101850-0c62-47ad-a777-659d81f4ffc9")
 		(property "Reference" "S6"
@@ -11530,7 +11577,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "SKRPABE010"
+		(property "Value" "ESP BUTTON 2"
 			(at 384.81 129.5399 90)
 			(effects
 				(font
@@ -11539,7 +11586,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "SKRPABE010:SW_SKRPABE010"
+		(property "Footprint" "footprints:push_button_SKRPABE010"
 			(at 383.54 128.27 0)
 			(effects
 				(font
@@ -12344,9 +12391,9 @@
 		(at 360.68 167.64 90)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "a7e47e8e-bc95-419b-8cce-1d0b6514c4eb")
 		(property "Reference" "S4"
@@ -12358,7 +12405,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "SKRPABE010"
+		(property "Value" "ESP BUTTON 3"
 			(at 361.95 168.9099 90)
 			(effects
 				(font
@@ -12367,7 +12414,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "SKRPABE010:SW_SKRPABE010"
+		(property "Footprint" "footprints:push_button_SKRPABE010"
 			(at 360.68 167.64 0)
 			(effects
 				(font
@@ -13004,77 +13051,6 @@
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
 					(reference "LED2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Switch:SW_SPDT")
-		(at 375.92 205.74 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "b5d275c6-1bcc-4e54-9fa1-c9a72e429a1e")
-		(property "Reference" "SW1"
-			(at 375.92 196.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "PROGRAMMING_MODE_ENB"
-			(at 375.92 199.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 375.92 205.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 375.92 213.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Switch, single pole double throw"
-			(at 375.92 205.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "24ad9865-bd31-4ba6-a278-203e48cfea29")
-		)
-		(pin "3"
-			(uuid "ffbd6c0a-af50-4775-a9fb-b3942618425c")
-		)
-		(pin "2"
-			(uuid "2a219c8b-6113-4a2f-8e86-20ca448b0b64")
-		)
-		(instances
-			(project "ReMapper"
-				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "SW1")
 					(unit 1)
 				)
 			)
