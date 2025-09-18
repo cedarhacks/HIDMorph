@@ -5471,16 +5471,6 @@
 	)
 	(wire
 		(pts
-			(xy 331.47 36.83) (xy 331.47 38.1)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "07829439-222a-4711-81b5-b38bc3ca1472")
-	)
-	(wire
-		(pts
 			(xy 130.81 60.96) (xy 130.81 62.23)
 		)
 		(stroke
@@ -5791,7 +5781,17 @@
 	)
 	(wire
 		(pts
-			(xy 167.64 86.36) (xy 167.64 100.33)
+			(xy 335.28 45.72) (xy 335.28 46.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "35584745-9c4f-4e71-963b-3c528fae0ad7")
+	)
+	(wire
+		(pts
+			(xy 167.64 86.36) (xy 167.64 92.71)
 		)
 		(stroke
 			(width 0)
@@ -6301,16 +6301,6 @@
 	)
 	(wire
 		(pts
-			(xy 156.21 146.05) (xy 158.75 146.05)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "684aabfb-c067-4fb5-93bf-b2d7174170bd")
-	)
-	(wire
-		(pts
 			(xy 361.95 118.11) (xy 361.95 120.65)
 		)
 		(stroke
@@ -6448,6 +6438,16 @@
 			(type default)
 		)
 		(uuid "766c8515-5bb5-42dd-b18f-05cd50ef6958")
+	)
+	(wire
+		(pts
+			(xy 311.15 71.12) (xy 311.15 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "77027088-135f-40d4-979b-6e2518dc5116")
 	)
 	(wire
 		(pts
@@ -6651,16 +6651,6 @@
 	)
 	(wire
 		(pts
-			(xy 331.47 25.4) (xy 331.47 29.21)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8fc4a6f6-c1d4-44bf-aa47-f702d73d489c")
-	)
-	(wire
-		(pts
 			(xy 67.31 82.55) (xy 72.39 82.55)
 		)
 		(stroke
@@ -6701,7 +6691,7 @@
 	)
 	(wire
 		(pts
-			(xy 245.11 85.09) (xy 245.11 99.06)
+			(xy 245.11 85.09) (xy 245.11 92.71)
 		)
 		(stroke
 			(width 0)
@@ -6718,6 +6708,26 @@
 			(type default)
 		)
 		(uuid "95f6ade2-e62b-4224-8660-0629bf849e48")
+	)
+	(wire
+		(pts
+			(xy 67.31 67.31) (xy 72.39 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "95fb8cb1-3a49-4e61-a0f1-c57b9d26c88e")
+	)
+	(wire
+		(pts
+			(xy 335.28 36.83) (xy 335.28 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9a4071e7-6ddc-4d8e-aa1c-dd52ec66db98")
 	)
 	(wire
 		(pts
@@ -6821,6 +6831,16 @@
 	)
 	(wire
 		(pts
+			(xy 335.28 29.21) (xy 335.28 25.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a7525440-65fe-42ad-b8cb-143794dfdfc7")
+	)
+	(wire
+		(pts
 			(xy 46.99 31.75) (xy 46.99 33.02)
 		)
 		(stroke
@@ -6898,6 +6918,16 @@
 			(type default)
 		)
 		(uuid "b0322f74-b6f6-48f7-bcff-063d71c0cbd4")
+	)
+	(wire
+		(pts
+			(xy 311.15 80.01) (xy 311.15 81.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b129b44e-2b80-458e-96b2-7c40c9dbe990")
 	)
 	(wire
 		(pts
@@ -7011,6 +7041,16 @@
 	)
 	(wire
 		(pts
+			(xy 156.21 181.61) (xy 158.75 181.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c41960af-3e2d-48c4-9a31-d0bf8e30ddca")
+	)
+	(wire
+		(pts
 			(xy 135.89 25.4) (xy 135.89 29.21)
 		)
 		(stroke
@@ -7111,13 +7151,13 @@
 	)
 	(wire
 		(pts
-			(xy 331.47 45.72) (xy 331.47 46.99)
+			(xy 311.15 59.69) (xy 311.15 63.5)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "cef4724a-f811-44c8-8565-63fb7b9cabb3")
+		(uuid "cf1e831d-4dc8-460e-b9bd-fae19847f59c")
 	)
 	(wire
 		(pts
@@ -7401,16 +7441,6 @@
 	)
 	(wire
 		(pts
-			(xy 156.21 148.59) (xy 158.75 148.59)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f93be25c-e61c-4607-9d0a-8730473156e5")
-	)
-	(wire
-		(pts
 			(xy 204.47 138.43) (xy 212.09 138.43)
 		)
 		(stroke
@@ -7438,6 +7468,16 @@
 			(type default)
 		)
 		(uuid "fdaacad0-dbd7-4e52-99f0-1021c636f038")
+	)
+	(label "LED_RP_1"
+		(at 335.28 25.4 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "01c63981-2aba-4430-9c17-a345ba141b7c")
 	)
 	(label "QSPI_IO2_esp"
 		(at 53.34 142.24 180)
@@ -7499,16 +7539,6 @@
 		)
 		(uuid "0feb9868-bf80-4c48-a1f2-9988218d3daa")
 	)
-	(label "GPIO5_rp"
-		(at 359.41 25.4 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "12197192-f596-4704-bd35-214707c06e67")
-	)
 	(label "USB_IN_D-"
 		(at 179.07 78.74 0)
 		(effects
@@ -7549,7 +7579,7 @@
 		)
 		(uuid "17ada951-c990-4c15-96c7-6956236449ce")
 	)
-	(label "IO8_esp"
+	(label "LED_ESP_1"
 		(at 382.27 25.4 180)
 		(effects
 			(font
@@ -7709,6 +7739,16 @@
 		)
 		(uuid "43c5f4ed-712b-4b8a-97ed-195adf0aa941")
 	)
+	(label "LED_ESP_2"
+		(at 311.15 59.69 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4b3baf2e-732f-4b84-bab3-bf3225e1f5e4")
+	)
 	(label "USB_VIN"
 		(at 41.91 246.38 180)
 		(effects
@@ -7729,7 +7769,7 @@
 		)
 		(uuid "50bdc784-26c0-47bb-940d-07359c652cfa")
 	)
-	(label "IO8_esp"
+	(label "LED_ESP_1"
 		(at 67.31 64.77 180)
 		(effects
 			(font
@@ -7769,6 +7809,16 @@
 		)
 		(uuid "589e267f-a76f-4b14-ac34-29341c19e311")
 	)
+	(label "LED_RP_2"
+		(at 359.41 25.4 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5a3d07a1-9b1f-4343-8ac9-3d91fd880bb3")
+	)
 	(label "QSPI_CS_rp"
 		(at 322.58 200.66 0)
 		(effects
@@ -7778,16 +7828,6 @@
 			(justify left bottom)
 		)
 		(uuid "5e8f8277-192d-47cf-80ec-47135ed271d3")
-	)
-	(label "USB_VIN"
-		(at 331.47 25.4 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "62557df0-5127-45d9-98e2-f3d8ab806242")
 	)
 	(label "QSPI_IO0_rp"
 		(at 275.59 135.89 180)
@@ -7799,7 +7839,7 @@
 		)
 		(uuid "6519a6c9-03a9-4705-bd62-7a58c366e2a9")
 	)
-	(label "GPIO5_rp"
+	(label "LED_RP_1"
 		(at 156.21 179.07 180)
 		(effects
 			(font
@@ -7969,15 +8009,15 @@
 		)
 		(uuid "9cbe33ca-a1b9-49be-a85a-c170e4579ad3")
 	)
-	(label "SWCLK_rp"
-		(at 156.21 146.05 180)
+	(label "LED_RP_2"
+		(at 156.21 181.61 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "a44a570c-835e-4805-8307-7b17e5aeacb7")
+		(uuid "a5ff18b1-2b1e-48d6-b68c-9f5115bffc28")
 	)
 	(label "USB_OUT_D-"
 		(at 135.89 52.07 0)
@@ -8099,6 +8139,16 @@
 		)
 		(uuid "cd65368b-4a56-4a09-9ffd-a1df0f609138")
 	)
+	(label "LED_ESP_2"
+		(at 67.31 67.31 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d0036058-0d7d-4166-95b0-b0ca3583f062")
+	)
 	(label "USB_OUT_D-"
 		(at 259.08 77.47 0)
 		(effects
@@ -8128,16 +8178,6 @@
 			(justify left bottom)
 		)
 		(uuid "dc5e6eee-ac39-481b-aa18-181b2e4690d7")
-	)
-	(label "SWDIO_rp"
-		(at 156.21 148.59 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "e1de4f2c-fc54-4df4-988b-2953ef6360f5")
 	)
 	(label "ESP_BUTTON_2"
 		(at 67.31 49.53 180)
@@ -8299,7 +8339,7 @@
 		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "01880980-f070-4d44-aac9-a3f439b6596b")
-		(property "Reference" "J5"
+		(property "Reference" "J4"
 			(at 245.11 62.23 0)
 			(effects
 				(font
@@ -8369,7 +8409,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "J5")
+					(reference "J4")
 					(unit 1)
 				)
 			)
@@ -8436,103 +8476,6 @@
 			(project ""
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
 					(reference "#PWR018")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:LED")
-		(at 331.47 41.91 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "11ddc801-e191-47f8-aa65-e036b272446f")
-		(property "Reference" "LED2"
-			(at 335.28 42.2274 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "LED USB VIN"
-			(at 335.28 44.7674 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
-			(at 331.47 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 331.47 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Light emitting diode"
-			(at 331.47 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Pins" "1=K 2=A"
-			(at 331.47 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC Part" "C965807"
-			(at 331.47 41.91 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "SNAPEDA_PACKAGE_ID" ""
-			(at 331.47 41.91 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "53419e62-7f07-4aa6-b65a-239726282ea1")
-		)
-		(pin "2"
-			(uuid "db737e2a-af3d-4e3d-9920-a9692107175f")
-		)
-		(instances
-			(project "ReMapper"
-				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "LED2")
 					(unit 1)
 				)
 			)
@@ -8624,7 +8567,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "18100b4b-da94-49b0-b1c4-0557e3190dae")
-		(property "Reference" "#PWR032"
+		(property "Reference" "#PWR01"
 			(at 38.1 205.74 0)
 			(effects
 				(font
@@ -8674,7 +8617,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR032")
+					(reference "#PWR01")
 					(unit 1)
 				)
 			)
@@ -8690,7 +8633,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1b581d78-da85-43b0-8c54-4eed7a1a35c3")
-		(property "Reference" "#PWR09"
+		(property "Reference" "#PWR023"
 			(at 247.65 209.55 0)
 			(effects
 				(font
@@ -8740,7 +8683,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR09")
+					(reference "#PWR023")
 					(unit 1)
 				)
 			)
@@ -8756,7 +8699,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1d6c6d8e-491b-4bf0-a2c8-2c25b63a9542")
-		(property "Reference" "#PWR031"
+		(property "Reference" "#PWR017"
 			(at 177.8 265.43 0)
 			(effects
 				(font
@@ -8806,7 +8749,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR031")
+					(reference "#PWR017")
 					(unit 1)
 				)
 			)
@@ -8822,7 +8765,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1dbba252-0f23-4089-b507-29eab31974af")
-		(property "Reference" "D2"
+		(property "Reference" "D3"
 			(at 124.46 55.8799 90)
 			(effects
 				(font
@@ -8894,7 +8837,7 @@
 		(instances
 			(project ""
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "D2")
+					(reference "D3")
 					(unit 1)
 				)
 			)
@@ -8910,7 +8853,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1f6c2321-ccd6-48d2-844a-5722eaa412ea")
-		(property "Reference" "#PWR033"
+		(property "Reference" "#PWR011"
 			(at 118.11 218.44 0)
 			(effects
 				(font
@@ -8960,7 +8903,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR033")
+					(reference "#PWR011")
 					(unit 1)
 				)
 			)
@@ -8976,7 +8919,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "20392046-e4fa-4214-9706-dbea571e3ce3")
-		(property "Reference" "D1"
+		(property "Reference" "D5"
 			(at 202.2475 62.23 0)
 			(effects
 				(font
@@ -9046,7 +8989,7 @@
 		(instances
 			(project ""
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "D1")
+					(reference "D5")
 					(unit 1)
 				)
 			)
@@ -9150,7 +9093,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "25b7da16-1758-43ec-8563-c059f3cf0bde")
-		(property "Reference" "S4"
+		(property "Reference" "S5"
 			(at 363.22 126.9999 90)
 			(effects
 				(font
@@ -9241,7 +9184,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "S4")
+					(reference "S5")
 					(unit 1)
 				)
 			)
@@ -9257,7 +9200,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "28792a05-6446-4716-a8cd-ae8028a435f1")
-		(property "Reference" "#PWR027"
+		(property "Reference" "#PWR031"
 			(at 359.41 53.34 0)
 			(effects
 				(font
@@ -9307,7 +9250,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR027")
+					(reference "#PWR031")
 					(unit 1)
 				)
 			)
@@ -9322,7 +9265,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2c6c3642-b81e-45ca-97ed-8f7b7e9e515c")
-		(property "Reference" "J1"
+		(property "Reference" "J2"
 			(at 166.37 244.094 0)
 			(effects
 				(font
@@ -9380,7 +9323,7 @@
 		(instances
 			(project ""
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "J1")
+					(reference "J2")
 					(unit 1)
 				)
 			)
@@ -9396,7 +9339,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2d04b719-3346-482c-9078-47c79436ac4d")
-		(property "Reference" "U2"
+		(property "Reference" "U4"
 			(at 181.61 115.57 0)
 			(effects
 				(font
@@ -9672,7 +9615,73 @@
 		(instances
 			(project ""
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "U2")
+					(reference "U4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 335.28 46.99 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2db1866b-092f-4dba-8368-887d5fcb6b50")
+		(property "Reference" "#PWR030"
+			(at 335.28 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 335.28 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 335.28 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 335.28 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 335.28 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "803d68a9-6863-4f64-b6c9-f4aa8b414319")
+		)
+		(instances
+			(project "ReMapper"
+				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
+					(reference "#PWR030")
 					(unit 1)
 				)
 			)
@@ -9688,7 +9697,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2e476782-16ec-4f3c-9998-f87aeb6a3930")
-		(property "Reference" "#PWR024"
+		(property "Reference" "#PWR019"
 			(at 223.52 146.05 0)
 			(effects
 				(font
@@ -9738,7 +9747,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR024")
+					(reference "#PWR019")
 					(unit 1)
 				)
 			)
@@ -9841,7 +9850,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "321eefd8-8543-406b-87a9-16430b827801")
-		(property "Reference" "R5"
+		(property "Reference" "R3"
 			(at 313.69 31.7499 0)
 			(effects
 				(font
@@ -9913,7 +9922,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "R5")
+					(reference "R3")
 					(unit 1)
 				)
 			)
@@ -9929,7 +9938,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "32f55dc0-ecf1-4288-b71a-d7710d34cc86")
-		(property "Reference" "S2"
+		(property "Reference" "S3"
 			(at 308.356 183.388 0)
 			(effects
 				(font
@@ -10038,7 +10047,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "S2")
+					(reference "S3")
 					(unit 1)
 				)
 			)
@@ -10151,7 +10160,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "3e533a65-82f8-496a-9036-8ed1cc8a8a7b")
-		(property "Reference" "D3"
+		(property "Reference" "D4"
 			(at 133.35 55.8799 90)
 			(effects
 				(font
@@ -10223,7 +10232,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "D3")
+					(reference "D4")
 					(unit 1)
 				)
 			)
@@ -10238,7 +10247,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "401498da-3602-4422-9b09-68c027c845d7")
-		(property "Reference" "C10"
+		(property "Reference" "C14"
 			(at 321.31 121.9199 0)
 			(effects
 				(font
@@ -10310,7 +10319,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "C10")
+					(reference "C14")
 					(unit 1)
 				)
 			)
@@ -10326,7 +10335,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4fcb48ac-fabb-4a87-9c46-50ce0c116a45")
-		(property "Reference" "#PWR011"
+		(property "Reference" "#PWR036"
 			(at 386.08 215.9 0)
 			(effects
 				(font
@@ -10376,7 +10385,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR011")
+					(reference "#PWR036")
 					(unit 1)
 				)
 			)
@@ -10392,7 +10401,7 @@
 		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "517c3ab2-e185-4e32-b16a-836b73d1e780")
-		(property "Reference" "J2"
+		(property "Reference" "J3"
 			(at 167.64 63.5 0)
 			(effects
 				(font
@@ -10462,7 +10471,7 @@
 		(instances
 			(project ""
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "J2")
+					(reference "J3")
 					(unit 1)
 				)
 			)
@@ -10478,7 +10487,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "53ca34e4-b6aa-4d36-90f0-759514483015")
-		(property "Reference" "#PWR08"
+		(property "Reference" "#PWR02"
 			(at 40.64 99.06 0)
 			(effects
 				(font
@@ -10528,7 +10537,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR08")
+					(reference "#PWR02")
 					(unit 1)
 				)
 			)
@@ -10544,7 +10553,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "53d8a1b2-7443-474e-97ba-e31497bbaf3a")
-		(property "Reference" "#PWR036"
+		(property "Reference" "#PWR032"
 			(at 360.68 186.69 0)
 			(effects
 				(font
@@ -10594,7 +10603,191 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR036")
+					(reference "#PWR032")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 335.28 41.91 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5b814ce7-a89f-4b05-a24e-68acc709772d")
+		(property "Reference" "LED3"
+			(at 339.09 42.2274 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "LED RP5"
+			(at 339.09 44.7674 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
+			(at 335.28 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 335.28 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 335.28 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 335.28 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C965807"
+			(at 335.28 41.91 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SNAPEDA_PACKAGE_ID" ""
+			(at 335.28 41.91 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "de58d812-3503-4133-b837-80b40e3c0ecc")
+		)
+		(pin "2"
+			(uuid "ac920724-c1cd-4213-b4b4-642d3507b847")
+		)
+		(instances
+			(project "ReMapper"
+				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
+					(reference "LED3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 335.28 33.02 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5ebf2907-da30-41a7-9321-9bba955e9a2a")
+		(property "Reference" "R6"
+			(at 337.82 31.7499 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "500"
+			(at 337.82 34.2899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 333.502 33.02 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 335.28 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 335.28 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C860931"
+			(at 335.28 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SNAPEDA_PACKAGE_ID" ""
+			(at 335.28 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2cdf831b-9933-4ff3-b3c7-75de679ef11e")
+		)
+		(pin "2"
+			(uuid "529815bb-05d6-4be7-9fd5-0833ce54fa00")
+		)
+		(instances
+			(project "ReMapper"
+				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
+					(reference "R6")
 					(unit 1)
 				)
 			)
@@ -10609,7 +10802,7 @@
 		(on_board yes)
 		(dnp yes)
 		(uuid "616621bd-0cdf-40b1-a655-f1693f549709")
-		(property "Reference" "ESP_UART0"
+		(property "Reference" "J1"
 			(at 163.195 24.13 0)
 			(effects
 				(font
@@ -10676,7 +10869,7 @@
 		(instances
 			(project ""
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "ESP_UART0")
+					(reference "J1")
 					(unit 1)
 				)
 			)
@@ -10692,7 +10885,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6943dc8e-25ad-4db1-a979-fb3e92415a66")
-		(property "Reference" "C14"
+		(property "Reference" "C1"
 			(at 48.26 204.4699 0)
 			(effects
 				(font
@@ -10764,7 +10957,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "C14")
+					(reference "C1")
 					(unit 1)
 				)
 			)
@@ -10779,7 +10972,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "69d6e80b-5e26-480c-83cc-619fe70cb191")
-		(property "Reference" "C5"
+		(property "Reference" "C6"
 			(at 105.41 123.1899 0)
 			(effects
 				(font
@@ -10851,7 +11044,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "C5")
+					(reference "C6")
 					(unit 1)
 				)
 			)
@@ -10867,7 +11060,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6b014caa-ac74-4392-be23-dc7405cc6cd4")
-		(property "Reference" "C8"
+		(property "Reference" "C3"
 			(at 50.8 248.9199 0)
 			(effects
 				(font
@@ -10939,7 +11132,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "C8")
+					(reference "C3")
 					(unit 1)
 				)
 			)
@@ -10955,7 +11148,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6cc8ebb2-f649-4900-95d9-56d74892c0b8")
-		(property "Reference" "#PWR025"
+		(property "Reference" "#PWR027"
 			(at 311.15 53.34 0)
 			(effects
 				(font
@@ -11005,7 +11198,7 @@
 		(instances
 			(project ""
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR025")
+					(reference "#PWR027")
 					(unit 1)
 				)
 			)
@@ -11100,7 +11293,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 167.64 100.33 0)
+		(at 167.64 92.71 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11108,8 +11301,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "75fb0c57-3843-4963-98eb-6c4c7b062edf")
-		(property "Reference" "#PWR012"
-			(at 167.64 106.68 0)
+		(property "Reference" "#PWR015"
+			(at 167.64 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11118,7 +11311,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 167.64 105.41 0)
+			(at 167.64 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11126,7 +11319,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 167.64 100.33 0)
+			(at 167.64 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11135,7 +11328,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 167.64 100.33 0)
+			(at 167.64 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11144,7 +11337,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 167.64 100.33 0)
+			(at 167.64 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11158,7 +11351,7 @@
 		(instances
 			(project ""
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR012")
+					(reference "#PWR015")
 					(unit 1)
 				)
 			)
@@ -11174,7 +11367,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "76988101-43ef-4f0c-a19b-00f67542be5f")
-		(property "Reference" "#PWR021"
+		(property "Reference" "#PWR020"
 			(at 232.41 210.82 0)
 			(effects
 				(font
@@ -11224,7 +11417,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR021")
+					(reference "#PWR020")
 					(unit 1)
 				)
 			)
@@ -11240,7 +11433,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7eef9921-e7b4-436c-8341-e89967407d78")
-		(property "Reference" "R4"
+		(property "Reference" "R5"
 			(at 321.31 191.7699 0)
 			(effects
 				(font
@@ -11312,7 +11505,7 @@
 		(instances
 			(project ""
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "R4")
+					(reference "R5")
 					(unit 1)
 				)
 			)
@@ -11328,7 +11521,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "82101850-0c62-47ad-a777-659d81f4ffc9")
-		(property "Reference" "S5"
+		(property "Reference" "S6"
 			(at 384.81 126.9999 90)
 			(effects
 				(font
@@ -11419,7 +11612,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "S5")
+					(reference "S6")
 					(unit 1)
 				)
 			)
@@ -11435,7 +11628,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8570c188-f37c-484d-bca0-14b717a9a334")
-		(property "Reference" "#PWR030"
+		(property "Reference" "#PWR03"
 			(at 44.45 219.71 0)
 			(effects
 				(font
@@ -11485,7 +11678,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR030")
+					(reference "#PWR03")
 					(unit 1)
 				)
 			)
@@ -11501,7 +11694,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "90404106-2ced-4a01-b74a-88d9be82ab48")
-		(property "Reference" "#PWR017"
+		(property "Reference" "#PWR07"
 			(at 66.04 267.97 0)
 			(effects
 				(font
@@ -11551,7 +11744,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR017")
+					(reference "#PWR07")
 					(unit 1)
 				)
 			)
@@ -11566,7 +11759,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "93393aa4-ef31-4c36-bb91-45bea87fe88a")
-		(property "Reference" "C4"
+		(property "Reference" "C5"
 			(at 92.71 123.1899 0)
 			(effects
 				(font
@@ -11638,7 +11831,7 @@
 		(instances
 			(project ""
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "C4")
+					(reference "C5")
 					(unit 1)
 				)
 			)
@@ -11654,7 +11847,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "95b824f7-63f0-4db9-8978-27859da2bd70")
-		(property "Reference" "#PWR06"
+		(property "Reference" "#PWR09"
 			(at 107.95 139.7 0)
 			(effects
 				(font
@@ -11704,7 +11897,7 @@
 		(instances
 			(project ""
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR06")
+					(reference "#PWR09")
 					(unit 1)
 				)
 			)
@@ -11719,7 +11912,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "987014fa-e491-419c-a59c-2a65ea98bba4")
-		(property "Reference" "C2"
+		(property "Reference" "C9"
 			(at 139.7 31.7499 0)
 			(effects
 				(font
@@ -11791,7 +11984,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "C2")
+					(reference "C9")
 					(unit 1)
 				)
 			)
@@ -11806,7 +11999,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "9d1345a6-ab73-4786-af05-afd6531f32bc")
-		(property "Reference" "U3"
+		(property "Reference" "U2"
 			(at 83.82 138.4299 0)
 			(effects
 				(font
@@ -11899,94 +12092,7 @@
 		(instances
 			(project ""
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "U3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 331.47 33.02 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "9d551cbc-b8a7-4343-9224-d506499e955a")
-		(property "Reference" "R6"
-			(at 334.01 31.7499 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "500"
-			(at 334.01 34.2899 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 329.692 33.02 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 331.47 33.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 331.47 33.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC Part" "C860931"
-			(at 331.47 33.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "SNAPEDA_PACKAGE_ID" ""
-			(at 331.47 33.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "f3cb4d35-128a-4b94-88c7-7a07e6b9423a")
-		)
-		(pin "2"
-			(uuid "904dec68-7e07-4bc7-9640-f5d99df63b51")
-		)
-		(instances
-			(project "ReMapper"
-				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "R6")
+					(reference "U2")
 					(unit 1)
 				)
 			)
@@ -12001,7 +12107,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "9daa65ea-4c50-4bcc-bb00-b26c7faebb82")
-		(property "Reference" "C15"
+		(property "Reference" "C4"
 			(at 59.69 204.4699 0)
 			(effects
 				(font
@@ -12073,7 +12179,73 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "C15")
+					(reference "C4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 311.15 81.28 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a11668d3-0d4f-479a-881b-f9ec90e8602b")
+		(property "Reference" "#PWR028"
+			(at 311.15 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 311.15 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 311.15 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 311.15 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 311.15 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6c7a6ebd-f687-41b0-a1d6-783c9914c104")
+		)
+		(instances
+			(project "ReMapper"
+				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
+					(reference "#PWR028")
 					(unit 1)
 				)
 			)
@@ -12177,7 +12349,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a7e47e8e-bc95-419b-8cce-1d0b6514c4eb")
-		(property "Reference" "S6"
+		(property "Reference" "S4"
 			(at 361.95 166.3699 90)
 			(effects
 				(font
@@ -12268,7 +12440,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "S6")
+					(reference "S4")
 					(unit 1)
 				)
 			)
@@ -12284,7 +12456,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a8cb2487-4548-46c8-bc40-6b3d25a52fca")
-		(property "Reference" "R3"
+		(property "Reference" "R2"
 			(at 267.97 180.3399 0)
 			(effects
 				(font
@@ -12356,7 +12528,7 @@
 		(instances
 			(project ""
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "R3")
+					(reference "R2")
 					(unit 1)
 				)
 			)
@@ -12372,7 +12544,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "aa95c865-7bb8-451b-ae5c-a52ca029f4ac")
-		(property "Reference" "#PWR028"
+		(property "Reference" "#PWR034"
 			(at 382.27 53.34 0)
 			(effects
 				(font
@@ -12422,7 +12594,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR028")
+					(reference "#PWR034")
 					(unit 1)
 				)
 			)
@@ -12438,7 +12610,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ad9b50f0-65ed-4218-94bb-9c8fed108915")
-		(property "Reference" "LED4"
+		(property "Reference" "LED5"
 			(at 386.08 42.2274 90)
 			(effects
 				(font
@@ -12519,7 +12691,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "LED4")
+					(reference "LED5")
 					(unit 1)
 				)
 			)
@@ -12535,7 +12707,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b16e961f-f3a1-44f3-b143-cccbb6f69b4f")
-		(property "Reference" "Y2"
+		(property "Reference" "Y1"
 			(at 255.27 187.8898 0)
 			(effects
 				(font
@@ -12602,7 +12774,7 @@
 		(instances
 			(project ""
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "Y2")
+					(reference "Y1")
 					(unit 1)
 				)
 			)
@@ -12618,7 +12790,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b3083a9c-93dc-46be-a191-5a1efdef78ad")
-		(property "Reference" "#PWR023"
+		(property "Reference" "#PWR024"
 			(at 265.43 210.82 0)
 			(effects
 				(font
@@ -12668,7 +12840,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR023")
+					(reference "#PWR024")
 					(unit 1)
 				)
 			)
@@ -12684,7 +12856,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b42a24b4-3221-4bee-89ef-44bbf876c68b")
-		(property "Reference" "#PWR022"
+		(property "Reference" "#PWR026"
 			(at 293.37 201.93 0)
 			(effects
 				(font
@@ -12734,7 +12906,104 @@
 		(instances
 			(project ""
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR022")
+					(reference "#PWR026")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 311.15 76.2 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b591243a-85e0-4e3b-98fc-dfa1012b5c1d")
+		(property "Reference" "LED2"
+			(at 314.96 76.5174 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "LED RP5"
+			(at 314.96 79.0574 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
+			(at 311.15 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 311.15 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 311.15 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 311.15 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C965807"
+			(at 311.15 76.2 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SNAPEDA_PACKAGE_ID" ""
+			(at 311.15 76.2 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "170a6898-fd4f-49e5-ac11-8e7989fa10c1")
+		)
+		(pin "2"
+			(uuid "ed1a062b-cd01-4f98-802f-45ba971979ea")
+		)
+		(instances
+			(project "ReMapper"
+				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
+					(reference "LED2")
 					(unit 1)
 				)
 			)
@@ -12821,7 +13090,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b7610773-57b3-411d-8761-ecede9a9b0d3")
-		(property "Reference" "LED3"
+		(property "Reference" "LED4"
 			(at 363.22 42.2274 90)
 			(effects
 				(font
@@ -12902,7 +13171,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "LED3")
+					(reference "LED4")
 					(unit 1)
 				)
 			)
@@ -12918,7 +13187,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b872cb8a-9429-48d7-9de3-169799d39da0")
-		(property "Reference" "#PWR05"
+		(property "Reference" "#PWR08"
 			(at 72.39 165.1 0)
 			(effects
 				(font
@@ -12968,7 +13237,7 @@
 		(instances
 			(project ""
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR05")
+					(reference "#PWR08")
 					(unit 1)
 				)
 			)
@@ -12983,7 +13252,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b886146e-4096-4b48-b6fc-9a804ed768dd")
-		(property "Reference" "C13"
+		(property "Reference" "C10"
 			(at 227.33 134.6199 0)
 			(effects
 				(font
@@ -13055,7 +13324,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "C13")
+					(reference "C10")
 					(unit 1)
 				)
 			)
@@ -13071,7 +13340,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "bf3f6a6d-1bf3-4b74-a488-661e9db8cfc4")
-		(property "Reference" "#PWR010"
+		(property "Reference" "#PWR022"
 			(at 247.65 177.8 0)
 			(effects
 				(font
@@ -13121,7 +13390,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR010")
+					(reference "#PWR022")
 					(unit 1)
 				)
 			)
@@ -13137,7 +13406,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c2504d62-6fa9-47d8-b7dd-c9b2a50eaeb6")
-		(property "Reference" "#PWR016"
+		(property "Reference" "#PWR05"
 			(at 46.99 260.35 0)
 			(effects
 				(font
@@ -13187,7 +13456,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR016")
+					(reference "#PWR05")
 					(unit 1)
 				)
 			)
@@ -13203,7 +13472,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c2aecfce-df04-4d7c-b7db-2a28c45974da")
-		(property "Reference" "#PWR03"
+		(property "Reference" "#PWR014"
 			(at 135.89 41.91 0)
 			(effects
 				(font
@@ -13253,7 +13522,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR03")
+					(reference "#PWR014")
 					(unit 1)
 				)
 			)
@@ -13269,7 +13538,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c316bf69-4b55-42c0-9e98-2c66fdfeaaa4")
-		(property "Reference" "U6"
+		(property "Reference" "U1"
 			(at 81.28 185.42 0)
 			(effects
 				(font
@@ -13347,7 +13616,7 @@
 		(instances
 			(project ""
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "U6")
+					(reference "U1")
 					(unit 1)
 				)
 			)
@@ -13363,7 +13632,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c33373f8-d34b-407a-b33d-cdf5d4e1be16")
-		(property "Reference" "#PWR01"
+		(property "Reference" "#PWR010"
 			(at 111.76 97.79 0)
 			(effects
 				(font
@@ -13413,7 +13682,7 @@
 		(instances
 			(project ""
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR01")
+					(reference "#PWR010")
 					(unit 1)
 				)
 			)
@@ -13495,7 +13764,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "caf636c9-cc7d-47f1-a5e3-22218c7c7015")
-		(property "Reference" "#PWR07"
+		(property "Reference" "#PWR06"
 			(at 55.88 219.71 0)
 			(effects
 				(font
@@ -13545,7 +13814,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR07")
+					(reference "#PWR06")
 					(unit 1)
 				)
 			)
@@ -13561,7 +13830,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "cbe68727-20ef-47ce-a079-ddb4779b89cc")
-		(property "Reference" "S3"
+		(property "Reference" "S2"
 			(at 35.306 73.914 90)
 			(effects
 				(font
@@ -13670,7 +13939,94 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "S3")
+					(reference "S2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 311.15 67.31 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "cf3dda06-ef0a-4212-a03b-19dc6848f199")
+		(property "Reference" "R4"
+			(at 313.69 66.0399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "500"
+			(at 313.69 68.5799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 309.372 67.31 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 311.15 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 311.15 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C860931"
+			(at 311.15 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SNAPEDA_PACKAGE_ID" ""
+			(at 311.15 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c7f4a432-0ed5-48b4-b77a-be30b1d6a3db")
+		)
+		(pin "2"
+			(uuid "28b13799-8524-4f16-b49e-5b344ed8189b")
+		)
+		(instances
+			(project "ReMapper"
+				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
+					(reference "R4")
 					(unit 1)
 				)
 			)
@@ -13686,7 +14042,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d2fb7bb6-8c42-4ecc-9338-964b956ae2ba")
-		(property "Reference" "#PWR014"
+		(property "Reference" "#PWR016"
 			(at 172.72 43.18 0)
 			(effects
 				(font
@@ -13736,7 +14092,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR014")
+					(reference "#PWR016")
 					(unit 1)
 				)
 			)
@@ -13810,7 +14166,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 245.11 99.06 0)
+		(at 245.11 92.71 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13818,8 +14174,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "dbca3c39-3157-479d-b5f0-85b72853a2ac")
-		(property "Reference" "#PWR015"
-			(at 245.11 105.41 0)
+		(property "Reference" "#PWR021"
+			(at 245.11 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13828,7 +14184,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 245.11 104.14 0)
+			(at 245.11 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13836,7 +14192,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 245.11 99.06 0)
+			(at 245.11 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13845,7 +14201,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 245.11 99.06 0)
+			(at 245.11 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13854,7 +14210,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 245.11 99.06 0)
+			(at 245.11 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13868,7 +14224,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR015")
+					(reference "#PWR021")
 					(unit 1)
 				)
 			)
@@ -13884,7 +14240,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "dc7e2244-68b5-4006-bc75-acdd75f6c024")
-		(property "Reference" "#PWR020"
+		(property "Reference" "#PWR029"
 			(at 325.12 138.43 0)
 			(effects
 				(font
@@ -13934,7 +14290,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR020")
+					(reference "#PWR029")
 					(unit 1)
 				)
 			)
@@ -13950,7 +14306,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "dce4202e-848f-4f31-a563-528aab62f698")
-		(property "Reference" "U1"
+		(property "Reference" "U3"
 			(at 87.63 21.59 0)
 			(effects
 				(font
@@ -14292,7 +14648,7 @@
 		(instances
 			(project ""
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "U1")
+					(reference "U3")
 					(unit 1)
 				)
 			)
@@ -14416,7 +14772,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e0f40abe-70d6-4b1e-97f5-d3dad8eb6073")
-		(property "Reference" "#PWR034"
+		(property "Reference" "#PWR033"
 			(at 361.95 147.32 0)
 			(effects
 				(font
@@ -14466,7 +14822,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR034")
+					(reference "#PWR033")
 					(unit 1)
 				)
 			)
@@ -14482,7 +14838,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e2a00b33-0033-49a0-a793-dd1abe1d7e5a")
-		(property "Reference" "C3"
+		(property "Reference" "C2"
 			(at 50.8 35.5599 0)
 			(effects
 				(font
@@ -14554,7 +14910,7 @@
 		(instances
 			(project ""
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "C3")
+					(reference "C2")
 					(unit 1)
 				)
 			)
@@ -14569,7 +14925,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e3d56825-8d6d-48c0-8d05-d287cd60be53")
-		(property "Reference" "C9"
+		(property "Reference" "C13"
 			(at 307.34 121.9199 0)
 			(effects
 				(font
@@ -14641,7 +14997,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "C9")
+					(reference "C13")
 					(unit 1)
 				)
 			)
@@ -14657,7 +15013,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e500ce7b-b05d-42ae-be72-0f2bcfdcbefc")
-		(property "Reference" "C16"
+		(property "Reference" "C7"
 			(at 121.92 203.1999 0)
 			(effects
 				(font
@@ -14729,7 +15085,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "C16")
+					(reference "C7")
 					(unit 1)
 				)
 			)
@@ -14745,7 +15101,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e64b7c34-1105-4afc-8fb7-3f819b0fad96")
-		(property "Reference" "D4"
+		(property "Reference" "D1"
 			(at 63.5 253.9999 90)
 			(effects
 				(font
@@ -14817,7 +15173,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "D4")
+					(reference "D1")
 					(unit 1)
 				)
 			)
@@ -14832,7 +15188,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e9faf668-c18f-4e52-846f-4f803dd94d2c")
-		(property "Reference" "C1"
+		(property "Reference" "C8"
 			(at 127 31.7499 0)
 			(effects
 				(font
@@ -14904,7 +15260,7 @@
 		(instances
 			(project ""
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "C1")
+					(reference "C8")
 					(unit 1)
 				)
 			)
@@ -15007,7 +15363,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "eea8ce47-96ff-4153-85c0-f7184a9d4c44")
-		(property "Reference" "D5"
+		(property "Reference" "D2"
 			(at 72.39 253.9999 90)
 			(effects
 				(font
@@ -15079,7 +15435,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "D5")
+					(reference "D2")
 					(unit 1)
 				)
 			)
@@ -15095,7 +15451,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "eebe9a6c-eba6-4908-a7f6-bc16ddae8d75")
-		(property "Reference" "#PWR02"
+		(property "Reference" "#PWR012"
 			(at 123.19 41.91 0)
 			(effects
 				(font
@@ -15145,7 +15501,7 @@
 		(instances
 			(project ""
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR02")
+					(reference "#PWR012")
 					(unit 1)
 				)
 			)
@@ -15344,72 +15700,6 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 331.47 46.99 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "f89ecc25-46e1-4e48-8f9d-36abb17bfd42")
-		(property "Reference" "#PWR026"
-			(at 331.47 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 331.47 52.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 331.47 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 331.47 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 331.47 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "b965422f-aec8-45cf-aa48-bd1d94813a77")
-		)
-		(instances
-			(project "ReMapper"
-				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR026")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
 		(at 289.56 157.48 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -15418,7 +15708,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f9223513-4a0c-4605-882d-55805e542252")
-		(property "Reference" "#PWR019"
+		(property "Reference" "#PWR025"
 			(at 289.56 163.83 0)
 			(effects
 				(font
@@ -15468,7 +15758,7 @@
 		(instances
 			(project "ReMapper"
 				(path "/facd47ac-9f29-4b3c-ae50-ce7a688e305d"
-					(reference "#PWR019")
+					(reference "#PWR025")
 					(unit 1)
 				)
 			)
