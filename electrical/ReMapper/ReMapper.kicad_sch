@@ -5198,6 +5198,10 @@
 		(uuid "13a17df8-6d2c-451c-871a-74feeb411e00")
 	)
 	(no_connect
+		(at 165.1 86.36)
+		(uuid "19814100-e35a-4333-9a30-65f76751bf43")
+	)
+	(no_connect
 		(at 204.47 212.09)
 		(uuid "24352dd8-994d-4e4d-81c0-2fb9078da26e")
 	)
@@ -5244,6 +5248,10 @@
 	(no_connect
 		(at 204.47 204.47)
 		(uuid "482a1665-5f9b-4012-bdae-d2def14b6c98")
+	)
+	(no_connect
+		(at 242.57 85.09)
+		(uuid "50c9d5e5-a01c-4f60-903e-d45a61930dac")
 	)
 	(no_connect
 		(at 158.75 146.05)
@@ -5625,7 +5633,7 @@
 	)
 	(wire
 		(pts
-			(xy 382.27 45.72) (xy 382.27 46.99)
+			(xy 355.6 45.72) (xy 355.6 46.99)
 		)
 		(stroke
 			(width 0)
@@ -5795,7 +5803,7 @@
 	)
 	(wire
 		(pts
-			(xy 382.27 25.4) (xy 382.27 29.21)
+			(xy 355.6 25.4) (xy 355.6 29.21)
 		)
 		(stroke
 			(width 0)
@@ -6875,7 +6883,7 @@
 	)
 	(wire
 		(pts
-			(xy 382.27 36.83) (xy 382.27 38.1)
+			(xy 355.6 36.83) (xy 355.6 38.1)
 		)
 		(stroke
 			(width 0)
@@ -7324,7 +7332,7 @@
 		(uuid "17ada951-c990-4c15-96c7-6956236449ce")
 	)
 	(label "LED_ESP_1"
-		(at 382.27 25.4 180)
+		(at 355.6 25.4 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -10453,7 +10461,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 382.27 33.02 0)
+		(at 355.6 33.02 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10461,7 +10469,7 @@
 		(dnp no)
 		(uuid "724216b9-0907-48ba-9506-92e654caeb1a")
 		(property "Reference" "R8"
-			(at 384.81 31.7499 0)
+			(at 358.14 31.7499 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10470,7 +10478,7 @@
 			)
 		)
 		(property "Value" "500"
-			(at 384.81 34.2899 0)
+			(at 358.14 34.2899 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10479,7 +10487,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 380.492 33.02 90)
+			(at 353.822 33.02 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10488,7 +10496,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 382.27 33.02 0)
+			(at 355.6 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10497,7 +10505,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 382.27 33.02 0)
+			(at 355.6 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10506,7 +10514,7 @@
 			)
 		)
 		(property "LCSC Part" "C860931"
-			(at 382.27 33.02 0)
+			(at 355.6 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10515,7 +10523,7 @@
 			)
 		)
 		(property "SNAPEDA_PACKAGE_ID" ""
-			(at 382.27 33.02 0)
+			(at 355.6 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11643,7 +11651,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 382.27 46.99 0)
+		(at 355.6 46.99 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11652,7 +11660,7 @@
 		(fields_autoplaced yes)
 		(uuid "aa95c865-7bb8-451b-ae5c-a52ca029f4ac")
 		(property "Reference" "#PWR034"
-			(at 382.27 53.34 0)
+			(at 355.6 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11661,7 +11669,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 382.27 52.07 0)
+			(at 355.6 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11669,7 +11677,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 382.27 46.99 0)
+			(at 355.6 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11678,7 +11686,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 382.27 46.99 0)
+			(at 355.6 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11687,7 +11695,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 382.27 46.99 0)
+			(at 355.6 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11709,7 +11717,7 @@
 	)
 	(symbol
 		(lib_id "Device:LED")
-		(at 382.27 41.91 90)
+		(at 355.6 41.91 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11718,7 +11726,7 @@
 		(fields_autoplaced yes)
 		(uuid "ad9b50f0-65ed-4218-94bb-9c8fed108915")
 		(property "Reference" "LED5"
-			(at 386.08 42.2274 90)
+			(at 359.41 42.2274 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11727,7 +11735,7 @@
 			)
 		)
 		(property "Value" "LED RP5"
-			(at 386.08 44.7674 90)
+			(at 359.41 44.7674 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11736,7 +11744,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
-			(at 382.27 41.91 0)
+			(at 355.6 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11745,7 +11753,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 382.27 41.91 0)
+			(at 355.6 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11754,7 +11762,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode"
-			(at 382.27 41.91 0)
+			(at 355.6 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11763,7 +11771,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 382.27 41.91 0)
+			(at 355.6 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11772,7 +11780,7 @@
 			)
 		)
 		(property "LCSC Part" "C965807"
-			(at 382.27 41.91 90)
+			(at 355.6 41.91 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11781,7 +11789,7 @@
 			)
 		)
 		(property "SNAPEDA_PACKAGE_ID" ""
-			(at 382.27 41.91 90)
+			(at 355.6 41.91 90)
 			(effects
 				(font
 					(size 1.27 1.27)
