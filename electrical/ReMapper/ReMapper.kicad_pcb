@@ -3112,7 +3112,7 @@
 	(footprint "LOGO"
 		(layer "F.Cu")
 		(uuid "6756142e-d333-4125-8be5-257ac375f39b")
-		(at 184.4294 73.8378 90)
+		(at 185.72185 76.480422 90)
 		(property "Reference" "G***"
 			(at 0 0 90)
 			(layer "F.SilkS")
@@ -14362,8 +14362,8 @@
 			)
 		)
 	)
-	(gr_text "ReMapper Rev4\nCedarHacks.com"
-		(at 182.0926 69.4436 90)
+	(gr_text "ReMapper\nRev4\nCedarHacks.com"
+		(at 183.496953 73.1012 90)
 		(layer "F.SilkS")
 		(uuid "acdf42f7-b5c6-40ba-a6f5-cbe1605b0894")
 		(effects

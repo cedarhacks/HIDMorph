@@ -8514,7 +8514,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part" "SOD523"
+		(property "LCSC Part" "C5199159"
 			(at 127 57.15 90)
 			(effects
 				(font
@@ -9525,7 +9525,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part" "SOD523"
+		(property "LCSC Part" "C5199159"
 			(at 130.81 57.15 90)
 			(effects
 				(font
@@ -9650,9 +9650,9 @@
 		(at 375.92 149.86 270)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "4b01c75d-74ae-4e2a-b19f-f5a2bc04bca3")
 		(property "Reference" "J5"
@@ -10551,9 +10551,9 @@
 		(at 377.19 121.92 270)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "73e16984-03f4-4a23-8ebb-b003fe868d50")
 		(property "Reference" "J9"
@@ -13843,7 +13843,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part" "SOD523"
+		(property "LCSC Part" "C5199159"
 			(at 66.04 255.27 90)
 			(effects
 				(font
@@ -14018,7 +14018,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part" "SOD523"
+		(property "LCSC Part" "C5199159"
 			(at 69.85 255.27 90)
 			(effects
 				(font
