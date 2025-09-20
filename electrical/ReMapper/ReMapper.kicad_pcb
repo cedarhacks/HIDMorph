@@ -288,7 +288,7 @@
 		(path "/73e16984-03f4-4a23-8ebb-b003fe868d50")
 		(sheetname "/")
 		(sheetfile "ReMapper.kicad_sch")
-		(attr smd)
+		(attr smd exclude_from_bom dnp)
 		(fp_line
 			(start 1.16 2.54)
 			(end 1.16 2.65)
@@ -4335,7 +4335,7 @@
 				)
 			)
 		)
-		(property "LCSC Part" "SOD523"
+		(property "LCSC Part" "C5199159"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -4852,7 +4852,7 @@
 				)
 			)
 		)
-		(property "LCSC Part" "SOD523"
+		(property "LCSC Part" "C5199159"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -6531,7 +6531,7 @@
 		(path "/4b01c75d-74ae-4e2a-b19f-f5a2bc04bca3")
 		(sheetname "/")
 		(sheetfile "ReMapper.kicad_sch")
-		(attr exclude_from_pos_files)
+		(attr exclude_from_pos_files exclude_from_bom dnp)
 		(fp_circle
 			(center 0 0)
 			(end 0 1.2)
@@ -8099,7 +8099,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC Part" "SOD523"
+		(property "LCSC Part" "C5199159"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -9493,7 +9493,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC Part" "SOD523"
+		(property "LCSC Part" "C5199159"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
