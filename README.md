@@ -12,11 +12,15 @@
    - [x] Neesd to accept commands either for HID or handle the file storage (It will have the handle)
  - [ ] Read and parse files in qspi
  - [x] Write OLED Driver
-   - [ ] Done here: https://github.com/cedarhacks/SSD1306_esp32_driver
- - [ ] Add LCD to schematic
-   - [ ] i2C IO15 data
-   - [ ] i2C IO16 CLK
- - [ ] Add 1 switch + 2 buttons to schematic
-   - [ ] switch to IO1
-   - [ ] button 1 to IO2
-   - [ ] button 2 to IO3
+   - [x] Done here: https://github.com/cedarhacks/SSD1306_esp32_driver
+ - [x] Add LCD to schematic
+   - [x] i2C IO15 data
+   - [x] i2C IO16 CLK
+ - [x] Add 1 switch + 2 buttons to schematic
+   - [x] switch to IO1
+   - [x] button 1 to IO2
+   - [x] button 2 to IO3
+ - [x] Send V3 to Fab
+ - [ ] Start working on webtool to create programs
+ - [ ] Finish planning out program execution
+ - [ ] Finish laying out full user experience flow
