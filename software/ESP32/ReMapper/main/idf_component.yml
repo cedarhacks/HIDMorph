@@ -16,3 +16,4 @@ dependencies:
   #   public: true
   espressif/tinyusb: '*'
   espressif/esp_tinyusb: '*'
+  lvgl/lvgl: ^9

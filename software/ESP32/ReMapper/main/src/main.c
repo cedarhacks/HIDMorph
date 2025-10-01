@@ -10,6 +10,7 @@
 #include "task_webhost.h"
 #include "task_gamepad_out.h"
 #include "task_usb_storage_device.h"
+#include "task_display.h"
 #include "programming_mode.h"
 
 #include "esp_log.h"
@@ -29,7 +30,15 @@ void app_main(void) {
         .intr_type = GPIO_INTR_DISABLE};
     gpio_config(&io_conf);
 
-    volatile bool is_programming_mode = gpio_get_level(programming_mode_gpio) == 1;
+    volatile bool is_programming_mode = gpio_get_level(programming_mode_gpio) == 0;
+
+    // display task
+    xTaskCreate(task_display,
+                "display",
+                20480,
+                NULL,
+                1,
+                NULL);
 
     if (is_programming_mode) {
         flash_duration = 100;
@@ -57,14 +66,6 @@ void app_main(void) {
                     NULL,
                     10,
                     NULL);
-
-        // no web task
-        // xTaskCreate(task_webhost,
-        //             "webhost",
-        //             20480,
-        //             NULL,
-        //             1,
-        //             NULL);
 
         xTaskCreate(task_gamepad_out,
                     "gamepad",

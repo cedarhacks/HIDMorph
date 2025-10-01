@@ -10,10 +10,12 @@ idf_component_register(
         "src/task_webhost.c"
         "src/programming_mode.c"
         "src/W25Q128J.c"
+        "src/SSD1306_i2c_driver.c"
         "src/extflash_fs.c"
         "src/task_usb_storage_device.c"
         "src/task_gamepad_out.c"
         "src/tusb_descriptors.c"
+        "src/task_display.c"
 
     INCLUDE_DIRS
         "./include"
@@ -31,5 +33,6 @@ idf_component_register(
         esp-tls
         esp_netif
         esp_http_server
+        driver
 )
 
