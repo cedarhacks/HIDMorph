@@ -9,10 +9,13 @@
 #include "lualib.h"
 
 #include "utils.h"
-
-const char *TAG = "LUA_TASK";
+#include <stdio.h>
+#include <string.h>
+#include <dirent.h>
 
 #define MAX_FILE_PATH_LEN (255)
+
+const char *TAG = "LUA_TASK";
 
 int list_files(const char *path, char files_paths[][MAX_FILE_PATH_LEN], int file_paths_count) {
     DIR *dir = opendir(path);
@@ -20,6 +23,10 @@ int list_files(const char *path, char files_paths[][MAX_FILE_PATH_LEN], int file
         printf("Failed to open directory: %s\n", path);
         return 0;
     }
+
+    char path_as_dir[MAX_FILE_PATH_LEN];
+    sprintf(path_as_dir, "%s/", path);
+    int strlen_path_as_dir = strlen(path_as_dir);
 
     int count = 0;
     struct dirent *entry;
@@ -30,7 +37,12 @@ int list_files(const char *path, char files_paths[][MAX_FILE_PATH_LEN], int file
 
         } else {
             // entry->d_name NOT NULL terminated
-            memcpy(files_paths[count], entry->d_name, MAX_FILE_PATH_LEN);
+            memset(files_paths[count], '\0', MAX_FILE_PATH_LEN);
+            strcpy(files_paths[count], path_as_dir);
+            // strcat(files_paths[count], entry->d_name);/// ahh no null termination
+            memcpy((files_paths[count]) + strlen_path_as_dir,
+                   &entry->d_name[0],
+                   MAX_FILE_PATH_LEN - strlen_path_as_dir);
             count += 1;
         }
     }
@@ -75,13 +87,27 @@ void task_lua_vm(void *args) {
     int file_count = list_files("/ext", files, 20);
     ESP_LOGI(TAG, " --- file count: %d", file_count);
 
-    for( int i = 0; i < file_count; i++ ){
+    // char current_file[MAX_FILE_PATH_LEN];
+    for (int i = 0; i < file_count; i++) {
         ESP_LOGI(TAG, "file: %s", files[i]);
     }
+
+    // READ TEST.lua
+    char *current_file = "/ext/TEST.lua";
 
     // initialize the LUA vm
     lua_State *L = luaL_newstate();
     luaL_openlibs(L);
+
+    if (luaL_dofile(L, current_file) == LUA_OK) {
+        ESP_LOGI(TAG, "Script ran successfully!");
+        if (lua_isnumber(L, -1)) {
+            int result = lua_tointeger(L, -1);
+            ESP_LOGI(TAG, "Returned value = %d", result);
+        }
+    } else {
+        ESP_LOGE(TAG, "Error: %s", lua_tostring(L, -1));
+    }
 
     while (1) {
         vTaskDelay(10 / portTICK_PERIOD_MS);

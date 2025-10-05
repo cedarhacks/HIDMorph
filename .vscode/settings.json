@@ -16,6 +16,8 @@
         "tusb_config.h": "c",
         "tusb_msc_storage.h": "c",
         "tinyusb.h": "c",
-        "msc_device.h": "c"
+        "msc_device.h": "c",
+        "lualib.h": "c",
+        "utils.h": "c"
     }
 }
