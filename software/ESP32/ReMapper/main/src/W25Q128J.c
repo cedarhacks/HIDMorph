@@ -5,7 +5,8 @@ static const char *TAG = "W25Q128J";
 bool init_W25Q128J(W25Q128J_t *device, int SPI_DEV) {
 
     // init the spi bus
-    ESP_ERROR_CHECK(spi_bus_initialize(SPI_DEV, &device->bus, SPI_DMA_CH_AUTO));
+    // ESP_ERROR_CHECK(spi_bus_initialize(SPI_DEV, &device->bus, SPI_DMA_CH_AUTO));
+    spi_bus_initialize(SPI_DEV, &device->bus, SPI_DMA_CH_AUTO);
     ESP_LOGI(TAG, "Initialized spi bus on dev: %d  ... now attaching flash\n", SPI_DEV);
 
     esp_flash_spi_device_config_t new_cfg = {
