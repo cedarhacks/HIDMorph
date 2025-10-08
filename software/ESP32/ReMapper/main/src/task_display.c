@@ -7,8 +7,10 @@
 #include "esp_timer.h"
 #include "lvgl.h"
 
-#define GUI_QUEUE_LEN (1)
+#define GUI_QUEUE_LEN (16)
 #define LVGL_BUF_PIXELS (SSD1306_HEIGHT * SSD1306_WIDTH)
+
+volatile static QueueHandle_t gui_q = NULL;
 
 static const char *TAG = "DISPLAY";
 
@@ -17,7 +19,6 @@ static lv_display_t *lvgl_display;
 uint8_t pixels[SSD1306_HEIGHT * SSD1306_WIDTH];
 SSD1306_t display;
 
-static QueueHandle_t s_gui_q = NULL;
 
 static inline bool color_on(lv_color_t c) {
     return lv_color_brightness(c) < 200;
@@ -46,9 +47,9 @@ void my_flush_cb(lv_display_t *disp, const lv_area_t *area, uint8_t *px_map) {
 }
 
 bool gui_async(gui_cb_t cb, void *arg) {
-    if (!s_gui_q) return false;
+    if (!gui_q) return false;
     gui_msg_t m = {.cb = cb, .arg = arg, .done = NULL};
-    return xQueueSend(s_gui_q, &m, 0) == pdTRUE;
+    return xQueueSend(gui_q, &m, 0) == pdTRUE;
 }
 
 void task_display(void *args) {
@@ -74,9 +75,8 @@ void task_display(void *args) {
     lv_display_set_flush_cb(lvgl_display, my_flush_cb);
     lv_display_set_antialiasing(lvgl_display, false); // crisper at 1bpp style
 
-    // s_gui_q = xQueueCreate(GUI_QUEUE_LEN, sizeof(gui_msg_t));
+    gui_q = xQueueCreate(GUI_QUEUE_LEN, sizeof(gui_msg_t));
 
-    // TickType_t last = xTaskGetTickCount();
 
     while (1) {
 
@@ -87,17 +87,17 @@ void task_display(void *args) {
         lv_tick_inc(20);
         lv_timer_handler();
 
-        // // drain 1 msg
-        // gui_msg_t msg;
-        // if (xQueueReceive(s_gui_q, &msg, 0) == pdTRUE) {
-        //     if (msg.cb) {
-        //         msg.cb(msg.arg);
-        //     }
+        // drain 1 msg
+        gui_msg_t msg;
+        if (xQueueReceive(gui_q, &msg, 0) == pdTRUE) {
+            if (msg.cb) {
+                msg.cb(msg.arg);
+            }
 
-        //     if (msg.done) {
-        //         xSemaphoreGive(msg.done); // wake the waiter
-        //     }
-        // }
+            if (msg.done) {
+                xSemaphoreGive(msg.done); // wake the waiter
+            }
+        }
 
     }
 }

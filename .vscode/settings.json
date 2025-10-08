@@ -18,6 +18,7 @@
         "tinyusb.h": "c",
         "msc_device.h": "c",
         "lualib.h": "c",
-        "utils.h": "c"
+        "utils.h": "c",
+        "task_display.h": "c"
     }
 }

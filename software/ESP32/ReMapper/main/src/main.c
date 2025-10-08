@@ -41,6 +41,8 @@ void app_main(void) {
                 1,
                 NULL);
 
+    vTaskDelay(50 / portTICK_PERIOD_MS);
+
     if (is_programming_mode) {
         flash_duration = 100;
 

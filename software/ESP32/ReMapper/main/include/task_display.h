@@ -14,5 +14,6 @@ typedef struct {
     SemaphoreHandle_t done; // NULL for async, binary semaphore for sync
 } gui_msg_t;
 
+
 void task_display(void *args);          // init task
 bool gui_async(gui_cb_t cb, void *arg); // enqueue and return immediately

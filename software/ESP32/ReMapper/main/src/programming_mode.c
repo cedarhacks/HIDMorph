@@ -9,6 +9,9 @@
 #include "class/msc/msc_device.h"
 #include "tusb_msc_storage.h"
 
+#include "task_display.h"
+#include "lvgl.h"
+
 #define SECTOR_SIZE 4096
 #define BOARD_TUD_RHPORT 0
 
@@ -69,7 +72,22 @@ void fatfs_test(void) {
     ESP_LOGI(TAG, "Appended to test.txt");
 }
 
+static lv_obj_t *s_label;
+
+static void gui_build(void *arg) {
+    (void)arg;
+    lv_obj_t *scr = lv_scr_act();
+    s_label = lv_label_create(scr);
+    lv_label_set_text(s_label, "Programming");
+    lv_obj_center(s_label);
+    ESP_LOGI("TTTTT", "hello world");
+    printf("asdasdas\n\nasdasdasdasdasd\n\n");
+}
+
 void run_programming_mode() {
+
+    gui_async(gui_build, NULL);
+
     bool stat;
 
     // initialize the qspi CHIP here
@@ -95,5 +113,4 @@ void run_programming_mode() {
     fatfs_test();
 
     ESP_LOGI(TAG, "WL handler: %d\n", ext_flash_fs.wl);
-
 }
