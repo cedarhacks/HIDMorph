@@ -14,10 +14,10 @@ volatile static QueueHandle_t gui_q = NULL;
 
 static const char *TAG = "DISPLAY";
 
-static lv_color_t buf1[LVGL_BUF_PIXELS];
-static lv_display_t *lvgl_display;
-uint8_t pixels[SSD1306_HEIGHT * SSD1306_WIDTH];
-SSD1306_t display;
+volatile static lv_color_t buf1[LVGL_BUF_PIXELS];
+volatile static lv_display_t *lvgl_display;
+volatile uint8_t pixels[SSD1306_HEIGHT * SSD1306_WIDTH];
+volatile SSD1306_t display;
 
 
 static inline bool color_on(lv_color_t c) {
