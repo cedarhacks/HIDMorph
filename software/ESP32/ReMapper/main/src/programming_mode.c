@@ -72,16 +72,19 @@ void fatfs_test(void) {
     ESP_LOGI(TAG, "Appended to test.txt");
 }
 
+lv_obj_t *scr = NULL;
 static lv_obj_t *s_label;
 
 static void gui_build(void *arg) {
     (void)arg;
-    lv_obj_t *scr = lv_scr_act();
+
+    scr = lv_scr_act();
     s_label = lv_label_create(scr);
-    lv_label_set_text(s_label, "Programming");
-    lv_obj_center(s_label);
-    ESP_LOGI("TTTTT", "hello world");
-    printf("asdasdas\n\nasdasdasdasdasd\n\n");
+    lv_obj_set_width(s_label, 128);
+    lv_label_set_text(s_label, "Programming Mode");
+    lv_obj_set_style_text_font(s_label, &lv_font_montserrat_10, 0);
+    lv_obj_align(s_label, LV_ALIGN_TOP_MID, 0, 10);
+    // lv_label_set_long_mode(s_label, LV_LABEL_LONG_SCROLL);
 }
 
 void run_programming_mode() {
