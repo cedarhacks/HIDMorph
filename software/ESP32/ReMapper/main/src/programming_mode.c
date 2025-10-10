@@ -20,6 +20,8 @@ static const char *TAG = "PROGRAMMING MODE";
 W25Q128J_t memory_chip;
 ExtFlashFs_t ext_flash_fs;
 
+LV_IMG_DECLARE(gear);
+
 int PIN_NUM_MOSI = 12;
 int PIN_NUM_MISO = 13;
 int PIN_NUM_CLK = 11;
@@ -72,19 +74,41 @@ void fatfs_test(void) {
     ESP_LOGI(TAG, "Appended to test.txt");
 }
 
-lv_obj_t *scr = NULL;
+lv_obj_t *screen = NULL;
 static lv_obj_t *s_label;
+static lv_obj_t *img;
+static lv_anim_t gear_anim;
 
 static void gui_build(void *arg) {
     (void)arg;
 
-    scr = lv_scr_act();
-    s_label = lv_label_create(scr);
+    // gear
+    img = lv_image_create(lv_screen_active());
+    lv_image_set_src(img, &gear);
+    lv_obj_set_pos(img,
+                   DISPLAY_W - (gear.header.w / 2),
+                   DISPLAY_H + 5 - (gear.header.h / 2));
+    lv_img_set_pivot(img,
+                     gear.header.w/2,
+                     gear.header.h/2);
+
+    lv_anim_init(&gear_anim);
+    lv_anim_set_var(&gear_anim, img);
+    lv_anim_set_exec_cb(&gear_anim, (lv_anim_exec_xcb_t)lv_img_set_angle);
+
+    // angles are in 0.1 degrees (900 = 90°, 3600 = 360°)
+    lv_anim_set_values(&gear_anim, 0, 3600);
+    lv_anim_set_time(&gear_anim, 10000); // 2 seconds per rotation
+    lv_anim_set_repeat_count(&gear_anim, LV_ANIM_REPEAT_INFINITE);
+    lv_anim_start(&gear_anim);
+
+    screen = lv_screen_active();
+    s_label = lv_label_create(screen);
     lv_obj_set_width(s_label, 128);
     lv_label_set_text(s_label, "Programming Mode");
     lv_obj_set_style_text_font(s_label, &lv_font_montserrat_10, 0);
-    lv_obj_align(s_label, LV_ALIGN_TOP_MID, 0, 10);
-    // lv_label_set_long_mode(s_label, LV_LABEL_LONG_SCROLL);
+    lv_obj_align(s_label, LV_ALIGN_OUT_TOP_MID, 0, 10);
+    // lv_label_set_long_mode(s_label, LV_LABEL_LONG_MODE_SCROLL_CIRCULAR);
 }
 
 void run_programming_mode() {

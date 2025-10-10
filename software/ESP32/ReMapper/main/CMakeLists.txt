@@ -17,6 +17,8 @@ idf_component_register(
         "src/task_display.c"
         "src/task_lua_vm.c"
 
+        "src/images/gear.c"
+
         "lua/lapi.c"
         "lua/lauxlib.c"
         "lua/lbaselib.c"

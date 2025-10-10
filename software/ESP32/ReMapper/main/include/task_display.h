@@ -5,6 +5,11 @@
 #include "freertos/semphr.h"
 #include "freertos/task.h"
 #include "freertos/queue.h"
+#include "SSD1306_i2c_driver.h"
+
+
+#define DISPLAY_W (SSD1306_WIDTH)
+#define DISPLAY_H (SSD1306_HEIGHT)
 
 typedef void (*gui_cb_t)(void *arg);
 

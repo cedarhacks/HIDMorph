@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <dirent.h>
+#include "gui_main.h"
 
 #define MAX_FILE_PATH_LEN (255)
 
