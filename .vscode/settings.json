@@ -19,6 +19,9 @@
         "msc_device.h": "c",
         "lualib.h": "c",
         "utils.h": "c",
-        "task_display.h": "c"
+        "task_display.h": "c",
+        "lvgl.h": "c",
+        "gui_main.h": "c",
+        "stdio.h": "c"
     }
 }

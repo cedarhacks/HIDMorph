@@ -107,7 +107,7 @@ static void gui_build(void *arg) {
     lv_obj_set_width(s_label, 128);
     lv_label_set_text(s_label, "Programming Mode");
     lv_obj_set_style_text_font(s_label, &lv_font_montserrat_10, 0);
-    lv_obj_align(s_label, LV_ALIGN_OUT_TOP_MID, 0, 10);
+    lv_obj_align(s_label, LV_ALIGN_TOP_LEFT, 0, 10);
     // lv_label_set_long_mode(s_label, LV_LABEL_LONG_MODE_SCROLL_CIRCULAR);
 }
 

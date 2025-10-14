@@ -13,10 +13,18 @@
 #include <string.h>
 #include <dirent.h>
 #include "gui_main.h"
+#include "task_display.h"
 
 #define MAX_FILE_PATH_LEN (255)
 
 const char *TAG = "LUA_TASK";
+
+lv_obj_t *file_screen = NULL;
+
+static void gui_build(void *arg) {
+    file_screen = lv_screen_active();
+    create_file_pager(file_screen);
+}
 
 int list_files(const char *path, char files_paths[][MAX_FILE_PATH_LEN], int file_paths_count) {
     DIR *dir = opendir(path);
@@ -53,6 +61,8 @@ int list_files(const char *path, char files_paths[][MAX_FILE_PATH_LEN], int file
 }
 
 void task_lua_vm(void *args) {
+
+    gui_async(gui_build, NULL);
 
     int PIN_NUM_MOSI = 12;
     int PIN_NUM_MISO = 13;

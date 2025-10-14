@@ -16,6 +16,7 @@ idf_component_register(
         "src/tusb_descriptors.c"
         "src/task_display.c"
         "src/task_lua_vm.c"
+        "src/gui_main.c"
 
         "src/images/gear.c"
 
