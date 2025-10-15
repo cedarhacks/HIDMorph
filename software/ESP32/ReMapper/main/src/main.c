@@ -36,7 +36,7 @@ void app_main(void) {
     // display task
     xTaskCreate(task_display,
                 "display",
-                20480,
+                8192,
                 NULL,
                 1,
                 NULL);
@@ -54,7 +54,7 @@ void app_main(void) {
         // in progamming mode we run the MSC task to allow the user to edit programs
         xTaskCreate(task_usb_storage_device,
                     "usb_storage",
-                    20480,
+                    4096,
                     NULL,
                     10,
                     NULL);
@@ -65,21 +65,21 @@ void app_main(void) {
         // check the boot mode
         xTaskCreate(task_spi_usb,
                     "spi_usb",
-                    20480,
+                    4096,
                     NULL,
                     10,
                     NULL);
 
         xTaskCreate(task_lua_vm,
                     "lua_vm",
-                    20480,
+                    8192,
                     NULL,
                     10,
                     NULL);
 
         xTaskCreate(task_gamepad_out,
                     "gamepad",
-                    20480,
+                    4096,
                     NULL,
                     10,
                     NULL);

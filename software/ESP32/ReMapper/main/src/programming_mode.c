@@ -17,8 +17,8 @@
 
 static const char *TAG = "PROGRAMMING MODE";
 
-W25Q128J_t memory_chip;
-ExtFlashFs_t ext_flash_fs;
+static W25Q128J_t memory_chip;
+static ExtFlashFs_t ext_flash_fs;
 
 LV_IMG_DECLARE(gear);
 

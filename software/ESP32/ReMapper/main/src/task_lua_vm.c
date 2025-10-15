@@ -18,6 +18,8 @@
 #define MAX_FILE_PATH_LEN (255)
 
 const char *TAG = "LUA_TASK";
+static W25Q128J_t memory_chip;
+static ExtFlashFs_t ext_flash_fs;
 
 lv_obj_t *file_screen = NULL;
 
@@ -72,8 +74,6 @@ void task_lua_vm(void *args) {
     int PIN_NUM_CS = 17;
 
     bool stat;
-    W25Q128J_t memory_chip;
-    ExtFlashFs_t ext_flash_fs;
 
     // initialize the qspi CHIP here
     memory_chip.bus.mosi_io_num = PIN_NUM_MOSI;
@@ -91,7 +91,6 @@ void task_lua_vm(void *args) {
 
     stat = extfs_setup(&ext_flash_fs, memory_chip.ext_flash, "/ext", "myextfs");
     ESP_LOGI(TAG, "Mount External flash as vfs wl: %d", stat == true);
-    // fatfs_test2();
 
     // get lua files list
     static char files[20][MAX_FILE_PATH_LEN];

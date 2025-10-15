@@ -10,9 +10,8 @@
 #include "W25Q128J.h"
 
 static const char *TAG = "USB OUT";
-
-extern W25Q128J_t memory_chip;
-extern ExtFlashFs_t ext_flash_fs;
+static W25Q128J_t memory_chip;
+static ExtFlashFs_t ext_flash_fs;
 
 
 // callback that is delivered when storage is mounted/unmounted by application.
