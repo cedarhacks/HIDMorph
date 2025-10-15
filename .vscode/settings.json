@@ -22,6 +22,7 @@
         "task_display.h": "c",
         "lvgl.h": "c",
         "gui_main.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "widget_horizontal_select.h": "c"
     }
 }

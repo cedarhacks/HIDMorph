@@ -14,6 +14,7 @@
 #include <dirent.h>
 #include "gui_main.h"
 #include "task_display.h"
+#include "widget_horizontal_select.h"
 
 #define MAX_FILE_PATH_LEN (255)
 
@@ -21,11 +22,24 @@ const char *TAG = "LUA_TASK";
 static W25Q128J_t memory_chip;
 static ExtFlashFs_t ext_flash_fs;
 
-lv_obj_t *file_screen = NULL;
+char files[20][MAX_FILE_PATH_LEN];
+char* files_list[20];
+ 
+int file_count = 0;
 
-static void gui_build(void *arg) {
-    file_screen = lv_screen_active();
-    create_file_pager(file_screen);
+static list_selector_t file_list_select;
+
+void gui_build(void *arg) {
+
+    for (int i = 0; i < file_count; i++) {
+        files_list[i] = files[i];
+    }
+
+    file_list_select.items = (char **)files_list;
+    file_list_select.num_items = file_count;
+    file_list_select.current_i = 0;
+    list_selector_init(lv_screen_active(), &file_list_select);
+    list_selector_scroll_to(&file_list_select, 1);
 }
 
 int list_files(const char *path, char files_paths[][MAX_FILE_PATH_LEN], int file_paths_count) {
@@ -64,8 +78,6 @@ int list_files(const char *path, char files_paths[][MAX_FILE_PATH_LEN], int file
 
 void task_lua_vm(void *args) {
 
-    gui_async(gui_build, NULL);
-
     int PIN_NUM_MOSI = 12;
     int PIN_NUM_MISO = 13;
     int PIN_NUM_CLK = 11;
@@ -93,14 +105,11 @@ void task_lua_vm(void *args) {
     ESP_LOGI(TAG, "Mount External flash as vfs wl: %d", stat == true);
 
     // get lua files list
-    static char files[20][MAX_FILE_PATH_LEN];
-    int file_count = list_files("/ext", files, 20);
-    ESP_LOGI(TAG, " --- file count: %d", file_count);
+    file_count = list_files("/ext", files, 20);
+    ESP_LOGI(TAG, "file count: %d", file_count);
 
-    // char current_file[MAX_FILE_PATH_LEN];
-    for (int i = 0; i < file_count; i++) {
-        ESP_LOGI(TAG, "file: %s", files[i]);
-    }
+    // construct the gui after getting a file list
+    gui_async(gui_build, NULL);
 
     // READ TEST.lua
     char *current_file = "/ext/TEST.lua";

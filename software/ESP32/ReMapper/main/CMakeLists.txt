@@ -17,6 +17,7 @@ idf_component_register(
         "src/task_display.c"
         "src/task_lua_vm.c"
         "src/gui_main.c"
+        "src/lvgl_widgets/widget_horizontal_select.c"
 
         "src/images/gear.c"
 
@@ -56,6 +57,7 @@ idf_component_register(
 
     INCLUDE_DIRS
         "./include"
+        "./include/lvgl_widgets"
         "../../../SHARED/include/"
         "./lua"
 
