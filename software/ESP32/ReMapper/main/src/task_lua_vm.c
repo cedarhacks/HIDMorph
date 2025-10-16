@@ -23,8 +23,10 @@ static W25Q128J_t memory_chip;
 static ExtFlashFs_t ext_flash_fs;
 
 char files[20][MAX_FILE_PATH_LEN];
-char* files_list[20];
- 
+char files_name_only[20][MAX_FILE_PATH_LEN];
+char *files_list[20];
+char *files_name_only_list[20];
+
 int file_count = 0;
 
 static list_selector_t file_list_select;
@@ -33,9 +35,12 @@ void gui_build(void *arg) {
 
     for (int i = 0; i < file_count; i++) {
         files_list[i] = files[i];
+
+        // find last "/" to display
+        files_name_only_list[i] = strrchr(files_list[i], '/') + 1;
     }
 
-    file_list_select.items = (char **)files_list;
+    file_list_select.items = (char **)files_name_only_list;
     file_list_select.num_items = file_count;
     file_list_select.current_i = 0;
     list_selector_init(lv_screen_active(), &file_list_select);
