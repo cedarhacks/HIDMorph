@@ -23,6 +23,8 @@
         "lvgl.h": "c",
         "gui_main.h": "c",
         "stdio.h": "c",
-        "widget_horizontal_select.h": "c"
+        "widget_horizontal_select.h": "c",
+        "task_input_manager.h": "c",
+        "button.h": "c"
     }
 }

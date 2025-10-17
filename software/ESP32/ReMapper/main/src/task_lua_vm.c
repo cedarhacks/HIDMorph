@@ -14,6 +14,7 @@
 #include <dirent.h>
 #include "gui_main.h"
 #include "task_display.h"
+#include "task_input_manager.h"
 #include "widget_horizontal_select.h"
 
 #define MAX_FILE_PATH_LEN (255)
@@ -26,10 +27,35 @@ char files[20][MAX_FILE_PATH_LEN];
 char files_name_only[20][MAX_FILE_PATH_LEN];
 char *files_list[20];
 char *files_name_only_list[20];
+int selected_file_i = 0;
 
 int file_count = 0;
 
 static list_selector_t file_list_select;
+int global_pin; // assume pin ebvent at a time
+
+void gui_input(void *pin_ptr) {
+    int pin = *(int *)pin_ptr;
+    ESP_LOGI("gggggg", "input: %d\n", pin);
+
+    if (pin == BUTTON_NEXT) {
+        selected_file_i += 1;
+
+    } else if (pin == BUTTON_PREV) {
+        selected_file_i -= 1;
+
+    } else if (pin == BUTTON_SELECT) {
+    }
+
+    selected_file_i = selected_file_i >= file_count ? 0 : selected_file_i;
+    selected_file_i = selected_file_i < 0 ? file_count - 1 : selected_file_i;
+    list_selector_scroll_to(&file_list_select, selected_file_i);
+}
+
+void clicked_cb(int pin) {
+    global_pin = pin;
+    gui_async(gui_input, &global_pin);
+}
 
 void gui_build(void *arg) {
 
@@ -44,7 +70,7 @@ void gui_build(void *arg) {
     file_list_select.num_items = file_count;
     file_list_select.current_i = 0;
     list_selector_init(lv_screen_active(), &file_list_select);
-    list_selector_scroll_to(&file_list_select, 1);
+    list_selector_scroll_to(&file_list_select, selected_file_i);
 }
 
 int list_files(const char *path, char files_paths[][MAX_FILE_PATH_LEN], int file_paths_count) {
@@ -115,6 +141,9 @@ void task_lua_vm(void *args) {
 
     // construct the gui after getting a file list
     gui_async(gui_build, NULL);
+
+    // register input
+    input_listen_click(clicked_cb);
 
     // READ TEST.lua
     char *current_file = "/ext/TEST.lua";
