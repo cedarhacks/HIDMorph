@@ -9,7 +9,7 @@ void list_selector_init(lv_obj_t *parent, list_selector_t *selector) {
     lv_coord_t parent_width = lv_obj_get_width(parent);
     lv_coord_t parent_height = lv_obj_get_height(parent);
 
-    int button_size = parent_height - 10;
+    int button_size = parent_height - 16;
 
     lv_obj_t *row = lv_obj_create(parent);
     selector->row = row;
@@ -20,6 +20,7 @@ void list_selector_init(lv_obj_t *parent, list_selector_t *selector) {
     lv_obj_set_style_bg_opa(row, LV_OPA_TRANSP, LV_PART_MAIN);
     lv_obj_set_flex_flow(row, LV_FLEX_FLOW_ROW);
     lv_obj_set_flex_align(row, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
+    lv_obj_center(row);
 
     // Left arrow
     lv_obj_t *button_l = lv_btn_create(row);
@@ -70,7 +71,7 @@ void list_selector_init(lv_obj_t *parent, list_selector_t *selector) {
         lv_label_set_text_fmt(label, "%s", selector->items[i]);
         lv_obj_set_style_text_font(label, &lv_font_montserrat_10, 0);
         lv_label_set_long_mode(label, LV_LABEL_LONG_SCROLL_CIRCULAR);
-        lv_obj_set_width(label, LV_PCT(100));
+        // lv_obj_set_width(label, LV_PCT(100));
     }
 
     // Right arrow
