@@ -12,6 +12,7 @@
 #include "task_usb_storage_device.h"
 #include "task_display.h"
 #include "task_lua_vm.h"
+#include "task_input_manager.h"
 #include "programming_mode.h"
 
 #include "esp_log.h"
@@ -37,6 +38,14 @@ void app_main(void) {
     xTaskCreate(task_display,
                 "display",
                 8192,
+                NULL,
+                1,
+                NULL);
+
+    // input_manager_task
+    xTaskCreate(task_input_manager,
+                "input_manager",
+                2048,
                 NULL,
                 1,
                 NULL);

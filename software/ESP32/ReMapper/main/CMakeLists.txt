@@ -18,6 +18,8 @@ idf_component_register(
         "src/task_lua_vm.c"
         "src/gui_main.c"
         "src/lvgl_widgets/widget_horizontal_select.c"
+        "src/task_input_manager.c"
+        "src/button.c"
 
         "src/images/gear.c"
 
