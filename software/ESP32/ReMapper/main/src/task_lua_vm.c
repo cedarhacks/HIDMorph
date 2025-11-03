@@ -1,6 +1,8 @@
+#include <stdatomic.h>
 #include "task_lua_vm.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "freertos/semphr.h"
 #include "extflash_fs.h"
 #include "W25Q128J.h"
 
@@ -23,20 +25,32 @@ const char *TAG = "LUA_TASK";
 static W25Q128J_t memory_chip;
 static ExtFlashFs_t ext_flash_fs;
 
+static lv_obj_t *screen_file_select;
 char files[20][MAX_FILE_PATH_LEN];
 char files_name_only[20][MAX_FILE_PATH_LEN];
 char *files_list[20];
 char *files_name_only_list[20];
-int selected_file_i = 0;
 
+static lv_obj_t *screen_file_running;
+
+
+int selected_file_i = 0;
 int file_count = 0;
 
 static list_selector_t file_list_select;
 int global_pin; // assume pin ebvent at a time
 
+typedef enum RUN_MODE {
+    MODE_FILE_SELECT,
+    MODE_RUN,
+} RUN_MODE_t;
+
+static SemaphoreHandle_t mode_sem;
+static RUN_MODE_t mode;
+static RUN_MODE_t mode_lp;
+
 void gui_input(void *pin_ptr) {
     int pin = *(int *)pin_ptr;
-    ESP_LOGI("gggggg", "input: %d\n", pin);
 
     if (pin == BUTTON_NEXT) {
         selected_file_i += 1;
@@ -45,6 +59,11 @@ void gui_input(void *pin_ptr) {
         selected_file_i -= 1;
 
     } else if (pin == BUTTON_SELECT) {
+        // enter run mode
+        if (xSemaphoreTake(mode_sem, portMAX_DELAY)) {
+            mode = MODE_RUN;
+            xSemaphoreGive(mode_sem);
+        }
     }
 
     selected_file_i = selected_file_i >= file_count ? 0 : selected_file_i;
@@ -57,7 +76,9 @@ void clicked_cb(int pin) {
     gui_async(gui_input, &global_pin);
 }
 
-void gui_build(void *arg) {
+void gui_build_file_select(void *arg) {
+
+    screen_file_select = lv_obj_create(NULL);
 
     for (int i = 0; i < file_count; i++) {
         files_list[i] = files[i];
@@ -69,9 +90,28 @@ void gui_build(void *arg) {
     file_list_select.items = (char **)files_name_only_list;
     file_list_select.num_items = file_count;
     file_list_select.current_i = 0;
-    list_selector_init(lv_screen_active(), &file_list_select);
+    list_selector_init(screen_file_select, &file_list_select);
     list_selector_scroll_to(&file_list_select, selected_file_i);
 }
+
+void gui_build_running(void *arg){
+    screen_file_running = lv_obj_create(NULL);
+
+    lv_obj_t* label = lv_label_create(screen_file_running);
+    lv_label_set_long_mode(label, LV_LABEL_LONG_SCROLL_CIRCULAR);
+    lv_label_set_text_fmt(label, "Running!");
+    lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
+
+}
+
+void gui_switch_file_select(void *arg){
+    lv_scr_load(screen_file_select);
+}
+
+void gui_switch_file_run(void *arg){
+    lv_scr_load(screen_file_running);
+}
+
 
 int list_files(const char *path, char files_paths[][MAX_FILE_PATH_LEN], int file_paths_count) {
     DIR *dir = opendir(path);
@@ -109,6 +149,10 @@ int list_files(const char *path, char files_paths[][MAX_FILE_PATH_LEN], int file
 
 void task_lua_vm(void *args) {
 
+    mode = MODE_FILE_SELECT;
+    mode_lp = mode;
+    mode_sem = xSemaphoreCreateMutex();
+
     int PIN_NUM_MOSI = 12;
     int PIN_NUM_MISO = 13;
     int PIN_NUM_CLK = 11;
@@ -139,32 +183,46 @@ void task_lua_vm(void *args) {
     file_count = list_files("/ext", files, 20);
     ESP_LOGI(TAG, "file count: %d", file_count);
 
-    // construct the gui after getting a file list
-    gui_async(gui_build, NULL);
+    // // construct the gui after getting a file list
+    gui_async(gui_build_file_select, NULL);
+    gui_async(gui_build_running, NULL);
+    gui_async(gui_switch_file_select, NULL);
 
-    // register input
+    // // register input
     input_listen_click(clicked_cb);
 
-    // READ TEST.lua
-    char *current_file = "/ext/TEST.lua";
+    // // READ TEST.lua
+    // char *current_file = "/ext/TEST.lua";
 
-    // initialize the LUA vm
-    lua_State *L = luaL_newstate();
-    luaL_openlibs(L);
+    // // initialize the LUA vm
+    // lua_State *L = luaL_newstate();
+    // luaL_openlibs(L);
 
-    if (luaL_dofile(L, current_file) == LUA_OK) {
-        ESP_LOGI(TAG, "Script ran successfully!");
-        if (lua_isnumber(L, -1)) {
-            int result = lua_tointeger(L, -1);
-            ESP_LOGI(TAG, "Returned value = %d", result);
-        }
-    } else {
-        ESP_LOGE(TAG, "Error: %s", lua_tostring(L, -1));
-    }
+    // if (luaL_dofile(L, current_file) == LUA_OK) {
+    //     ESP_LOGI(TAG, "Script ran successfully!");
+    //     if (lua_isnumber(L, -1)) {
+    //         int result = lua_tointeger(L, -1);
+    //         ESP_LOGI(TAG, "Returned value = %d", result);
+    //     }
+    // } else {
+    //     ESP_LOGE(TAG, "Error: %s", lua_tostring(L, -1));
+    // }
 
     while (1) {
+
+        if( mode == MODE_RUN ){
+            // if we just selected a file
+            // start runnning
+            if( mode_lp == MODE_FILE_SELECT ){
+                ESP_LOGI(TAG, "SELECTED FILE %s  %s", files_name_only_list[selected_file_i], files_list[selected_file_i]);
+                gui_async(gui_switch_file_run, NULL);
+
+            }
+        }
+
+        mode_lp = mode;
         vTaskDelay(10 / portTICK_PERIOD_MS);
     }
 
-    lua_close(L);
+    // lua_close(L);
 }

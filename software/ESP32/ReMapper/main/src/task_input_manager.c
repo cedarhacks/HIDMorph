@@ -34,8 +34,6 @@ void task_input_manager(void *args) {
             step_debounce_button(input_events[i]);
 
             if (is_clicked_debounce_button(input_events[i])) {
-                ESP_LOGI(TAG, "Button Clicked: %d", input_events[i]->GPIO_PIN);
-            
                 for( int ci = 0; ci < clicked_callbacks_i; ci++){
                     clicked_callbacks[ci](input_events[i]->GPIO_PIN);
                 }
