@@ -64,14 +64,20 @@ void list_selector_init(lv_obj_t *parent, list_selector_t *selector) {
 
         // center label inside
         lv_obj_set_layout(item, LV_LAYOUT_FLEX);
-        lv_obj_set_flex_flow(item, LV_FLEX_FLOW_COLUMN);
+        lv_obj_set_flex_flow(item, LV_FLEX_FLOW_ROW);
         lv_obj_set_flex_align(item, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
+
+        lv_obj_t *label_num = lv_label_create(item);
+        lv_label_set_text_fmt(label_num, "[%d]", i);
+        lv_obj_set_style_text_font(label_num, &lv_font_montserrat_10, 0);
+        lv_label_set_long_mode(label_num, LV_LABEL_LONG_SCROLL_CIRCULAR);
+        lv_obj_set_width(label_num, LV_PCT(20));
 
         lv_obj_t *label = lv_label_create(item);
         lv_label_set_text_fmt(label, "%s", selector->items[i]);
         lv_obj_set_style_text_font(label, &lv_font_montserrat_10, 0);
         lv_label_set_long_mode(label, LV_LABEL_LONG_SCROLL_CIRCULAR);
-        // lv_obj_set_width(label, LV_PCT(100));
+        lv_obj_set_width(label, LV_PCT(80));
     }
 
     // Right arrow

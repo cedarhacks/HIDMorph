@@ -33,7 +33,6 @@ char *files_name_only_list[20];
 
 static lv_obj_t *screen_file_running;
 
-
 int selected_file_i = 0;
 int file_count = 0;
 
@@ -94,24 +93,22 @@ void gui_build_file_select(void *arg) {
     list_selector_scroll_to(&file_list_select, selected_file_i);
 }
 
-void gui_build_running(void *arg){
+void gui_build_running(void *arg) {
     screen_file_running = lv_obj_create(NULL);
 
-    lv_obj_t* label = lv_label_create(screen_file_running);
+    lv_obj_t *label = lv_label_create(screen_file_running);
     lv_label_set_long_mode(label, LV_LABEL_LONG_SCROLL_CIRCULAR);
     lv_label_set_text_fmt(label, "Running!");
     lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
-
 }
 
-void gui_switch_file_select(void *arg){
+void gui_switch_file_select(void *arg) {
     lv_scr_load(screen_file_select);
 }
 
-void gui_switch_file_run(void *arg){
+void gui_switch_file_run(void *arg) {
     lv_scr_load(screen_file_running);
 }
-
 
 int list_files(const char *path, char files_paths[][MAX_FILE_PATH_LEN], int file_paths_count) {
     DIR *dir = opendir(path);
@@ -191,6 +188,9 @@ void task_lua_vm(void *args) {
     // // register input
     input_listen_click(clicked_cb);
 
+    // necassary to read file names
+    vTaskDelay(500 / portTICK_PERIOD_MS);
+
     // // READ TEST.lua
     // char *current_file = "/ext/TEST.lua";
 
@@ -210,13 +210,12 @@ void task_lua_vm(void *args) {
 
     while (1) {
 
-        if( mode == MODE_RUN ){
+        if (mode == MODE_RUN) {
             // if we just selected a file
             // start runnning
-            if( mode_lp == MODE_FILE_SELECT ){
+            if (mode_lp == MODE_FILE_SELECT) {
                 ESP_LOGI(TAG, "SELECTED FILE %s  %s", files_name_only_list[selected_file_i], files_list[selected_file_i]);
                 gui_async(gui_switch_file_run, NULL);
-
             }
         }
 
