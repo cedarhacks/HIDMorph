@@ -1,7 +1,7 @@
 #include "widget_horizontal_select.h"
 
 void list_selector_scroll_to(list_selector_t *selector, int index) {
-    lv_obj_scroll_to_view(lv_obj_get_child(selector->page, index), LV_ANIM_ON);
+    lv_obj_scroll_to_view(lv_obj_get_child(selector->page, index), LV_ANIM_OFF);
 }
 
 void list_selector_init(lv_obj_t *parent, list_selector_t *selector) {
@@ -54,6 +54,7 @@ void list_selector_init(lv_obj_t *parent, list_selector_t *selector) {
     lv_obj_set_scroll_dir(page, LV_DIR_HOR);
     lv_obj_set_scroll_snap_x(page, LV_SCROLL_SNAP_CENTER);
     lv_obj_set_scrollbar_mode(page, LV_SCROLLBAR_MODE_OFF);
+    lv_obj_set_style_anim_time(page, 80, 0);
 
     // Full-width snappable items
     for (int i = 0; i < selector->num_items; i++) {
@@ -68,16 +69,16 @@ void list_selector_init(lv_obj_t *parent, list_selector_t *selector) {
         lv_obj_set_flex_align(item, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
 
         lv_obj_t *label_num = lv_label_create(item);
-        lv_label_set_text_fmt(label_num, "[%d]", i);
+        lv_label_set_text_fmt(label_num, "%d", i);
         lv_obj_set_style_text_font(label_num, &lv_font_montserrat_10, 0);
         lv_label_set_long_mode(label_num, LV_LABEL_LONG_SCROLL_CIRCULAR);
-        lv_obj_set_width(label_num, LV_PCT(20));
+        lv_obj_set_width(label_num, LV_PCT(25));
 
         lv_obj_t *label = lv_label_create(item);
         lv_label_set_text_fmt(label, "%s", selector->items[i]);
         lv_obj_set_style_text_font(label, &lv_font_montserrat_10, 0);
         lv_label_set_long_mode(label, LV_LABEL_LONG_SCROLL_CIRCULAR);
-        lv_obj_set_width(label, LV_PCT(80));
+        lv_obj_set_width(label, LV_PCT(75));
     }
 
     // Right arrow

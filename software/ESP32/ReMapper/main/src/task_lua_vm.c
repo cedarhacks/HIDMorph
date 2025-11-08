@@ -216,6 +216,9 @@ void task_lua_vm(void *args) {
             if (mode_lp == MODE_FILE_SELECT) {
                 ESP_LOGI(TAG, "SELECTED FILE %s  %s", files_name_only_list[selected_file_i], files_list[selected_file_i]);
                 gui_async(gui_switch_file_run, NULL);
+
+                // run_lua_file(files_names[])
+
             }
         }
 
