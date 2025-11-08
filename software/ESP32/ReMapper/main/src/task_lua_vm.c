@@ -48,6 +48,8 @@ static SemaphoreHandle_t mode_sem;
 static RUN_MODE_t mode;
 static RUN_MODE_t mode_lp;
 
+static volatile bool g_stop = false;
+
 void gui_input(void *pin_ptr) {
     int pin = *(int *)pin_ptr;
 
@@ -55,7 +57,12 @@ void gui_input(void *pin_ptr) {
         selected_file_i += 1;
 
     } else if (pin == BUTTON_PREV) {
-        selected_file_i -= 1;
+
+        if (mode == MODE_RUN) {
+            g_stop = true;
+        } else if (mode == MODE_FILE_SELECT) {
+            selected_file_i -= 1;
+        }
 
     } else if (pin == BUTTON_SELECT) {
         // enter run mode
@@ -144,6 +151,76 @@ int list_files(const char *path, char files_paths[][MAX_FILE_PATH_LEN], int file
     return count;
 }
 
+static void hook_count(lua_State *L, lua_Debug *ar) {
+    (void)ar;
+    // Cooperatively yield to host task
+    lua_yield(L, 0);
+}
+
+void run_lua_file(const char *filename) {
+
+    lua_State *L = luaL_newstate();
+    luaL_openlibs(L);
+
+    if (luaL_loadfile(L, filename) != LUA_OK) {
+        ESP_LOGE(TAG, "load error: %s", lua_tostring(L, -1));
+        lua_close(L);
+        return;
+    }
+
+    lua_State *co = lua_newthread(L);            // Stack: [func, co]
+    lua_insert(L, -2);                           // Stack: [co, func]  (put func on top)
+    lua_xmove(L, co, 1);                         // L:   [co]
+                                                 // co:  [func]
+    int co_ref = luaL_ref(L, LUA_REGISTRYINDEX); // pops 'co' from L, keeps it alive
+
+    lua_sethook(co, hook_count, LUA_MASKCOUNT, 10000); // every ~10k VM instr
+
+    for (;;) {
+        int nres = 0;
+        int rc = lua_resume(co, NULL, 0, &nres); // 5.4 signature
+
+        if (rc == LUA_YIELD) {
+
+            if (g_stop) {
+                // Stop further hook interruptions
+                lua_sethook(co, NULL, 0, 0);
+
+                (void)lua_resetthread(co);
+
+                luaL_unref(L, LUA_REGISTRYINDEX, co_ref);
+                lua_close(L);
+
+                ESP_LOGI(TAG, "STOPPED");
+                mode = MODE_FILE_SELECT;
+                g_stop = false;
+                return;
+            }
+
+            vTaskDelay(pdMS_TO_TICKS(1));
+            continue;
+
+        } else if (rc == LUA_OK) {
+
+            // finished successfully
+            break;
+
+        } else {
+
+            // error on co’s stack
+            const char *err = lua_tostring(co, -1);
+            ESP_LOGE(TAG, "runtime error: %s", err ? err : "(unknown)");
+            break;
+        }
+    }
+
+    luaL_unref(L, LUA_REGISTRYINDEX, co_ref);
+    lua_close(L);
+
+    ESP_LOGI(TAG, "DONE");
+    mode = MODE_FILE_SELECT;
+}
+
 void task_lua_vm(void *args) {
 
     mode = MODE_FILE_SELECT;
@@ -194,37 +271,27 @@ void task_lua_vm(void *args) {
     // // READ TEST.lua
     // char *current_file = "/ext/TEST.lua";
 
-    // // initialize the LUA vm
-    // lua_State *L = luaL_newstate();
-    // luaL_openlibs(L);
-
-    // if (luaL_dofile(L, current_file) == LUA_OK) {
-    //     ESP_LOGI(TAG, "Script ran successfully!");
-    //     if (lua_isnumber(L, -1)) {
-    //         int result = lua_tointeger(L, -1);
-    //         ESP_LOGI(TAG, "Returned value = %d", result);
-    //     }
-    // } else {
-    //     ESP_LOGE(TAG, "Error: %s", lua_tostring(L, -1));
-    // }
-
     while (1) {
 
         if (mode == MODE_RUN) {
-            // if we just selected a file
-            // start runnning
             if (mode_lp == MODE_FILE_SELECT) {
+                mode_lp = mode;
+
                 ESP_LOGI(TAG, "SELECTED FILE %s  %s", files_name_only_list[selected_file_i], files_list[selected_file_i]);
-                gui_async(gui_switch_file_run, NULL);
+                gui_async(gui_switch_file_run, files_name_only_list[selected_file_i]);
 
-                // run_lua_file(files_names[])
+                run_lua_file(files_list[selected_file_i]);
+                mode = MODE_FILE_SELECT;
+            }
+        } else if (mode == MODE_FILE_SELECT) {
+            if (mode_lp == MODE_RUN) {
+                mode_lp = mode;
 
+                gui_async(gui_switch_file_select, NULL);
+                ESP_LOGI(TAG, "CHANGING FROM RUN TO FS\n");
             }
         }
 
-        mode_lp = mode;
         vTaskDelay(10 / portTICK_PERIOD_MS);
     }
-
-    // lua_close(L);
 }
