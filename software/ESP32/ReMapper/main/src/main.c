@@ -8,7 +8,7 @@
 
 #include "task_spi_usb.h"
 #include "task_webhost.h"
-#include "task_gamepad_out.h"
+#include "task_hid_out.h"
 #include "task_usb_storage_device.h"
 #include "task_display.h"
 #include "task_lua_vm.h"
@@ -90,7 +90,7 @@ void app_main(void) {
                     10,
                     NULL);
 
-        xTaskCreate(task_gamepad_out,
+        xTaskCreate(task_hid_out,
                     "gamepad",
                     4096,
                     NULL,

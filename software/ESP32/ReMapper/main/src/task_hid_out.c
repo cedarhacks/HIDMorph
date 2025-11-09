@@ -1,9 +1,9 @@
-#include "task_gamepad_out.h"
+#include "task_hid_out.h"
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
-void task_gamepad_out(void *args) {
+void task_hid_out(void *args) {
     gamepad_hid_init();
 
     while (1) {

@@ -12,7 +12,7 @@ idf_component_register(
         "src/SSD1306_i2c_driver.c"
         "src/extflash_fs.c"
         "src/task_usb_storage_device.c"
-        "src/task_gamepad_out.c"
+        "src/task_hid_out.c"
         "src/tusb_descriptors.c"
         "src/task_display.c"
         "src/task_lua_vm.c"

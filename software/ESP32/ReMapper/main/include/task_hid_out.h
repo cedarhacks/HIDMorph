@@ -5,4 +5,4 @@
 #include "hid_parsing.h"
 
 
-void task_gamepad_out(void *args);
+void task_hid_out(void *args);
