@@ -91,6 +91,7 @@ void handle_req_queue() {
                                  e.u.mouse.y,
                                  e.u.mouse.wheel,
                                  e.u.mouse.pan);
+            ESP_LOGI("TTT", "%d %d", e.u.mouse.x, e.u.mouse.y);
             break;
 
         case HID_EVT_GAMEPAD:
