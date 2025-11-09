@@ -197,7 +197,8 @@ void run_lua_file(const char *filename) {
                                                  // co:  [func]
     int co_ref = luaL_ref(L, LUA_REGISTRYINDEX); // pops 'co' from L, keeps it alive
 
-    lua_sethook(co, hook_count, LUA_MASKCOUNT, 10000); // every ~10k VM instr
+    // lua_sethook(co, hook_count, LUA_MASKCOUNT, 10000); // every ~10k VM instr
+    lua_sethook(co, hook_count, LUA_MASKCOUNT, 1000); // every ~10k VM instr
 
     for (;;) {
         int nres = 0;

@@ -72,7 +72,7 @@ void handle_req_queue() {
     int max_per_call = 16;
     int i = 0;
     for (;;) {
-        if (xQueueReceive(g_hid_q, &e, portMAX_DELAY) != pdTRUE) continue;;
+        if (xQueueReceive(g_hid_q, &e, 10) != pdTRUE) continue;;
 
         // Ensure USB is ready; skip silently if not
         if (!tud_mounted() || !tud_hid_ready()) return;
@@ -91,7 +91,6 @@ void handle_req_queue() {
                                  e.u.mouse.y,
                                  e.u.mouse.wheel,
                                  e.u.mouse.pan);
-            ESP_LOGI("TAG", "MOUSE EVENT: %d %d\n", e.u.mouse.x, e.u.mouse.y);
             break;
 
         case HID_EVT_GAMEPAD:
