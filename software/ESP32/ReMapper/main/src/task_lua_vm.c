@@ -18,6 +18,7 @@
 #include "task_display.h"
 #include "task_input_manager.h"
 #include "widget_horizontal_select.h"
+#include "hid_q.h"
 
 #define MAX_FILE_PATH_LEN (255)
 
@@ -157,11 +158,33 @@ static void hook_count(lua_State *L, lua_Debug *ar) {
     lua_yield(L, 0);
 }
 
+static int init_hid_mouse(lua_State *L) {
+
+    int result = 1;
+    ESP_LOGI(TAG, "from lua: init HID mouse");
+    lua_pushnumber(L, result);
+    return result;
+}
+
+static int set_mouse_pos(lua_State *L) {
+    
+    double x = luaL_checknumber(L, 1);
+    double y = luaL_checknumber(L, 2);
+
+    hid_post_mouse(0,x,y,0,0, portMAX_DELAY);
+    vTaskDelay(pdMS_TO_TICKS(10));
+    return 1;
+}
+
+
 void run_lua_file(const char *filename) {
 
     lua_State *L = luaL_newstate();
     luaL_openlibs(L);
 
+    lua_register(L, "init_hid_mouse", init_hid_mouse);
+    lua_register(L, "set_mouse_pos", set_mouse_pos);
+    
     if (luaL_loadfile(L, filename) != LUA_OK) {
         ESP_LOGE(TAG, "load error: %s", lua_tostring(L, -1));
         lua_close(L);
@@ -220,6 +243,8 @@ void run_lua_file(const char *filename) {
     ESP_LOGI(TAG, "DONE");
     mode = MODE_FILE_SELECT;
 }
+
+
 
 void task_lua_vm(void *args) {
 

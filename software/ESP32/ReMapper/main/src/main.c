@@ -14,6 +14,7 @@
 #include "task_lua_vm.h"
 #include "task_input_manager.h"
 #include "programming_mode.h"
+#include "hid_q.h"
 
 #include "esp_log.h"
 
@@ -33,6 +34,9 @@ void app_main(void) {
     gpio_config(&io_conf);
 
     volatile bool is_programming_mode = gpio_get_level(programming_mode_gpio) == 0;
+
+    // initialize the hid queue
+    hid_queue_init();
 
     // display task
     xTaskCreate(task_display,

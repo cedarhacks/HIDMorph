@@ -20,6 +20,7 @@ idf_component_register(
         "src/lvgl_widgets/widget_horizontal_select.c"
         "src/task_input_manager.c"
         "src/button.c"
+        "src/hid_q.c"
 
         "src/images/gear.c"
 

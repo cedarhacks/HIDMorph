@@ -25,6 +25,8 @@
         "stdio.h": "c",
         "widget_horizontal_select.h": "c",
         "task_input_manager.h": "c",
-        "button.h": "c"
+        "button.h": "c",
+        "gamepad_hid.h": "c",
+        "programming_mode.h": "c"
     }
 }
