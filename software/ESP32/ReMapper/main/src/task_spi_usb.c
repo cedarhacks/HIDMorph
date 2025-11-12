@@ -6,7 +6,7 @@
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-
+#include "hid_q.h"
 
 // Prepare data to send
 uint8_t tx_data[1024] = {0};
@@ -75,10 +75,18 @@ void task_spi_usb(void *args) {
         if (hid_packet.sync_word[0] == 'D' && hid_packet.sync_word[1] == 'R' && hid_packet.sync_word[2] == 'E' && hid_packet.sync_word[3] == 'A' && hid_packet.sync_word[4] == 'M') {
 
             int num_events = parse_hid_packet(&hid_packet, new_events, NEW_EVENTS_SIZE);
+
             for (int i = 0; i < num_events; i++) {
-                if (new_events[i].type == EVENT_KEY_PRESSED)
-                    printf("Key Press: %c\n", new_events[i].ascii);
+                if (new_events[i].type == EVENT_KEY_PRESSED){
+                    // printf("Key Press: %c\n", new_events[i].ascii);
+                    // key pressed
+                    uint8_t temp_keycodes[6];
+                    temp_keycodes[0] = new_events[i].keycode;
+                    hid_post_keyboard(&input_events_q, 0, temp_keycodes, portMAX_DELAY);
+
+                }
             }
+
         }
 
         vTaskDelay(1 / portTICK_PERIOD_MS);

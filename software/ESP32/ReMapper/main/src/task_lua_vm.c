@@ -51,6 +51,46 @@ static RUN_MODE_t mode_lp;
 
 static volatile bool g_stop = false;
 
+lua_State *L = NULL;
+int L_good = 0;
+static int keyboard_callback_ref = LUA_NOREF;
+
+static int register_keyboard_callback(lua_State *L) {
+    luaL_checktype(L, 1, LUA_TFUNCTION);
+
+    if (keyboard_callback_ref != LUA_NOREF) {
+        luaL_unref(L, LUA_REGISTRYINDEX, keyboard_callback_ref);
+        keyboard_callback_ref = LUA_NOREF;
+    }
+
+    // Store the new function
+    lua_pushvalue(L, 1);
+    keyboard_callback_ref = luaL_ref(L, LUA_REGISTRYINDEX);
+
+    return 0;
+}
+
+void trigger_keyboard_event(int keycode, bool pressed) {
+    if (!L_good || L == NULL)
+        return;
+
+    if (keyboard_callback_ref == LUA_NOREF)
+        return;
+
+    // Push the callback
+    lua_rawgeti(L, LUA_REGISTRYINDEX, keyboard_callback_ref);
+
+    // Push arguments
+    lua_pushinteger(L, keycode);
+    lua_pushboolean(L, pressed);
+
+    // Call function with 2 args, 0 return values
+    if (lua_pcall(L, 2, 0, 0) != LUA_OK) {
+        printf("Lua keyboard callback error: %s\n", lua_tostring(L, -1));
+        lua_pop(L, 1);
+    }
+}
+
 void gui_input(void *pin_ptr) {
     int pin = *(int *)pin_ptr;
 
@@ -167,24 +207,55 @@ static int init_hid_mouse(lua_State *L) {
 }
 
 static int set_mouse_pos(lua_State *L) {
-    
     double x = luaL_checknumber(L, 1);
     double y = luaL_checknumber(L, 2);
 
-    hid_post_mouse(&output_events_q, 0,x,y,0,0, portMAX_DELAY);
+    hid_post_mouse(&output_events_q, 0, x, y, 0, 0, portMAX_DELAY);
     vTaskDelay(pdMS_TO_TICKS(10));
     return 1;
 }
 
+void handle_hid_inputs() {
+    hid_evt_t e;
+
+    int max_per_call = 16;
+    int i = 0;
+
+    if (xQueueReceive(input_events_q, &e, 10) != pdTRUE) return;
+
+    switch (e.kind) {
+    case HID_EVT_KEYBOARD:
+        // tud_hid_keyboard_report(REPORT_ID_KBD, e.u.kbd.mods, e.u.kbd.keycodes);
+        trigger_keyboard_event(e.u.kbd.keycodes[0], true);
+        break;
+
+    case HID_EVT_MOUSE:
+        // tud_hid_mouse_report(REPORT_ID_MOUSE,
+        //                      e.u.mouse.buttons,
+        //                      e.u.mouse.x,
+        //                      e.u.mouse.y,
+        //                      e.u.mouse.wheel,
+        //                      e.u.mouse.pan);
+        break;
+
+    case HID_EVT_GAMEPAD:
+        // Use generic sender for your packed struct
+        // tud_hid_report(REPORT_ID_GAMEPAD, &e.u.gp, sizeof(e.u.gp));
+        break;
+    }
+}
 
 void run_lua_file(const char *filename) {
 
-    lua_State *L = luaL_newstate();
+    L = luaL_newstate();
     luaL_openlibs(L);
 
     lua_register(L, "init_hid_mouse", init_hid_mouse);
     lua_register(L, "set_mouse_pos", set_mouse_pos);
-    
+    lua_register(L, "register_keyboard_callback", register_keyboard_callback);
+
+    L_good = 1;
+
     if (luaL_loadfile(L, filename) != LUA_OK) {
         ESP_LOGE(TAG, "load error: %s", lua_tostring(L, -1));
         lua_close(L);
@@ -221,6 +292,8 @@ void run_lua_file(const char *filename) {
                 return;
             }
 
+            handle_hid_inputs();
+
             vTaskDelay(pdMS_TO_TICKS(1));
             continue;
 
@@ -240,12 +313,11 @@ void run_lua_file(const char *filename) {
 
     luaL_unref(L, LUA_REGISTRYINDEX, co_ref);
     lua_close(L);
+    L_good = 0;
 
     ESP_LOGI(TAG, "DONE");
     mode = MODE_FILE_SELECT;
 }
-
-
 
 void task_lua_vm(void *args) {
 
@@ -317,6 +389,7 @@ void task_lua_vm(void *args) {
                 ESP_LOGI(TAG, "CHANGING FROM RUN TO FS\n");
             }
         }
+
 
         vTaskDelay(10 / portTICK_PERIOD_MS);
     }
