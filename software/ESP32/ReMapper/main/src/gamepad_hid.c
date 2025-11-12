@@ -72,7 +72,7 @@ void handle_req_queue() {
     int max_per_call = 16;
     int i = 0;
     for (;;) {
-        if (xQueueReceive(g_hid_q, &e, 10) != pdTRUE) continue;;
+        if (xQueueReceive(output_events_q, &e, 10) != pdTRUE) continue;;
 
         // Ensure USB is ready; skip silently if not
         if (!tud_mounted() || !tud_hid_ready()) return;

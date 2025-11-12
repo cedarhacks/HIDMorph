@@ -36,7 +36,8 @@ void app_main(void) {
     volatile bool is_programming_mode = gpio_get_level(programming_mode_gpio) == 0;
 
     // initialize the hid queue
-    hid_queue_init();
+    hid_queue_init(&input_events_q);
+    hid_queue_init(&output_events_q);
 
     // display task
     xTaskCreate(task_display,

@@ -42,10 +42,11 @@ typedef struct {
 } hid_evt_t;
 
 // global queue handle
-extern QueueHandle_t g_hid_q;
+extern QueueHandle_t output_events_q;
+extern QueueHandle_t input_events_q;
 
 // API
-void hid_queue_init(void);
-bool hid_post_keyboard(uint8_t mods, const uint8_t keycodes[6], TickType_t to);
-bool hid_post_mouse(uint8_t buttons, int8_t dx, int8_t dy, int8_t wheel, int8_t pan, TickType_t to);
-bool hid_post_gamepad(uint16_t buttons, int8_t x, int8_t y, int8_t rx, int8_t ry, uint8_t hat, TickType_t to);
+void hid_queue_init(QueueHandle_t* q);
+bool hid_post_keyboard(QueueHandle_t* q, uint8_t mods, const uint8_t keycodes[6], TickType_t to);
+bool hid_post_mouse(QueueHandle_t* q, uint8_t buttons, int8_t dx, int8_t dy, int8_t wheel, int8_t pan, TickType_t to);
+bool hid_post_gamepad(QueueHandle_t* q, uint16_t buttons, int8_t x, int8_t y, int8_t rx, int8_t ry, uint8_t hat, TickType_t to);

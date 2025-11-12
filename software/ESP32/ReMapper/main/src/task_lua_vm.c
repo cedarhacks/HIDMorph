@@ -171,7 +171,7 @@ static int set_mouse_pos(lua_State *L) {
     double x = luaL_checknumber(L, 1);
     double y = luaL_checknumber(L, 2);
 
-    hid_post_mouse(0,x,y,0,0, portMAX_DELAY);
+    hid_post_mouse(&output_events_q, 0,x,y,0,0, portMAX_DELAY);
     vTaskDelay(pdMS_TO_TICKS(10));
     return 1;
 }
