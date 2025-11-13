@@ -27,7 +27,7 @@ void init_spi() {
     spi_controller = spi0_hw;
 
     // Enable SPI 0 at 50 MHz and connect to GPIOs
-    spi_init(spi_controller, 50*100 * 1000);
+    spi_init(spi_controller, 20*1000*1000);
     spi_set_slave(spi_controller, true);
 
     gpio_set_function(SPI_RX_PIN, GPIO_FUNC_SPI);
@@ -80,6 +80,8 @@ void tuh_hid_report_received_cb(uint8_t dev_addr, uint8_t instance,
     // printf("\n");
 
     // Continue receiving next report
+    gpio_put(DEBUG_LED_PIN, 1);
+
     tuh_hid_receive_report(dev_addr, instance);
 
     HID_MESSAGE_PACKET_t hid_message;
@@ -93,6 +95,7 @@ void tuh_hid_report_received_cb(uint8_t dev_addr, uint8_t instance,
     memcpy(out_buffer, &hid_message, sizeof(hid_message));
     int bytes = spi_write_blocking(spi_controller, out_buffer, sizeof(hid_message));
     // printf("WROTE REPORT TO SPI: %dbytes\n", bytes);
+    gpio_put(DEBUG_LED_PIN, 0);
 
 }
 
@@ -121,9 +124,6 @@ int main() {
     init_hid();
 
     while (true) {
-        gpio_put(DEBUG_LED_PIN, led_toggle);
-        led_toggle = !led_toggle;
-
         step_hid();
         sleep_us(1);
     }

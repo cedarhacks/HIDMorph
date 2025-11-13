@@ -43,10 +43,10 @@ void task_spi_usb(void *args) {
     ESP_ERROR_CHECK(ret);
 
     spi_device_interface_config_t devcfg = {
-        .clock_speed_hz = 50 * 100 * 1000, // Clock out at 1 MHz
-        .mode = 0,                         // SPI mode 0
-        .spics_io_num = PIN_NUM_CS,        // CS pin
-        .queue_size = 1,                   // We want to be able to queue 7 transactions at a time
+        .clock_speed_hz = 20 * 1000 * 1000, // Clock out at 1 MHz
+        .mode = 0,                          // SPI mode 0
+        .spics_io_num = PIN_NUM_CS,         // CS pin
+        .queue_size = 1,                    // We want to be able to queue 7 transactions at a time
     };
 
     ret = spi_bus_add_device(SPI2_HOST,
@@ -77,16 +77,14 @@ void task_spi_usb(void *args) {
             int num_events = parse_hid_packet(&hid_packet, new_events, NEW_EVENTS_SIZE);
 
             for (int i = 0; i < num_events; i++) {
-                if (new_events[i].type == EVENT_KEY_PRESSED){
-                    // printf("Key Press: %c\n", new_events[i].ascii);
+                if (new_events[i].type == EVENT_KEY_PRESSED) {
+                    // ESP_LOGI("[usb]", "Key Press: %c\n", new_events[i].ascii);
                     // key pressed
                     uint8_t temp_keycodes[6];
                     temp_keycodes[0] = new_events[i].keycode;
-                    hid_post_keyboard(&input_events_q, 0, temp_keycodes, portMAX_DELAY);
-
+                    hid_post_keybo  ard(&input_events_q, 0, temp_keycodes, 0);
                 }
             }
-
         }
 
         vTaskDelay(1 / portTICK_PERIOD_MS);
