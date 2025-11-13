@@ -77,12 +77,21 @@ void task_spi_usb(void *args) {
             int num_events = parse_hid_packet(&hid_packet, new_events, NEW_EVENTS_SIZE);
 
             for (int i = 0; i < num_events; i++) {
+
+                // key pressed
                 if (new_events[i].type == EVENT_KEY_PRESSED) {
-                    // ESP_LOGI("[usb]", "Key Press: %c\n", new_events[i].ascii);
-                    // key pressed
+                    ESP_LOGI("[usb]", "Key Press: %c\n", new_events[i].ascii);
                     uint8_t temp_keycodes[6];
                     temp_keycodes[0] = new_events[i].keycode;
-                    hid_post_keybo  ard(&input_events_q, 0, temp_keycodes, 0);
+                    hid_post_keyboard(&input_events_q, 0, temp_keycodes, false,  0); // not released
+                }
+
+                // key release
+                if (new_events[i].type == EVENT_KEY_RELEASED) {
+                    ESP_LOGI("[usb]", "Key RE:EASE: %c\n", new_events[i].ascii);
+                    uint8_t temp_keycodes[6];
+                    temp_keycodes[0] = new_events[i].keycode;
+                    hid_post_keyboard(&input_events_q, 0, temp_keycodes, true,  0); // not released
                 }
             }
         }

@@ -1,15 +1,58 @@
+-- fill these in with your actual keycodes for W/A/S/D
+local KEY_W = 26
+local KEY_S = 22
+local KEY_A = 4
+local KEY_D = 7
+
+-- track which movement keys are currently held
+local key_state = {
+    w = false,
+    a = false,
+    s = false,
+    d = false
+}
+
 register_keyboard_callback(function(keycode, pressed)
     print("Key:", keycode, pressed and "down" or "up")
 
-    if keycode == 26 then
-        set_mouse_pos(0, 15)
-    elseif keycode == 22 then
-        set_mouse_pos(0, -15)
+    if keycode == KEY_W then
+        key_state.w = pressed
+    elseif keycode == KEY_S then
+        key_state.s = pressed
+    elseif keycode == KEY_A then
+        key_state.a = pressed
+    elseif keycode == KEY_D then
+        key_state.d = pressed
     end
-
 end)
 
+local step = 1  -- how many pixels per tick
+
 while true do
-    -- add a small delay or yield if your runtime supports it
-    -- e.g., sleep(10)
+    local dx, dy = 0, 0
+
+    -- build movement vector from key state
+    if key_state.w then
+        dy = dy - step   -- up
+    end
+    if key_state.s then
+        dy = dy + step   -- down
+    end
+    if key_state.a then
+        dx = dx - step   -- left
+    end
+    if key_state.d then
+        dx = dx + step   -- right
+    end
+
+    -- only move if something is pressed
+    if dx ~= 0 or dy ~= 0 then
+        -- assuming set_mouse_pos sends a *relative* movement
+        set_mouse_pos(dx, dy)
+    end
+
+    -- avoid burning 100% CPU / moving too fast
+    -- replace sleep(...) with whatever your runtime provides
+    -- e.g. sleep(10) or yield()
+    -- sleep(10)
 end

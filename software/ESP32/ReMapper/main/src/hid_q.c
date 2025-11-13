@@ -11,9 +11,11 @@ void hid_queue_init(QueueHandle_t *q) {
         ESP_LOGE(TAG, "Failed to create HID queue!");
 }
 
-bool hid_post_keyboard(QueueHandle_t *q, uint8_t mods, const uint8_t keycodes[6], TickType_t to) {
-    hid_evt_t e = {.kind = HID_EVT_KEYBOARD};
+bool hid_post_keyboard(QueueHandle_t *q, uint8_t mods, const uint8_t keycodes[6], bool is_released, TickType_t to) {
+    hid_evt_t e = {.kind = HID_EVT_KEYBOARD,};
     e.u.kbd.mods = mods;
+    e.u.kbd.is_released = is_released;
+    
     for (int i = 0; i < 6; ++i)
         e.u.kbd.keycodes[i] = keycodes ? keycodes[i] : 0;
     return xQueueSend((*q), &e, to) == pdTRUE;

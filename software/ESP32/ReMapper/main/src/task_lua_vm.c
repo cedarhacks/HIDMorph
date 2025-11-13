@@ -226,7 +226,7 @@ void handle_hid_inputs() {
     switch (e.kind) {
     case HID_EVT_KEYBOARD:
         // tud_hid_keyboard_report(REPORT_ID_KBD, e.u.kbd.mods, e.u.kbd.keycodes);
-        trigger_keyboard_event(e.u.kbd.keycodes[0], true);
+        trigger_keyboard_event(e.u.kbd.keycodes[0], !e.u.kbd.is_released);
         break;
 
     case HID_EVT_MOUSE:
