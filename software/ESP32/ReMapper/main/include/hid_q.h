@@ -14,7 +14,14 @@ typedef enum {
     HID_EVT_GAMEPAD
 } hid_evt_kind_t;
 
-// --- structs ---
+
+typedef enum{
+    MOUSE_EVENT_MOVE,
+    MOUSE_EVENT_PRESS,
+    MOUSE_EVENT_RELEASE,
+    MOUSE_EVENT_WHEEL,
+} mouse_event_type_t;
+
 typedef struct {
     uint8_t mods;
     uint8_t keycodes[6];
@@ -22,6 +29,7 @@ typedef struct {
 } hid_kbd_t;
 
 typedef struct {
+    mouse_event_type_t mouse_event_type;
     uint8_t buttons;
     int8_t x, y, wheel, pan;
 } hid_mouse_t;

@@ -12,10 +12,12 @@ void hid_queue_init(QueueHandle_t *q) {
 }
 
 bool hid_post_keyboard(QueueHandle_t *q, uint8_t mods, const uint8_t keycodes[6], bool is_released, TickType_t to) {
-    hid_evt_t e = {.kind = HID_EVT_KEYBOARD,};
+    hid_evt_t e = {
+        .kind = HID_EVT_KEYBOARD,
+    };
     e.u.kbd.mods = mods;
     e.u.kbd.is_released = is_released;
-    
+
     for (int i = 0; i < 6; ++i)
         e.u.kbd.keycodes[i] = keycodes ? keycodes[i] : 0;
     return xQueueSend((*q), &e, to) == pdTRUE;
@@ -23,7 +25,12 @@ bool hid_post_keyboard(QueueHandle_t *q, uint8_t mods, const uint8_t keycodes[6]
 
 bool hid_post_mouse(QueueHandle_t *q, uint8_t buttons, int8_t dx, int8_t dy, int8_t wheel, int8_t pan, TickType_t to) {
     hid_evt_t e = {.kind = HID_EVT_MOUSE,
-                   .u.mouse = {.buttons = buttons, .x = dx, .y = dy, .wheel = wheel, .pan = pan}};
+                   .u.mouse = {.buttons = buttons,
+                               .x = dx,
+                               .y = dy,
+                               .wheel = wheel,
+                               .pan = pan}};
+
     return xQueueSend((*q), &e, to) == pdTRUE;
 }
 

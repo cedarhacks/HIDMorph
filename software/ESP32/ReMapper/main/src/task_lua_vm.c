@@ -236,6 +236,9 @@ void handle_hid_inputs() {
         //                      e.u.mouse.y,
         //                      e.u.mouse.wheel,
         //                      e.u.mouse.pan);
+
+        ESP_LOGI(TAG, "b:%d x:%d y:%d w:%d", e.u.mouse.buttons, e.u.mouse.x, e.u.mouse.y, e.u.mouse.wheel);
+
         break;
 
     case HID_EVT_GAMEPAD:

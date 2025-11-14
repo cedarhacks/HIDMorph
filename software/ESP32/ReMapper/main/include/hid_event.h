@@ -9,6 +9,7 @@ typedef enum EventType {
     EVENT_MOUSE_BUTTON_PRESS,
     EVENT_MOUSE_BUTTON_RELEASE,
     EVENT_MOUSE_WHEEL,
+    EVENT_MOUSE_RAW
 } EventType_t;
 
 typedef struct Event {

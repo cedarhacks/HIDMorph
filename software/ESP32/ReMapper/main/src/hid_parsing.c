@@ -70,6 +70,16 @@ int parse_hid_packet(HID_MESSAGE_PACKET_t *packet, Event_t *events, int max_even
             wheel = (int8_t)data[4];
         }
 
+        // we will also make a raw mouse event
+        if( num_events < max_events - 1) {
+            events[num_events].type = EVENT_MOUSE_RAW;
+            events[num_events].mouse_button = buttons;
+            events[num_events].mouse_wheel = wheel;
+            events[num_events].mouse_dx = dx;
+            events[num_events].mouse_dy = dy;
+            num_events += 1;
+        }
+
         // printf("b:%u x:%d y:%d w:%d\n",
         //        buttons,
         //        (int)dx,
