@@ -82,11 +82,14 @@ void tuh_hid_report_received_cb(uint8_t dev_addr, uint8_t instance,
     // Continue receiving next report
     gpio_put(DEBUG_LED_PIN, 1);
 
+    uint8_t proto = tuh_hid_interface_protocol(dev_addr, instance);
+
     tuh_hid_receive_report(dev_addr, instance);
 
     HID_MESSAGE_PACKET_t hid_message;
     strncpy(hid_message.sync_word, "DREAM", 5);
     hid_message.type = NEW_REPORT;
+    hid_message.message.new_report.protocol = proto;
     hid_message.message.new_report.dev_addr = dev_addr;
     hid_message.message.new_report.length = len;
     hid_message.message.new_report.report_id = 0;

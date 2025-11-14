@@ -1,6 +1,7 @@
 #include "hid_parsing.h"
 
 uint8_t key_down[256] = {0};
+uint8_t mouse_button_down[8] = {};
 
 char keycode_from_report(char report_val) {
     return report_val;
@@ -53,54 +54,110 @@ char keycode_to_ascii(uint8_t keycode, bool shift) {
 int parse_hid_packet(HID_MESSAGE_PACKET_t *packet, Event_t *events, int max_events) {
     int num_events = 0;
 
-    uint8_t *data = packet->message.new_report.data;
-    int data_len = packet->message.new_report.length;
+    if (packet->message.new_report.protocol == PROTOCOL_MOUSE) {
+        uint8_t *data = packet->message.new_report.data;
+        int data_len = packet->message.new_report.length;
 
-    char modifier = data[0];
-    bool is_l_ctrl = (data[0] >> 0) & 0b1;
-    bool is_l_shift = (data[0] >> 1) & 0b1;
-    bool is_l_alt = (data[0] >> 2) & 0b1;
-    bool is_l_cmd = (data[0] >> 3) & 0b1;
+        if (data_len < 4) // 3 if no wheel, 4 if you expect wheel
+            return num_events;
 
-    bool is_r_ctrl = (data[0] >> 4) & 0b1;
-    bool is_r_shift = (data[0] >> 5) & 0b1;
-    bool is_r_alt = (data[0] >> 6) & 0b1;
-    bool is_r_cmd = (data[0] >> 7) & 0b1;
+        uint8_t buttons = data[1];
+        int8_t dx = (int8_t)data[2];
+        int8_t dy = (int8_t)data[3];
 
-    bool is_shift = is_l_shift || is_r_shift;
-    bool is_ctrl = is_l_ctrl || is_r_ctrl;
-    bool is_alt = is_l_alt || is_r_alt;
-    bool is_cmd = is_l_cmd || is_r_cmd;
-
-    uint8_t key_seen[256] = {0};
-
-    for (int i = 2; i < data_len; i++) {
-
-        uint8_t keycode = keycode_from_report(data[i]);
-        char ascii = keycode_to_ascii(keycode, is_shift);
-
-        key_seen[keycode] = 1;
-
-        if (key_down[keycode] == 0x00 && num_events < max_events - 1) {
-            // key pressed
-            events[num_events].type = EVENT_KEY_PRESSED;
-            events[num_events].keycode = keycode;
-            events[num_events].ascii = ascii;
-            num_events += 1;
-
-            // mark as pressed
-            key_down[keycode] = 1;
+        int8_t wheel = 0;
+        if (data_len >= 5) {
+            wheel = (int8_t)data[4];
         }
-    }
 
-    for (int keycode = 1; keycode < 256 && num_events < max_events; keycode++) {
-        if (key_down[keycode] && !key_seen[keycode]) {
-            events[num_events].type = EVENT_KEY_RELEASED;
-            events[num_events].keycode = keycode;
-            events[num_events].ascii = keycode_to_ascii(keycode, false);
-            num_events++;
+        // printf("b:%u x:%d y:%d w:%d\n",
+        //        buttons,
+        //        (int)dx,
+        //        (int)dy,
+        //        (int)wheel);
 
-            key_down[keycode] = 0;
+        // if the mouse moved at all register a mouse move event
+        if ( (dx != 0 || dy != 0) && num_events < max_events - 1) {
+            events[num_events].type = EVENT_MOUSE_MOVE;
+            events[num_events].mouse_dx = dx;
+            events[num_events].mouse_dy = dy;
+            num_events += 1;
+        }
+
+        // check every bit, if it changed, register an event down or up
+        for (int i = 0; i < 8; i++) {
+            uint8_t current_b = (buttons >> i) & 0b1;
+
+            if (mouse_button_down[i] != current_b) {
+                mouse_button_down[i] = current_b;
+
+                if (num_events < max_events - 1) {
+                    events[num_events].type = current_b == 0 ? EVENT_MOUSE_BUTTON_RELEASE : EVENT_MOUSE_BUTTON_PRESS;
+                    events[num_events].mouse_button = i;
+                    num_events += 1;
+                }
+
+            }
+        }
+
+        // if mouse wheel is positive, register mouse wheel event
+        if (wheel != 0 && num_events < max_events - 1) {
+            events[num_events].type = EVENT_MOUSE_WHEEL;
+            events[num_events].mouse_wheel = wheel;
+            num_events += 1;
+        }
+
+    } else if (packet->message.new_report.protocol == PROTOCOL_KEYBOARD) {
+
+        uint8_t *data = packet->message.new_report.data;
+        int data_len = packet->message.new_report.length;
+
+        char modifier = data[0];
+        bool is_l_ctrl = (data[0] >> 0) & 0b1;
+        bool is_l_shift = (data[0] >> 1) & 0b1;
+        bool is_l_alt = (data[0] >> 2) & 0b1;
+        bool is_l_cmd = (data[0] >> 3) & 0b1;
+
+        bool is_r_ctrl = (data[0] >> 4) & 0b1;
+        bool is_r_shift = (data[0] >> 5) & 0b1;
+        bool is_r_alt = (data[0] >> 6) & 0b1;
+        bool is_r_cmd = (data[0] >> 7) & 0b1;
+
+        bool is_shift = is_l_shift || is_r_shift;
+        bool is_ctrl = is_l_ctrl || is_r_ctrl;
+        bool is_alt = is_l_alt || is_r_alt;
+        bool is_cmd = is_l_cmd || is_r_cmd;
+
+        uint8_t key_seen[256] = {0};
+
+        for (int i = 2; i < data_len; i++) {
+
+            uint8_t keycode = keycode_from_report(data[i]);
+            char ascii = keycode_to_ascii(keycode, is_shift);
+
+            key_seen[keycode] = 1;
+
+            if (key_down[keycode] == 0x00 && num_events < max_events - 1) {
+                // key pressed
+                events[num_events].type = EVENT_KEY_PRESSED;
+                events[num_events].keycode = keycode;
+                events[num_events].ascii = ascii;
+                num_events += 1;
+
+                // mark as pressed
+                key_down[keycode] = 1;
+            }
+        }
+
+        for (int keycode = 1; keycode < 256 && num_events < max_events; keycode++) {
+            if (key_down[keycode] && !key_seen[keycode]) {
+                events[num_events].type = EVENT_KEY_RELEASED;
+                events[num_events].keycode = keycode;
+                events[num_events].ascii = keycode_to_ascii(keycode, false);
+                num_events++;
+
+                key_down[keycode] = 0;
+            }
         }
     }
 

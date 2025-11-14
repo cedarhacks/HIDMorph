@@ -78,12 +78,14 @@ void task_spi_usb(void *args) {
 
             for (int i = 0; i < num_events; i++) {
 
+                // ESP_LOGI("[usb]", "protocol:%d  dev:%x id:%d  event: %d %c", hid_packet.message.new_report.protocol, hid_packet.message.new_report.dev_addr, hid_packet.message.new_report.report_id, new_events[i].keycode, new_events[i].ascii);
+
                 // key pressed
                 if (new_events[i].type == EVENT_KEY_PRESSED) {
                     // ESP_LOGI("[usb]", "DOWN: %c", new_events[i].ascii);
                     uint8_t temp_keycodes[6];
                     temp_keycodes[0] = new_events[i].keycode;
-                    hid_post_keyboard(&input_events_q, 0, temp_keycodes, false,  0); // not released
+                    hid_post_keyboard(&input_events_q, 0, temp_keycodes, false, 0); // not released
                 }
 
                 // key release
@@ -91,7 +93,23 @@ void task_spi_usb(void *args) {
                     // ESP_LOGI("[usb]", "UP: %c", new_events[i].ascii);
                     uint8_t temp_keycodes[6];
                     temp_keycodes[0] = new_events[i].keycode;
-                    hid_post_keyboard(&input_events_q, 0, temp_keycodes, true,  0); // not released
+                    hid_post_keyboard(&input_events_q, 0, temp_keycodes, true, 0); // not released
+                }
+
+                if (new_events[i].type == EVENT_MOUSE_BUTTON_PRESS) {
+                    ESP_LOGI("[usb]", "mouse down: %d", new_events[i].mouse_button);
+                }
+
+                if (new_events[i].type == EVENT_MOUSE_BUTTON_RELEASE) {
+                    ESP_LOGI("[usb]", "mouse up: %d", new_events[i].mouse_button);
+                }
+
+                if (new_events[i].type == EVENT_MOUSE_MOVE) {
+                    ESP_LOGI("[usb]", "mouse x:%d y:%d", new_events[i].mouse_dx, new_events[i].mouse_dy);
+                }
+
+                if (new_events[i].type == EVENT_MOUSE_WHEEL) {
+                    ESP_LOGI("[usb]", "mouse wheel:%d", new_events[i].mouse_wheel);
                 }
             }
             // ESP_LOGI("[usb]", "---------");

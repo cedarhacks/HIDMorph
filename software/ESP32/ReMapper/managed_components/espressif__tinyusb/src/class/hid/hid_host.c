@@ -157,7 +157,6 @@ uint8_t tuh_hid_itf_get_index(uint8_t daddr, uint8_t itf_num) {
 
   return TUSB_INDEX_INVALID_8;
 }
-
 uint8_t tuh_hid_interface_protocol(uint8_t daddr, uint8_t idx) {
   hidh_interface_t* p_hid = get_hid_itf(daddr, idx);
   return p_hid ? p_hid->itf_protocol : 0;
