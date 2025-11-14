@@ -80,7 +80,7 @@ void task_spi_usb(void *args) {
 
                 // key pressed
                 if (new_events[i].type == EVENT_KEY_PRESSED) {
-                    ESP_LOGI("[usb]", "Key Press: %c\n", new_events[i].ascii);
+                    // ESP_LOGI("[usb]", "DOWN: %c", new_events[i].ascii);
                     uint8_t temp_keycodes[6];
                     temp_keycodes[0] = new_events[i].keycode;
                     hid_post_keyboard(&input_events_q, 0, temp_keycodes, false,  0); // not released
@@ -88,12 +88,13 @@ void task_spi_usb(void *args) {
 
                 // key release
                 if (new_events[i].type == EVENT_KEY_RELEASED) {
-                    ESP_LOGI("[usb]", "Key RE:EASE: %c\n", new_events[i].ascii);
+                    // ESP_LOGI("[usb]", "UP: %c", new_events[i].ascii);
                     uint8_t temp_keycodes[6];
                     temp_keycodes[0] = new_events[i].keycode;
                     hid_post_keyboard(&input_events_q, 0, temp_keycodes, true,  0); // not released
                 }
             }
+            // ESP_LOGI("[usb]", "---------");
         }
 
         vTaskDelay(1 / portTICK_PERIOD_MS);

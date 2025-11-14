@@ -1,6 +1,6 @@
 #include "hid_parsing.h"
 
-uint8_t last_report[64];
+uint8_t key_down[256] = {0};
 
 char keycode_from_report(char report_val) {
     return report_val;
@@ -72,26 +72,36 @@ int parse_hid_packet(HID_MESSAGE_PACKET_t *packet, Event_t *events, int max_even
     bool is_alt = is_l_alt || is_r_alt;
     bool is_cmd = is_l_cmd || is_r_cmd;
 
-    // char reserved = 0;
+    uint8_t key_seen[256] = {0};
 
     for (int i = 2; i < data_len; i++) {
 
-        if (data[i] == 0x00 && last_report[i] != 0x00 && num_events < max_events - 1) {
-            // key released, what was in the last report
-            events[num_events].type = EVENT_KEY_RELEASED;
-            events[num_events].keycode = keycode_from_report(last_report[i]); // from last report
-            events[num_events].ascii = keycode_to_ascii(events[num_events].keycode, is_shift);
-            num_events += 1;
+        uint8_t keycode = keycode_from_report(data[i]);
+        char ascii = keycode_to_ascii(keycode, is_shift);
 
-        } else if (data[i] != last_report[i] && last_report[i] == 0x00 && num_events < max_events - 1) {
+        key_seen[keycode] = 1;
+
+        if (key_down[keycode] == 0x00 && num_events < max_events - 1) {
             // key pressed
             events[num_events].type = EVENT_KEY_PRESSED;
-            events[num_events].keycode = keycode_from_report(data[i]); // from data
-            events[num_events].ascii = keycode_to_ascii(events[num_events].keycode, is_shift);
+            events[num_events].keycode = keycode;
+            events[num_events].ascii = ascii;
             num_events += 1;
-        }
 
-        last_report[i] = data[i];
+            // mark as pressed
+            key_down[keycode] = 1;
+        }
+    }
+
+    for (int keycode = 1; keycode < 256 && num_events < max_events; keycode++) {
+        if (key_down[keycode] && !key_seen[keycode]) {
+            events[num_events].type = EVENT_KEY_RELEASED;
+            events[num_events].keycode = keycode;
+            events[num_events].ascii = keycode_to_ascii(keycode, false);
+            num_events++;
+
+            key_down[keycode] = 0;
+        }
     }
 
     return num_events;
