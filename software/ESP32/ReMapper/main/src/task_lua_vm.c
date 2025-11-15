@@ -26,6 +26,7 @@
 #include "hid_q.h"
 
 #define MAX_FILE_PATH_LEN (255)
+#define ORIGINAL_IO_OPEN_KEY "my_original_io_open"
 
 const char *TAG = "LUA_TASK";
 static W25Q128J_t memory_chip;
@@ -92,22 +93,6 @@ static int register_mouse_callback(lua_State *L) {
     return 0;
 }
 
-static void create_dirs_for_path(const char *path) {
-    char tmp[256];
-    snprintf(tmp, sizeof(tmp), "%s", path);
-
-    size_t len = strlen(tmp);
-    if (tmp[len - 1] == '/')
-        tmp[len - 1] = '\0';
-
-    for (char *p = tmp + 1; *p; p++) {
-        if (*p == '/') {
-            *p = '\0';
-            mkdir(tmp, 0777); // ignore errors (exists, etc.)
-            *p = '/';
-        }
-    }
-}
 
 void trigger_keyboard_event(int keycode, bool pressed) {
     if (!L_good || L == NULL)
@@ -277,34 +262,50 @@ static int set_mouse_pos(lua_State *L) {
     return 1;
 }
 
-// static int override_io_open(lua_State *L) {
-//     const char *filename = luaL_checkstring(L, 1);
-//     const char *mode = luaL_optstring(L, 2, "r");
+static int override_io_open(lua_State *L) {
+    // Get original args
+    const char *filename = luaL_checkstring(L, 1);
+    const char *mode     = luaL_optstring(L, 2, "r");
 
-//     char fullpath[256];
-//     snprintf(fullpath, sizeof(fullpath), "%s%s", OVERRIDE_FILE_PREFIX, filename);
+    char fullpath[256];
+    snprintf(fullpath, sizeof(fullpath), "%s%s", OVERRIDE_FILE_PREFIX, filename);
 
-//     // Ensure all directories exist
-//     mkdir(OVERRIDE_FILE_PREFIX, 0777);
-//     // create_dirs_for_path(fullpath);
+    // Clear stack & call the original io.open from the registry
+    lua_settop(L, 0);
 
-//     // Call original io.open
-//     lua_getglobal(L, "io");
-//     lua_getfield(L, -1, "open");
-//     lua_pushstring(L, fullpath);
-//     lua_pushstring(L, mode);
-//     lua_call(L, 2, 1);
+    // Push original io.open
+    lua_getfield(L, LUA_REGISTRYINDEX, ORIGINAL_IO_OPEN_KEY);
+    if (!lua_isfunction(L, -1)) {
+        return luaL_error(L, "original io.open not found");
+    }
 
-//     return 1;
-// }
+    // Push new arguments: fullpath, mode
+    lua_pushstring(L, fullpath);
+    lua_pushstring(L, mode);
 
-// static int register_override_io_open(lua_State *L) {
-//     lua_getglobal(L, "io");
-//     lua_pushcfunction(L, override_io_open);
-//     lua_setfield(L, -2, "open");
-//     lua_pop(L, 1); // pop io table
-//     return 1;
-// }
+    // Call original io.open(fullpath, mode)
+    lua_call(L, 2, 1);
+
+    // One return value (whatever io.open returned)
+    return 1;
+}
+
+static int register_override_io_open(lua_State *L) {
+    // Get io table
+    lua_getglobal(L, "io");               // stack: io
+
+    // Save original io.open in registry
+    lua_getfield(L, -1, "open");          // stack: io, io.open
+    lua_setfield(L, LUA_REGISTRYINDEX, ORIGINAL_IO_OPEN_KEY); // registry[KEY] = io.open
+
+    // Set our override as io.open
+    lua_pushcfunction(L, override_io_open); // stack: io, override
+    lua_setfield(L, -2, "open");            // io.open = override
+
+    lua_pop(L, 1); // pop io table
+
+    return 0; // no Lua return values
+}
 
 void handle_hid_inputs() {
     hid_evt_t e;
@@ -344,7 +345,7 @@ void run_lua_file(const char *filename) {
     lua_register(L, "register_mouse_callback", register_mouse_callback);
 
     // override functions
-    // register_override_io_open(L); // broken
+    register_override_io_open(L); // broken
 
     L_good = 1;
 
