@@ -54,6 +54,7 @@ static volatile bool g_stop = false;
 lua_State *L = NULL;
 int L_good = 0;
 static int keyboard_callback_ref = LUA_NOREF;
+static int mouse_callback_ref = LUA_NOREF;
 
 static int register_keyboard_callback(lua_State *L) {
     luaL_checktype(L, 1, LUA_TFUNCTION);
@@ -66,6 +67,21 @@ static int register_keyboard_callback(lua_State *L) {
     // Store the new function
     lua_pushvalue(L, 1);
     keyboard_callback_ref = luaL_ref(L, LUA_REGISTRYINDEX);
+
+    return 0;
+}
+
+static int register_mouse_callback(lua_State *L) {
+    luaL_checktype(L, 1, LUA_TFUNCTION);
+
+    if (mouse_callback_ref != LUA_NOREF) {
+        luaL_unref(L, LUA_REGISTRYINDEX, mouse_callback_ref);
+        mouse_callback_ref = LUA_NOREF;
+    }
+
+    // Store the new function
+    lua_pushvalue(L, 1);
+    mouse_callback_ref = luaL_ref(L, LUA_REGISTRYINDEX);
 
     return 0;
 }
@@ -87,6 +103,29 @@ void trigger_keyboard_event(int keycode, bool pressed) {
     // Call function with 2 args, 0 return values
     if (lua_pcall(L, 2, 0, 0) != LUA_OK) {
         printf("Lua keyboard callback error: %s\n", lua_tostring(L, -1));
+        lua_pop(L, 1);
+    }
+}
+
+void trigger_mouse_event(int buttons, int8_t dx, int8_t dy, int8_t wheel) {
+    if (!L_good || L == NULL)
+        return;
+
+    if (mouse_callback_ref == LUA_NOREF)
+        return;
+
+    // Push the callback
+    lua_rawgeti(L, LUA_REGISTRYINDEX, mouse_callback_ref);
+
+    // Push arguments
+    lua_pushinteger(L, buttons);
+    lua_pushinteger(L, dx);
+    lua_pushinteger(L, dy);
+    lua_pushinteger(L, wheel);
+
+    // Call function with 2 args, 0 return values
+    if (lua_pcall(L, 4, 0, 0) != LUA_OK) {
+        printf("Lua mouse callback error: %s\n", lua_tostring(L, -1));
         lua_pop(L, 1);
     }
 }
@@ -238,7 +277,7 @@ void handle_hid_inputs() {
         //                      e.u.mouse.pan);
 
         ESP_LOGI(TAG, "b:%d x:%d y:%d w:%d", e.u.mouse.buttons, e.u.mouse.x, e.u.mouse.y, e.u.mouse.wheel);
-
+        trigger_mouse_event(e.u.mouse.buttons, e.u.mouse.x, e.u.mouse.y, e.u.mouse.wheel);
         break;
 
     case HID_EVT_GAMEPAD:
@@ -256,6 +295,7 @@ void run_lua_file(const char *filename) {
     lua_register(L, "init_hid_mouse", init_hid_mouse);
     lua_register(L, "set_mouse_pos", set_mouse_pos);
     lua_register(L, "register_keyboard_callback", register_keyboard_callback);
+    lua_register(L, "register_mouse_callback", register_mouse_callback);
 
     L_good = 1;
 
