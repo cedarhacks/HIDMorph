@@ -6,6 +6,11 @@
 #include "extflash_fs.h"
 #include "W25Q128J.h"
 
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <errno.h>
+#include <string.h>
+
 #include "lua.h"
 #include "lauxlib.h"
 #include "lualib.h"
@@ -50,6 +55,7 @@ static RUN_MODE_t mode;
 static RUN_MODE_t mode_lp;
 
 static volatile bool g_stop = false;
+static const char *OVERRIDE_FILE_PREFIX = "/ext/user_data/";
 
 lua_State *L = NULL;
 int L_good = 0;
@@ -84,6 +90,23 @@ static int register_mouse_callback(lua_State *L) {
     mouse_callback_ref = luaL_ref(L, LUA_REGISTRYINDEX);
 
     return 0;
+}
+
+static void create_dirs_for_path(const char *path) {
+    char tmp[256];
+    snprintf(tmp, sizeof(tmp), "%s", path);
+
+    size_t len = strlen(tmp);
+    if (tmp[len - 1] == '/')
+        tmp[len - 1] = '\0';
+
+    for (char *p = tmp + 1; *p; p++) {
+        if (*p == '/') {
+            *p = '\0';
+            mkdir(tmp, 0777); // ignore errors (exists, etc.)
+            *p = '/';
+        }
+    }
 }
 
 void trigger_keyboard_event(int keycode, bool pressed) {
@@ -254,6 +277,35 @@ static int set_mouse_pos(lua_State *L) {
     return 1;
 }
 
+// static int override_io_open(lua_State *L) {
+//     const char *filename = luaL_checkstring(L, 1);
+//     const char *mode = luaL_optstring(L, 2, "r");
+
+//     char fullpath[256];
+//     snprintf(fullpath, sizeof(fullpath), "%s%s", OVERRIDE_FILE_PREFIX, filename);
+
+//     // Ensure all directories exist
+//     mkdir(OVERRIDE_FILE_PREFIX, 0777);
+//     // create_dirs_for_path(fullpath);
+
+//     // Call original io.open
+//     lua_getglobal(L, "io");
+//     lua_getfield(L, -1, "open");
+//     lua_pushstring(L, fullpath);
+//     lua_pushstring(L, mode);
+//     lua_call(L, 2, 1);
+
+//     return 1;
+// }
+
+// static int register_override_io_open(lua_State *L) {
+//     lua_getglobal(L, "io");
+//     lua_pushcfunction(L, override_io_open);
+//     lua_setfield(L, -2, "open");
+//     lua_pop(L, 1); // pop io table
+//     return 1;
+// }
+
 void handle_hid_inputs() {
     hid_evt_t e;
 
@@ -269,14 +321,7 @@ void handle_hid_inputs() {
         break;
 
     case HID_EVT_MOUSE:
-        // tud_hid_mouse_report(REPORT_ID_MOUSE,
-        //                      e.u.mouse.buttons,
-        //                      e.u.mouse.x,
-        //                      e.u.mouse.y,
-        //                      e.u.mouse.wheel,
-        //                      e.u.mouse.pan);
-
-        ESP_LOGI(TAG, "b:%d x:%d y:%d w:%d", e.u.mouse.buttons, e.u.mouse.x, e.u.mouse.y, e.u.mouse.wheel);
+        // ESP_LOGI(TAG, "b:%d x:%d y:%d w:%d", e.u.mouse.buttons, e.u.mouse.x, e.u.mouse.y, e.u.mouse.wheel);
         trigger_mouse_event(e.u.mouse.buttons, e.u.mouse.x, e.u.mouse.y, e.u.mouse.wheel);
         break;
 
@@ -292,10 +337,14 @@ void run_lua_file(const char *filename) {
     L = luaL_newstate();
     luaL_openlibs(L);
 
+    // register functionality
     lua_register(L, "init_hid_mouse", init_hid_mouse);
     lua_register(L, "set_mouse_pos", set_mouse_pos);
     lua_register(L, "register_keyboard_callback", register_keyboard_callback);
     lua_register(L, "register_mouse_callback", register_mouse_callback);
+
+    // override functions
+    // register_override_io_open(L); // broken
 
     L_good = 1;
 

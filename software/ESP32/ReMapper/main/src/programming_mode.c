@@ -8,9 +8,20 @@
 #include "tusb_config.h"
 #include "class/msc/msc_device.h"
 #include "tusb_msc_storage.h"
+#include "task_input_manager.h"
 
 #include "task_display.h"
 #include "lvgl.h"
+
+#include "utils.h"
+#include <stdio.h>
+#include <string.h>
+#include <dirent.h>
+#include "gui_main.h"
+#include "task_display.h"
+#include "task_input_manager.h"
+#include "widget_horizontal_select.h"
+#include "hid_q.h"
 
 #define SECTOR_SIZE 4096
 #define BOARD_TUD_RHPORT 0
@@ -127,7 +138,26 @@ void run_programming_mode() {
     memory_chip.PIN_CS = PIN_NUM_CS;
     stat = init_W25Q128J(&memory_chip, SPI3_HOST);
 
-    // erase_all_W25Q128J(&memory_chip);
+
+
+    int ERASE_ALL_MODE = BUTTON_SELECT;
+    gpio_config_t io_conf = {
+        .pin_bit_mask = (1ULL << ERASE_ALL_MODE),
+        .mode = GPIO_MODE_INPUT,
+        .pull_up_en = GPIO_PULLUP_ENABLE,
+        .pull_down_en = GPIO_PULLDOWN_DISABLE,
+        .intr_type = GPIO_INTR_DISABLE};
+    gpio_config(&io_conf);
+
+    volatile bool is_ERASE_MODE = gpio_get_level(ERASE_ALL_MODE) == 0;
+    if( is_ERASE_MODE ){
+        ESP_LOGI(TAG, "------------------------------------------");
+        ESP_LOGI(TAG, "\nERRRASE MODE ... don't un-plug. Might take a few minutes\n");
+        erase_all_W25Q128J(&memory_chip);
+        ESP_LOGI(TAG, "... DONE!");
+        ESP_LOGI(TAG, "------------------------------------------");
+    }
+
 
     ESP_LOGI(TAG, "Flash init: %d", stat == true);
     ESP_LOGI(TAG, "Flash Size: 0x%0lx", get_size_W25Q128J(&memory_chip));
@@ -137,7 +167,10 @@ void run_programming_mode() {
     stat = extfs_setup(&ext_flash_fs, memory_chip.ext_flash, "/ext", "myextfs");
     ESP_LOGI(TAG, "Mount External flash as vfs wl: %d", stat == true);
 
-    fatfs_test();
+
+    // make sure the correct directories exists
+    mkdir("/ext/user_data", 0777);
+    // fatfs_test();
 
     ESP_LOGI(TAG, "WL handler: %d\n", ext_flash_fs.wl);
 }

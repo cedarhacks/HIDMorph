@@ -86,7 +86,7 @@ void app_main(void) {
 
         xTaskCreate(task_lua_vm,
                     "lua_vm",
-                    8192,
+                    16384,
                     NULL,
                     10,
                     NULL);
