@@ -52,6 +52,33 @@ bool gui_async(gui_cb_t cb, void *arg) {
     return xQueueSend(gui_q, &m, 0) == pdTRUE;
 }
 
+
+bool gui_sync(gui_cb_t cb, void *arg, TickType_t timeout_ticks)
+{
+    if (!gui_q || !cb) return false;
+
+    SemaphoreHandle_t done = xSemaphoreCreateBinary();
+    if (!done) return false;
+
+    gui_msg_t m = {
+        .cb   = cb,
+        .arg  = arg,
+        .done = done,
+    };
+
+    // Queue the message (wait a bit if queue is full)
+    if (xQueueSend(gui_q, &m, timeout_ticks) != pdTRUE) {
+        vSemaphoreDelete(done);
+        return false;
+    }
+
+    // Wait for the display task to run the callback
+    bool ok = (xSemaphoreTake(done, timeout_ticks) == pdTRUE);
+
+    vSemaphoreDelete(done);
+    return ok;
+}
+
 void task_display(void *args) {
     ESP_LOGI(TAG, "TASK DISPLAY INIT\n");
 

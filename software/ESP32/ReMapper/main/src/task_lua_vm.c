@@ -28,6 +28,11 @@
 #define MAX_FILE_PATH_LEN (255)
 #define ORIGINAL_IO_OPEN_KEY "my_original_io_open"
 
+typedef enum RUN_MODE {
+    MODE_FILE_SELECT,
+    MODE_RUN,
+} RUN_MODE_t;
+
 const char *TAG = "LUA_TASK";
 static W25Q128J_t memory_chip;
 static ExtFlashFs_t ext_flash_fs;
@@ -38,18 +43,15 @@ char files_name_only[20][MAX_FILE_PATH_LEN];
 char *files_list[20];
 char *files_name_only_list[20];
 
-static lv_obj_t *screen_file_running;
-
 int selected_file_i = 0;
 int file_count = 0;
 
 static list_selector_t file_list_select;
 int global_pin; // assume pin ebvent at a time
 
-typedef enum RUN_MODE {
-    MODE_FILE_SELECT,
-    MODE_RUN,
-} RUN_MODE_t;
+static lv_obj_t *screen_file_running;
+lv_obj_t *running_label;
+
 
 static SemaphoreHandle_t mode_sem;
 static RUN_MODE_t mode;
@@ -62,6 +64,9 @@ lua_State *L = NULL;
 int L_good = 0;
 static int keyboard_callback_ref = LUA_NOREF;
 static int mouse_callback_ref = LUA_NOREF;
+
+// ---------------------------------------------------------------------------------------------------------
+
 
 static int register_keyboard_callback(lua_State *L) {
     luaL_checktype(L, 1, LUA_TFUNCTION);
@@ -92,7 +97,6 @@ static int register_mouse_callback(lua_State *L) {
 
     return 0;
 }
-
 
 void trigger_keyboard_event(int keycode, bool pressed) {
     if (!L_good || L == NULL)
@@ -191,10 +195,21 @@ void gui_build_file_select(void *arg) {
 void gui_build_running(void *arg) {
     screen_file_running = lv_obj_create(NULL);
 
-    lv_obj_t *label = lv_label_create(screen_file_running);
-    lv_label_set_long_mode(label, LV_LABEL_LONG_SCROLL_CIRCULAR);
-    lv_label_set_text_fmt(label, "Running!");
-    lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
+    lv_obj_t *loader = lv_spinner_create(screen_file_running);
+    lv_obj_set_size(loader, 10, 10);
+    lv_obj_set_pos(loader, 4, 4);
+    lv_obj_set_style_anim_time(loader, 1200, LV_PART_MAIN);   // speed
+    lv_obj_set_style_arc_width(loader, 1, LV_PART_INDICATOR); // line thickness
+
+    running_label = lv_label_create(screen_file_running);
+    lv_label_set_long_mode(running_label, LV_LABEL_LONG_SCROLL_CIRCULAR);
+    lv_label_set_text_fmt(running_label, "Running");
+    lv_obj_align(running_label, LV_ALIGN_CENTER, 0, 0);
+}
+
+void gui_set_run_text(void* arg) {
+    char* text = (char*)arg;
+    lv_label_set_text_fmt(running_label, text);
 }
 
 void gui_switch_file_select(void *arg) {
@@ -202,6 +217,7 @@ void gui_switch_file_select(void *arg) {
 }
 
 void gui_switch_file_run(void *arg) {
+    lv_label_set_text_fmt(running_label, "Running");
     lv_scr_load(screen_file_running);
 }
 
@@ -262,10 +278,17 @@ static int set_mouse_pos(lua_State *L) {
     return 1;
 }
 
+static int display_set_text(lua_State *L) {
+    char *text = luaL_checkstring(L, 1);
+    gui_sync(gui_set_run_text, text, portMAX_DELAY);
+    vTaskDelay(pdMS_TO_TICKS(1));
+    return 1;
+}
+
 static int override_io_open(lua_State *L) {
     // Get original args
     const char *filename = luaL_checkstring(L, 1);
-    const char *mode     = luaL_optstring(L, 2, "r");
+    const char *mode = luaL_optstring(L, 2, "r");
 
     char fullpath[256];
     snprintf(fullpath, sizeof(fullpath), "%s%s", OVERRIDE_FILE_PREFIX, filename);
@@ -292,10 +315,10 @@ static int override_io_open(lua_State *L) {
 
 static int register_override_io_open(lua_State *L) {
     // Get io table
-    lua_getglobal(L, "io");               // stack: io
+    lua_getglobal(L, "io"); // stack: io
 
     // Save original io.open in registry
-    lua_getfield(L, -1, "open");          // stack: io, io.open
+    lua_getfield(L, -1, "open");                              // stack: io, io.open
     lua_setfield(L, LUA_REGISTRYINDEX, ORIGINAL_IO_OPEN_KEY); // registry[KEY] = io.open
 
     // Set our override as io.open
@@ -339,8 +362,11 @@ void run_lua_file(const char *filename) {
     luaL_openlibs(L);
 
     // register functionality
+    //   functions lua can call
     lua_register(L, "init_hid_mouse", init_hid_mouse);
     lua_register(L, "set_mouse_pos", set_mouse_pos);
+    lua_register(L, "display_set_text", display_set_text);
+    //   callbacks
     lua_register(L, "register_keyboard_callback", register_keyboard_callback);
     lua_register(L, "register_mouse_callback", register_mouse_callback);
 

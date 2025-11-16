@@ -22,3 +22,4 @@ typedef struct {
 
 void task_display(void *args);          // init task
 bool gui_async(gui_cb_t cb, void *arg); // enqueue and return immediately
+bool gui_sync(gui_cb_t cb, void *arg, TickType_t timeout_ticks);
