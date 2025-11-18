@@ -49,9 +49,9 @@ for line in f:lines() do
     wheel = tonumber(wheel)
 
     -- Replay relative mouse movement
-    if dx ~= 0 or dy ~= 0 then
+    -- if dx ~= 0 or dy ~= 0 then
         set_mouse_raw(buttons, dx, dy, wheel)
-    end
+    -- end
 
     -- if DELAY_MS > 0 then
     --     sleep(DELAY_MS)

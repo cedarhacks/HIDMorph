@@ -58,20 +58,29 @@ int parse_hid_packet(HID_MESSAGE_PACKET_t *packet, Event_t *events, int max_even
         uint8_t *data = packet->message.new_report.data;
         int data_len = packet->message.new_report.length;
 
+        // for (int i = 0; i < data_len; i++) {
+        //     printf("%x ", data[i]);
+        // }
+        // printf("\n");
+
         if (data_len < 4) // 3 if no wheel, 4 if you expect wheel
             return num_events;
 
-        uint8_t buttons = data[1];
-        int8_t dx = (int8_t)data[2];
-        int8_t dy = (int8_t)data[3];
-
-        int8_t wheel = 0;
+        uint8_t buttons = data[0];
+        int8_t dx = (int8_t)data[1];
+        int8_t dy = (int8_t)data[2];
+        int8_t wheel = (int8_t)data[3];
+    
+        // touch pad??
         if (data_len >= 5) {
+            buttons = data[1];
+            dx = (int8_t)data[2];
+            dy = (int8_t)data[3];
             wheel = (int8_t)data[4];
         }
 
         // we will also make a raw mouse event
-        if( num_events < max_events - 1) {
+        if (num_events < max_events - 1) {
             events[num_events].type = EVENT_MOUSE_RAW;
             events[num_events].mouse_button = buttons;
             events[num_events].mouse_wheel = wheel;
@@ -87,7 +96,7 @@ int parse_hid_packet(HID_MESSAGE_PACKET_t *packet, Event_t *events, int max_even
         //        (int)wheel);
 
         // if the mouse moved at all register a mouse move event
-        if ( (dx != 0 || dy != 0) && num_events < max_events - 1) {
+        if ((dx != 0 || dy != 0) && num_events < max_events - 1) {
             events[num_events].type = EVENT_MOUSE_MOVE;
             events[num_events].mouse_dx = dx;
             events[num_events].mouse_dy = dy;
@@ -106,7 +115,6 @@ int parse_hid_packet(HID_MESSAGE_PACKET_t *packet, Event_t *events, int max_even
                     events[num_events].mouse_button = i;
                     num_events += 1;
                 }
-
             }
         }
 

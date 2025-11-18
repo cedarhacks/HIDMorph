@@ -80,10 +80,10 @@ void task_spi_usb(void *args) {
 
                 // ESP_LOGI("[usb]", "protocol:%d  dev:%x id:%d  event: %d %c", hid_packet.message.new_report.protocol, hid_packet.message.new_report.dev_addr, hid_packet.message.new_report.report_id, new_events[i].keycode, new_events[i].ascii);
 
-                if( new_events[i].type == EVENT_MOUSE_RAW ){
-                    // ESP_LOGI("[usb]", "mouse raw: b:%d x:%d y:%d w:%d", new_events[i].mouse_button, new_events[i].mouse_dx, new_events[i].mouse_dy, new_events[i].mouse_wheel);                    
+                if (new_events[i].type == EVENT_MOUSE_RAW) {
+                    // ESP_LOGI("[usb]", "mouse raw: b:%d x:%d y:%d w:%d", new_events[i].mouse_button, new_events[i].mouse_dx, new_events[i].mouse_dy, new_events[i].mouse_wheel);
                     hid_post_mouse(&input_events_q, new_events[i].mouse_button, new_events[i].mouse_dx, new_events[i].mouse_dy, new_events[i].mouse_wheel, 0, 0);
-            }
+                }
 
                 // key pressed
                 if (new_events[i].type == EVENT_KEY_PRESSED) {
@@ -102,19 +102,19 @@ void task_spi_usb(void *args) {
                 }
 
                 if (new_events[i].type == EVENT_MOUSE_BUTTON_PRESS) {
-                    //ESP_LOGI("[usb]", "mouse down: %d", new_events[i].mouse_button);
+                    // ESP_LOGI("[usb]", "mouse down: %d", new_events[i].mouse_button);
                 }
 
                 if (new_events[i].type == EVENT_MOUSE_BUTTON_RELEASE) {
-                    //ESP_LOGI("[usb]", "mouse up: %d", new_events[i].mouse_button);
+                    // ESP_LOGI("[usb]", "mouse up: %d", new_events[i].mouse_button);
                 }
 
                 if (new_events[i].type == EVENT_MOUSE_MOVE) {
-                    //ESP_LOGI("[usb]", "mouse x:%d y:%d", new_events[i].mouse_dx, new_events[i].mouse_dy);
+                    // ESP_LOGI("[usb]", "mouse x:%d y:%d", new_events[i].mouse_dx, new_events[i].mouse_dy);
                 }
 
                 if (new_events[i].type == EVENT_MOUSE_WHEEL) {
-                    //ESP_LOGI("[usb]", "mouse wheel:%d", new_events[i].mouse_wheel);
+                    // ESP_LOGI("[usb]", "mouse wheel:%d", new_events[i].mouse_wheel);
                 }
             }
             // ESP_LOGI("[usb]", "---------");
