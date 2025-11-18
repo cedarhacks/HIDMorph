@@ -271,8 +271,17 @@ static int init_hid_mouse(lua_State *L) {
 static int set_mouse_pos(lua_State *L) {
     double x = luaL_checknumber(L, 1);
     double y = luaL_checknumber(L, 2);
-
     hid_post_mouse(&output_events_q, 0, x, y, 0, 0, 0);
+    vTaskDelay(pdMS_TO_TICKS(10));
+    return 1;
+}
+
+static int set_mouse_raw(lua_State *L) {
+    int buttons = luaL_checknumber(L, 1);
+    int dx = luaL_checknumber(L, 2);
+    int dy = luaL_checknumber(L, 3);
+    int wheel = luaL_checknumber(L, 4);
+    hid_post_mouse(&output_events_q, buttons, dx, dy, wheel, 0, 0);
     vTaskDelay(pdMS_TO_TICKS(10));
     return 1;
 }
@@ -418,6 +427,7 @@ void run_lua_file(const char *filename) {
     //   functions lua can call
     lua_register(L, "init_hid_mouse", init_hid_mouse);
     lua_register(L, "set_mouse_pos", set_mouse_pos);
+    lua_register(L, "set_mouse_raw", set_mouse_raw);
     lua_register(L, "display_set_text", display_set_text);
     lua_register_icons(L);
     

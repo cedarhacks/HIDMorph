@@ -15,12 +15,14 @@ local HOMING_STEP_DY  = -15
 -- and for recording all subsequent moves.
 register_mouse_callback(function(buttons, dx, dy, wheel)
 
-    set_mouse_pos(dx,dy);
+    set_mouse_raw(buttons, dx, dy, wheel);
 
     if state == STATE_WAIT_MOVE then
         if dx ~= 0 or dy ~= 0 or wheel ~= 0 or buttons ~= 0 then
             log_file = assert(io.open("mouse_record.csv", "w"))
             log_file:write("buttons,dx,dy,wheel\n")
+            log_file:write(string.format("%d,%d,%d,%d\n", buttons, dx, dy, wheel))
+            log_file:flush()
 
             state = STATE_RECORDING
             display_set_text(ICON.STOP .. "\nRecording...\n")

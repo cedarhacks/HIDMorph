@@ -43,12 +43,14 @@ for line in f:lines() do
     local buttons, dx, dy, wheel =
         line:match("([^,]+),([^,]+),([^,]+),([^,]+)")
 
+    buttons = tonumber(buttons)
     dx = tonumber(dx)
     dy = tonumber(dy)
+    wheel = tonumber(wheel)
 
     -- Replay relative mouse movement
     if dx ~= 0 or dy ~= 0 then
-        set_mouse_pos(dx, dy)
+        set_mouse_raw(buttons, dx, dy, wheel)
     end
 
     -- if DELAY_MS > 0 then
