@@ -52,7 +52,6 @@ int global_pin; // assume pin ebvent at a time
 static lv_obj_t *screen_file_running;
 lv_obj_t *running_label;
 
-
 static SemaphoreHandle_t mode_sem;
 static RUN_MODE_t mode;
 static RUN_MODE_t mode_lp;
@@ -66,7 +65,6 @@ static int keyboard_callback_ref = LUA_NOREF;
 static int mouse_callback_ref = LUA_NOREF;
 
 // ---------------------------------------------------------------------------------------------------------
-
 
 static int register_keyboard_callback(lua_State *L) {
     luaL_checktype(L, 1, LUA_TFUNCTION);
@@ -203,12 +201,13 @@ void gui_build_running(void *arg) {
 
     running_label = lv_label_create(screen_file_running);
     lv_label_set_long_mode(running_label, LV_LABEL_LONG_SCROLL_CIRCULAR);
+        lv_obj_set_style_text_font(running_label, &lv_font_montserrat_10, 0);
     lv_label_set_text_fmt(running_label, "Running");
     lv_obj_align(running_label, LV_ALIGN_CENTER, 0, 0);
 }
 
-void gui_set_run_text(void* arg) {
-    char* text = (char*)arg;
+void gui_set_run_text(void *arg) {
+    char *text = (char *)arg;
     lv_label_set_text_fmt(running_label, text);
 }
 
@@ -330,6 +329,60 @@ static int register_override_io_open(lua_State *L) {
     return 0; // no Lua return values
 }
 
+void lua_register_icons(lua_State *L) {
+    // Create ICON = {}
+    lua_newtable(L);
+
+#define ICON(name, sym)     \
+    lua_pushstring(L, sym); \
+    lua_setfield(L, -2, name)
+
+    // Core icons
+    ICON("OK", LV_SYMBOL_OK);
+    ICON("CLOSE", LV_SYMBOL_CLOSE);
+    ICON("WARNING", LV_SYMBOL_WARNING);
+    ICON("CHARGE", LV_SYMBOL_CHARGE);
+    ICON("POWER", LV_SYMBOL_POWER);
+
+    // Connectivity
+    ICON("WIFI", LV_SYMBOL_WIFI);
+    ICON("BLUETOOTH", LV_SYMBOL_BLUETOOTH);
+    ICON("USB", LV_SYMBOL_USB);
+
+    // Media
+    ICON("AUDIO", LV_SYMBOL_AUDIO);
+    ICON("VIDEO", LV_SYMBOL_VIDEO);
+    ICON("PLAY", LV_SYMBOL_PLAY);
+    ICON("PAUSE", LV_SYMBOL_PAUSE);
+    ICON("STOP", LV_SYMBOL_STOP);
+
+    // Navigation arrows
+    ICON("UP", LV_SYMBOL_UP);
+    ICON("DOWN", LV_SYMBOL_DOWN);
+    ICON("LEFT", LV_SYMBOL_LEFT);
+    ICON("RIGHT", LV_SYMBOL_RIGHT);
+
+    // Battery
+    ICON("BATTERY_EMPTY", LV_SYMBOL_BATTERY_EMPTY);
+    ICON("BATTERY_1", LV_SYMBOL_BATTERY_1);
+    ICON("BATTERY_2", LV_SYMBOL_BATTERY_2);
+    ICON("BATTERY_3", LV_SYMBOL_BATTERY_3);
+    ICON("BATTERY_FULL", LV_SYMBOL_BATTERY_FULL);
+
+    // File / system
+    ICON("TRASH", LV_SYMBOL_TRASH);
+    ICON("EDIT", LV_SYMBOL_EDIT);
+    ICON("SAVE", LV_SYMBOL_SAVE);
+    ICON("REFRESH", LV_SYMBOL_REFRESH);
+    ICON("SETTINGS", LV_SYMBOL_SETTINGS);
+    ICON("HOME", LV_SYMBOL_HOME);
+    ICON("DOWNLOAD", LV_SYMBOL_DOWNLOAD);
+
+#undef ICON
+
+    lua_setglobal(L, "ICON");
+}
+
 void handle_hid_inputs() {
     hid_evt_t e;
 
@@ -366,6 +419,8 @@ void run_lua_file(const char *filename) {
     lua_register(L, "init_hid_mouse", init_hid_mouse);
     lua_register(L, "set_mouse_pos", set_mouse_pos);
     lua_register(L, "display_set_text", display_set_text);
+    lua_register_icons(L);
+    
     //   callbacks
     lua_register(L, "register_keyboard_callback", register_keyboard_callback);
     lua_register(L, "register_mouse_callback", register_mouse_callback);
