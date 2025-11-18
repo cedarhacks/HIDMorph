@@ -201,7 +201,7 @@ void gui_build_running(void *arg) {
 
     running_label = lv_label_create(screen_file_running);
     lv_label_set_long_mode(running_label, LV_LABEL_LONG_SCROLL_CIRCULAR);
-        lv_obj_set_style_text_font(running_label, &lv_font_montserrat_10, 0);
+    lv_obj_set_style_text_font(running_label, &lv_font_montserrat_10, 0);
     lv_label_set_text_fmt(running_label, "Running");
     lv_obj_align(running_label, LV_ALIGN_CENTER, 0, 0);
 }
@@ -268,11 +268,17 @@ static int init_hid_mouse(lua_State *L) {
     return result;
 }
 
+static int wait_ms_lua(lua_State *L) {
+    double ms = luaL_checknumber(L, 1);
+    vTaskDelay(pdMS_TO_TICKS(ms));
+    return 1;
+}
+
 static int set_mouse_pos(lua_State *L) {
     double x = luaL_checknumber(L, 1);
     double y = luaL_checknumber(L, 2);
     hid_post_mouse(&output_events_q, 0, x, y, 0, 0, 0);
-    vTaskDelay(pdMS_TO_TICKS(10));
+    // vTaskDelay(pdMS_TO_TICKS(10));
     return 1;
 }
 
@@ -282,7 +288,7 @@ static int set_mouse_raw(lua_State *L) {
     int dy = luaL_checknumber(L, 3);
     int wheel = luaL_checknumber(L, 4);
     hid_post_mouse(&output_events_q, buttons, dx, dy, wheel, 0, 0);
-    vTaskDelay(pdMS_TO_TICKS(10));
+    // vTaskDelay(pdMS_TO_TICKS(20));
     return 1;
 }
 
@@ -429,8 +435,9 @@ void run_lua_file(const char *filename) {
     lua_register(L, "set_mouse_pos", set_mouse_pos);
     lua_register(L, "set_mouse_raw", set_mouse_raw);
     lua_register(L, "display_set_text", display_set_text);
+    lua_register(L, "wait_ms", wait_ms_lua);
     lua_register_icons(L);
-    
+
     //   callbacks
     lua_register(L, "register_keyboard_callback", register_keyboard_callback);
     lua_register(L, "register_mouse_callback", register_mouse_callback);

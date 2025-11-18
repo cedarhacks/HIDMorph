@@ -7,7 +7,7 @@ local state           = STATE_HOMING
 local log_file        = nil
 
 -- How long to keep "homing" (tweak as needed)
-local HOMING_STEPS    = 500
+local HOMING_STEPS    = 200
 local HOMING_STEP_DX  = -15
 local HOMING_STEP_DY  = -15
 
@@ -46,6 +46,8 @@ local i = 0
 while i < HOMING_STEPS do
     set_mouse_pos(HOMING_STEP_DX, HOMING_STEP_DY)
     i = i + 1
+    wait_ms(10)
+
 end
 
 -- Now wait for user to move the mouse

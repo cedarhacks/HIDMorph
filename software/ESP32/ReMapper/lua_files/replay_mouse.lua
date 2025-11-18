@@ -15,14 +15,15 @@ end
 ----------------------------------------------------------
 display_set_text("Homing...")
 
-local HOMING_STEPS = 200
-local HOMING_DX = -15
-local HOMING_DY = -15
+local HOMING_STEPS = 100
+local HOMING_DX = -10
+local HOMING_DY = -10
 
 for i = 1, HOMING_STEPS do
     set_mouse_pos(HOMING_DX, HOMING_DY)
     -- optional delay to avoid OS rejecting rapid input
     -- sleep(5)
+    wait_ms(10)
 end
 
 print("Homing complete")
@@ -31,7 +32,7 @@ print("Homing complete")
 -- START REPLAY
 ----------------------------------------------------------
 
-display_set_text("Replaying…")
+display_set_text("Replaying")
 
 -- Skip CSV header
 f:read("*l")
@@ -49,9 +50,9 @@ for line in f:lines() do
     wheel = tonumber(wheel)
 
     -- Replay relative mouse movement
-    -- if dx ~= 0 or dy ~= 0 then
+    if dx ~= 0 or dy ~= 0 then
         set_mouse_raw(buttons, dx, dy, wheel)
-    -- end
+    end
 
     -- if DELAY_MS > 0 then
     --     sleep(DELAY_MS)

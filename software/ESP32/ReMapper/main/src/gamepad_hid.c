@@ -100,7 +100,7 @@ void handle_req_queue() {
         }
 
         // throttle a bit
-        // vTaskDelay(pdMS_TO_TICKS(1));
+        vTaskDelay(pdMS_TO_TICKS(1));
     }
 }
 
@@ -113,25 +113,25 @@ void gamepad_hid_step() {
     // flush the command queue
     handle_req_queue();
 
-    if (tud_mounted()) {
-        // printf("Sending Gamepad report\n");
+    // if (tud_mounted()) {
+    //     // printf("Sending Gamepad report\n");
 
-        gamepad_report_t report = {
-            .report_id = REPORT_ID_GAMEPAD,
-            .buttons = 0x01, // Button 1 pressed
-            .x = temp_x,     // Move right
-            .y = 0,
-            .rx = 0,
-            .ry = 0,
-            .hat = 0 // Neutral hat
-        };
+    //     gamepad_report_t report = {
+    //         .report_id = REPORT_ID_GAMEPAD,
+    //         .buttons = 0x01, // Button 1 pressed
+    //         .x = temp_x,     // Move right
+    //         .y = 0,
+    //         .rx = 0,
+    //         .ry = 0,
+    //         .hat = 0 // Neutral hat
+    //     };
 
-        tud_hid_report(REPORT_ID_GAMEPAD, &report, sizeof(report));
-        vTaskDelay(pdMS_TO_TICKS(100));
+    //     tud_hid_report(REPORT_ID_GAMEPAD, &report, sizeof(report));
+    //     vTaskDelay(pdMS_TO_TICKS(100));
 
-        // Release all
-        memset(&report, 0, sizeof(report));
-        report.report_id = REPORT_ID_GAMEPAD;
-        tud_hid_report(REPORT_ID_GAMEPAD, &report, sizeof(report));
-    }
+    //     // Release all
+    //     memset(&report, 0, sizeof(report));
+    //     report.report_id = REPORT_ID_GAMEPAD;
+    //     tud_hid_report(REPORT_ID_GAMEPAD, &report, sizeof(report));
+    // }
 }
