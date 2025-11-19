@@ -274,6 +274,12 @@ static int wait_ms_lua(lua_State *L) {
     return 1;
 }
 
+static int get_time_ms_lua(lua_State *L) {
+    float ms = esp_timer_get_time() / 1000.0f;
+    lua_pushnumber(L, (lua_Number)ms);
+    return 1;
+}
+
 static int set_mouse_pos(lua_State *L) {
     double x = luaL_checknumber(L, 1);
     double y = luaL_checknumber(L, 2);
@@ -436,6 +442,7 @@ void run_lua_file(const char *filename) {
     lua_register(L, "set_mouse_raw", set_mouse_raw);
     lua_register(L, "display_set_text", display_set_text);
     lua_register(L, "wait_ms", wait_ms_lua);
+    lua_register(L, "get_time_ms", get_time_ms_lua);
     lua_register_icons(L);
 
     //   callbacks

@@ -47,7 +47,6 @@ while i < HOMING_STEPS do
     set_mouse_pos(HOMING_STEP_DX, HOMING_STEP_DY)
     i = i + 1
     wait_ms(10)
-
 end
 
 -- Now wait for user to move the mouse
