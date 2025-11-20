@@ -6,7 +6,7 @@ QueueHandle_t input_events_q = NULL;
 static const char *TAG = "HID_QUEUE";
 
 void hid_queue_init(QueueHandle_t *q) {
-    (*q) = xQueueCreate(16, sizeof(hid_evt_t));
+    (*q) = xQueueCreate(8, sizeof(hid_evt_t));
     if (!(*q))
         ESP_LOGE(TAG, "Failed to create HID queue!");
 }

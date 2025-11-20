@@ -57,12 +57,14 @@ static RUN_MODE_t mode;
 static RUN_MODE_t mode_lp;
 
 static volatile bool g_stop = false;
+static volatile bool g_stop_final = false;
 static const char *OVERRIDE_FILE_PREFIX = "/ext/user_data/";
 
 lua_State *L = NULL;
 int L_good = 0;
 static int keyboard_callback_ref = LUA_NOREF;
 static int mouse_callback_ref = LUA_NOREF;
+static int teardown_callback_ref = LUA_NOREF;
 
 // ---------------------------------------------------------------------------------------------------------
 
@@ -94,6 +96,37 @@ static int register_mouse_callback(lua_State *L) {
     mouse_callback_ref = luaL_ref(L, LUA_REGISTRYINDEX);
 
     return 0;
+}
+
+static int register_teardown_callback(lua_State *L) {
+    luaL_checktype(L, 1, LUA_TFUNCTION);
+
+    if (teardown_callback_ref != LUA_NOREF) {
+        luaL_unref(L, LUA_REGISTRYINDEX, teardown_callback_ref);
+        teardown_callback_ref = LUA_NOREF;
+    }
+
+    // Store the new function
+    lua_pushvalue(L, 1);
+    teardown_callback_ref = luaL_ref(L, LUA_REGISTRYINDEX);
+
+    return 0;
+}
+
+void trigger_teardown() {
+    if (!L_good || L == NULL)
+        return;
+
+    if (teardown_callback_ref == LUA_NOREF)
+        return;
+    // Push the callback
+    lua_rawgeti(L, LUA_REGISTRYINDEX, teardown_callback_ref);
+
+    // Call function with 0 args, 0 return values
+    if (lua_pcall(L, 0, 0, 0) != LUA_OK) {
+        printf("Lua keyboard callback error: %s\n", lua_tostring(L, -1));
+        lua_pop(L, 1);
+    }
 }
 
 void trigger_keyboard_event(int keycode, bool pressed) {
@@ -274,6 +307,14 @@ static int wait_ms_lua(lua_State *L) {
     return 1;
 }
 
+static int wait_us_lua(lua_State *L) {
+    double us = luaL_checknumber(L, 1);
+    int64_t start = esp_timer_get_time();  // microseconds since boot
+    while ((esp_timer_get_time() - start) < us) {
+    }
+    return 1;
+}
+
 static int get_time_ms_lua(lua_State *L) {
     float ms = esp_timer_get_time() / 1000.0f;
     lua_pushnumber(L, (lua_Number)ms);
@@ -293,6 +334,8 @@ static int set_mouse_raw(lua_State *L) {
     int dx = luaL_checknumber(L, 2);
     int dy = luaL_checknumber(L, 3);
     int wheel = luaL_checknumber(L, 4);
+
+    // ESP_LOGI(TAG, "mouse: %d %d %d %d", buttons, dx, dy, wheel);
     hid_post_mouse(&output_events_q, buttons, dx, dy, wheel, 0, 0);
     // vTaskDelay(pdMS_TO_TICKS(20));
     return 1;
@@ -442,12 +485,14 @@ void run_lua_file(const char *filename) {
     lua_register(L, "set_mouse_raw", set_mouse_raw);
     lua_register(L, "display_set_text", display_set_text);
     lua_register(L, "wait_ms", wait_ms_lua);
+    lua_register(L, "wait_us", wait_us_lua);
     lua_register(L, "get_time_ms", get_time_ms_lua);
     lua_register_icons(L);
 
     //   callbacks
     lua_register(L, "register_keyboard_callback", register_keyboard_callback);
     lua_register(L, "register_mouse_callback", register_mouse_callback);
+    lua_register(L, "register_teardown_callback", register_teardown_callback);
 
     // override functions
     register_override_io_open(L); // broken
@@ -467,7 +512,7 @@ void run_lua_file(const char *filename) {
     int co_ref = luaL_ref(L, LUA_REGISTRYINDEX); // pops 'co' from L, keeps it alive
 
     // lua_sethook(co, hook_count, LUA_MASKCOUNT, 10000); // every ~10k VM instr
-    lua_sethook(co, hook_count, LUA_MASKCOUNT, 100); // every ~10k VM instr
+    lua_sethook(co, hook_count, LUA_MASKCOUNT, 2000); // every ~10k VM instr
 
     for (;;) {
         int nres = 0;
@@ -475,7 +520,16 @@ void run_lua_file(const char *filename) {
 
         if (rc == LUA_YIELD) {
 
+            // two step teardown
             if (g_stop) {
+                ESP_LOGI(TAG, "Teardown of LUA");
+                trigger_teardown();
+                g_stop_final = true;
+                g_stop = false;
+            }
+
+            if (g_stop_final) {
+
                 // Stop further hook interruptions
                 lua_sethook(co, NULL, 0, 0);
 
@@ -485,8 +539,10 @@ void run_lua_file(const char *filename) {
                 lua_close(L);
 
                 ESP_LOGI(TAG, "STOPPED");
+
                 mode = MODE_FILE_SELECT;
                 g_stop = false;
+                g_stop_final = false;
                 return;
             }
 

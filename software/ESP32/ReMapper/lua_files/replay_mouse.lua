@@ -52,15 +52,17 @@ for line in f:lines() do
     dy = tonumber(dy)
     wheel = tonumber(wheel)
 
+
     -- Wait until real clock has passed recorded timestamp
     while (get_time_ms() - start_time_ms) < time_ms do
-        wait_ms(1)
+        -- wait_us(1)
     end
 
-    -- Replay relative mouse movement
-    if dx ~= 0 or dy ~= 0 then
-        set_mouse_raw(buttons, dx, dy, wheel)
-    end
+    time_send = get_time_ms() - start_time_ms;
+
+    print("exp ", time_send, time_ms);
+
+    set_mouse_raw(buttons, dx, dy, wheel)
 
     -- if DELAY_MS > 0 then
     --     sleep(DELAY_MS)
