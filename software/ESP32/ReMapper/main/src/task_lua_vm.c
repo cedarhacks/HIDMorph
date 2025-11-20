@@ -410,7 +410,7 @@ void handle_hid_inputs() {
     int max_per_call = 16;
     int i = 0;
 
-    if (xQueueReceive(input_events_q, &e, 10) != pdTRUE) return;
+    if (xQueueReceive(input_events_q, &e, 0) != pdTRUE) return;
 
     switch (e.kind) {
     case HID_EVT_KEYBOARD:

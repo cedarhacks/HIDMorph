@@ -40,14 +40,22 @@ f:read("*l")
 -- Delay between replayed events (tweak)
 local DELAY_MS = 5
 
-for line in f:lines() do
-    local buttons, dx, dy, wheel =
-        line:match("([^,]+),([^,]+),([^,]+),([^,]+)")
+start_time_ms = get_time_ms();
 
+for line in f:lines() do
+    local time_ms, buttons, dx, dy, wheel =
+        line:match("([^,]+),([^,]+),([^,]+),([^,]+),([^,]+)")
+
+    time_ms = tonumber(time_ms)
     buttons = tonumber(buttons)
     dx = tonumber(dx)
     dy = tonumber(dy)
     wheel = tonumber(wheel)
+
+    -- Wait until real clock has passed recorded timestamp
+    while (get_time_ms() - start_time_ms) < time_ms do
+        wait_ms(1)
+    end
 
     -- Replay relative mouse movement
     if dx ~= 0 or dy ~= 0 then

@@ -10,6 +10,7 @@ local log_file        = nil
 local HOMING_STEPS    = 200
 local HOMING_STEP_DX  = -15
 local HOMING_STEP_DY  = -15
+local start_time_ms   = 0
 
 -- Mouse callback: used both for detecting the first move,
 -- and for recording all subsequent moves.
@@ -19,9 +20,12 @@ register_mouse_callback(function(buttons, dx, dy, wheel)
 
     if state == STATE_WAIT_MOVE then
         if dx ~= 0 or dy ~= 0 or wheel ~= 0 or buttons ~= 0 then
+
             log_file = assert(io.open("mouse_record.csv", "w"))
-            log_file:write("buttons,dx,dy,wheel\n")
-            log_file:write(string.format("%d,%d,%d,%d\n", buttons, dx, dy, wheel))
+
+            start_time_ms = get_time_ms();
+            log_file:write("time_ms,buttons,dx,dy,wheel\n")
+            log_file:write(string.format("%f,%d,%d,%d,%d\n", get_time_ms() - start_time_ms, buttons, dx, dy, wheel))
             log_file:flush()
 
             state = STATE_RECORDING
@@ -31,8 +35,8 @@ register_mouse_callback(function(buttons, dx, dy, wheel)
     end
 
     if state == STATE_RECORDING and log_file then
-        log_file:write(string.format("%d,%d,%d,%d\n", buttons, dx, dy, wheel))
-        log_file:flush()
+        log_file:write(string.format("%f,%d,%d,%d,%d\n", get_time_ms() - start_time_ms, buttons, dx, dy, wheel))
+        -- log_file:flush()
     end
 end)
 
