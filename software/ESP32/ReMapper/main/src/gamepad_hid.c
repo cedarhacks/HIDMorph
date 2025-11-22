@@ -22,13 +22,28 @@ const char *hid_string_descriptor[5] = {
     "Game Controller HID", // 4: HID
 };
 
-const uint8_t hid_report_descriptor[] = {
-    TUD_HID_REPORT_DESC_GAMEPAD(HID_REPORT_ID(HID_ITF_PROTOCOL_KEYBOARD)),
-    TUD_HID_REPORT_DESC_MOUSE(HID_REPORT_ID(HID_ITF_PROTOCOL_MOUSE))};
+const uint8_t hid_report_descriptor[] =
+{
+    // Keyboard
+    TUD_HID_REPORT_DESC_KEYBOARD(
+        HID_REPORT_ID(REPORT_ID_KBD)
+    ),
 
+    // Mouse
+    TUD_HID_REPORT_DESC_MOUSE(
+        HID_REPORT_ID(REPORT_ID_MOUSE)
+    ),
+
+    // Gamepad
+    TUD_HID_REPORT_DESC_GAMEPAD(
+        HID_REPORT_ID(REPORT_ID_GAMEPAD)
+    ),
+};
 static const uint8_t hid_configuration_descriptor[] = {
+
     // Configuration number, interface count, string index, total length, attribute, power in mA
     TUD_CONFIG_DESCRIPTOR(1, 1, 0, TUSB_DESC_TOTAL_LEN, TUSB_DESC_CONFIG_ATT_REMOTE_WAKEUP, 100),
+
     // Interface number, string index, boot protocol, report descriptor len, EP In address, size & polling interval
     TUD_HID_DESCRIPTOR(0, 4, false, sizeof(hid_report_descriptor), 0x81, 16, 10),
 
@@ -95,7 +110,15 @@ void handle_req_queue() {
 
         case HID_EVT_GAMEPAD:
             // Use generic sender for your packed struct
-            tud_hid_report(REPORT_ID_GAMEPAD, &e.u.gp, sizeof(e.u.gp));
+            // ESP_LOGI("[HID]", "gamepad: %d %d %d %d %d %d %d", e.u.gp.buttons, e.u.gp.x, e.u.gp.y, e.u.gp.rx, e.u.gp.ry, e.u.gp.hat);
+            hid_gamepad_wire_t gamepad_out;
+            gamepad_out.buttons = e.u.gp.buttons;
+            gamepad_out.x =  e.u.gp.x;
+            gamepad_out.y = e.u.gp.y;
+            gamepad_out.rx = e.u.gp.rx;
+            gamepad_out.ry = e.u.gp.ry;
+            gamepad_out.hat = e.u.gp.hat;
+            tud_hid_report(REPORT_ID_GAMEPAD, &gamepad_out, sizeof(hid_gamepad_wire_t));
             break;
         }
 
@@ -114,7 +137,7 @@ void gamepad_hid_step() {
     handle_req_queue();
 
     // if (tud_mounted()) {
-    //     // printf("Sending Gamepad report\n");
+    //     printf("Sending Gamepad report\n");
 
     //     gamepad_report_t report = {
     //         .report_id = REPORT_ID_GAMEPAD,

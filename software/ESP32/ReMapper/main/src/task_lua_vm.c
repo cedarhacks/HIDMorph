@@ -309,7 +309,7 @@ static int wait_ms_lua(lua_State *L) {
 
 static int wait_us_lua(lua_State *L) {
     double us = luaL_checknumber(L, 1);
-    int64_t start = esp_timer_get_time();  // microseconds since boot
+    int64_t start = esp_timer_get_time(); // microseconds since boot
     while ((esp_timer_get_time() - start) < us) {
     }
     return 1;
@@ -338,6 +338,18 @@ static int set_mouse_raw(lua_State *L) {
     // ESP_LOGI(TAG, "mouse: %d %d %d %d", buttons, dx, dy, wheel);
     hid_post_mouse(&output_events_q, buttons, dx, dy, wheel, 0, 0);
     // vTaskDelay(pdMS_TO_TICKS(20));
+    return 1;
+}
+
+static int set_gamepad_raw(lua_State *L) {
+    int buttons = luaL_checknumber(L, 1);
+    int x = luaL_checknumber(L, 2);
+    int y = luaL_checknumber(L, 3);
+    int rx = luaL_checknumber(L, 4);
+    int ry = luaL_checknumber(L, 5);
+    int hat = luaL_checknumber(L, 6);
+
+    hid_post_gamepad(&output_events_q, buttons, x, y, rx, ry, hat, 0);
     return 1;
 }
 
@@ -483,6 +495,7 @@ void run_lua_file(const char *filename) {
     lua_register(L, "init_hid_mouse", init_hid_mouse);
     lua_register(L, "set_mouse_pos", set_mouse_pos);
     lua_register(L, "set_mouse_raw", set_mouse_raw);
+    lua_register(L, "set_gamepad_raw", set_gamepad_raw);
     lua_register(L, "display_set_text", display_set_text);
     lua_register(L, "wait_ms", wait_ms_lua);
     lua_register(L, "wait_us", wait_us_lua);
@@ -512,7 +525,7 @@ void run_lua_file(const char *filename) {
     int co_ref = luaL_ref(L, LUA_REGISTRYINDEX); // pops 'co' from L, keeps it alive
 
     // lua_sethook(co, hook_count, LUA_MASKCOUNT, 10000); // every ~10k VM instr
-    lua_sethook(co, hook_count, LUA_MASKCOUNT, 2000); // every ~10k VM instr
+    lua_sethook(co, hook_count, LUA_MASKCOUNT, 100); // every ~10k VM instr
 
     for (;;) {
         int nres = 0;

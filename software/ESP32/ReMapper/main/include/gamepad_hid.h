@@ -14,6 +14,17 @@ typedef struct {
     int8_t hat;      // optional: D-pad
 } __attribute__((packed)) gamepad_report_t;
 
+typedef struct __attribute__((packed)) {
+    int8_t x;
+    int8_t y;
+    int8_t z;
+    int8_t rz;
+    int8_t rx;
+    int8_t ry;
+    uint8_t hat;
+    uint32_t buttons;
+} hid_gamepad_wire_t;
+
 void gamepad_hid_init(void);
 void gamepad_hid_step(void);
 
