@@ -34,8 +34,8 @@ local KEY_UP     = 82
 ----------------------------------------------------------
 -- GAMEPAD BUTTON BITS
 ----------------------------------------------------------
-local BTN_A      = 0x02  -- bit 0 (attack)
-local BTN_B      = 0x01  -- bit 1 (special)
+local BTN_A      = 0x01  -- bit 0 (attack)
+local BTN_B      = 0x02  -- bit 1 (special)
 local BTN_X      = 0x04  -- bit 2 (jump)
 local BTN_Y      = 0x08  -- bit 3 (jump 2)
 local BTN_L      = 0x10  -- bit 4 (shield)
@@ -146,6 +146,7 @@ end
 
 -- Q: Short hop (tap jump)
 local function macro_short_hop()
+    print("shorttt hopp")
     local ob, ox, oy, orx, ory, oh = save_state()
 
     -- press jump (X)

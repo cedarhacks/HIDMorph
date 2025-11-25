@@ -459,6 +459,141 @@ void lua_register_icons(lua_State *L) {
     lua_setglobal(L, "ICON");
 }
 
+void lua_register_keys(lua_State *L) {
+    // Create KEY = {}
+    lua_newtable(L);
+
+#define KEY(name, code)       \
+    lua_pushinteger(L, code); \
+    lua_setfield(L, -2, name)
+
+    // Letters
+    KEY("A", 4);
+    KEY("B", 5);
+    KEY("C", 6);
+    KEY("D", 7);
+    KEY("E", 8);
+    KEY("F", 9);
+    KEY("G", 10);
+    KEY("H", 11);
+    KEY("I", 12);
+    KEY("J", 13);
+    KEY("K", 14);
+    KEY("L", 15);
+    KEY("M", 16);
+    KEY("N", 17);
+    KEY("O", 18);
+    KEY("P", 19);
+    KEY("Q", 20);
+    KEY("R", 21);
+    KEY("S", 22);
+    KEY("T", 23);
+    KEY("U", 24);
+    KEY("V", 25);
+    KEY("W", 26);
+    KEY("X", 27);
+    KEY("Y", 28);
+    KEY("Z", 29);
+
+    // Numbers
+    KEY("NUM_1", 30);
+    KEY("NUM_2", 31);
+    KEY("NUM_3", 32);
+    KEY("NUM_4", 33);
+    KEY("NUM_5", 34);
+    KEY("NUM_6", 35);
+    KEY("NUM_7", 36);
+    KEY("NUM_8", 37);
+    KEY("NUM_9", 38);
+    KEY("NUM_0", 39);
+
+    // Modifiers
+    KEY("LCTRL", 224);
+    KEY("LSHIFT", 225);
+    KEY("LALT", 226);
+    KEY("LGUI", 227);
+    KEY("RCTRL", 228);
+    KEY("RSHIFT", 229);
+    KEY("RALT", 230);
+    KEY("RGUI", 231);
+
+    // Navigation / editing
+    KEY("ENTER", 40);
+    KEY("ESC", 41);
+    KEY("BACKSPACE", 42);
+    KEY("TAB", 43);
+    KEY("SPACE", 44);
+    KEY("MINUS", 45);
+    KEY("EQUAL", 46);
+    KEY("LEFT_BRACKET", 47);
+    KEY("RIGHT_BRACKET", 48);
+    KEY("BACKSLASH", 49);
+    KEY("SEMICOLON", 51);
+    KEY("APOSTROPHE", 52);
+    KEY("GRAVE", 53);
+    KEY("COMMA", 54);
+    KEY("PERIOD", 55);
+    KEY("SLASH", 56);
+
+    // Arrows
+    KEY("RIGHT", 79);
+    KEY("LEFT", 80);
+    KEY("DOWN", 81);
+    KEY("UP", 82);
+
+    // Function keys
+    KEY("F1", 58);
+    KEY("F2", 59);
+    KEY("F3", 60);
+    KEY("F4", 61);
+    KEY("F5", 62);
+    KEY("F6", 63);
+    KEY("F7", 64);
+    KEY("F8", 65);
+    KEY("F9", 66);
+    KEY("F10", 67);
+    KEY("F11", 68);
+    KEY("F12", 69);
+
+#undef KEY
+
+    lua_setglobal(L, "KEY");
+}
+
+void lua_register_gamepad_buttons(lua_State *L) {
+    // Create BTN = {}
+    lua_newtable(L);
+
+#define BTN(name, id)        \
+    lua_pushinteger(L, id);  \
+    lua_setfield(L, -2, name)
+
+    // Face buttons
+    BTN("A",        0);
+    BTN("B",        1);
+    BTN("X",        2);
+    BTN("Y",        3);
+
+    // Shoulder buttons
+    BTN("LB",       4);
+    BTN("RB",       5);
+
+    // Center / system buttons
+    BTN("BACK",     6);   // or SELECT
+    BTN("START",    7);
+    BTN("LSTICK",   8);   // left stick click
+    BTN("RSTICK",   9);   // right stick click
+
+    // Extra / vendor-specific buttons
+    BTN("EXTRA_1",  10);
+    BTN("EXTRA_2",  11);
+
+#undef BTN
+
+    lua_setglobal(L, "BTN");
+}
+
+
 void handle_hid_inputs() {
     hid_evt_t e;
 
@@ -501,6 +636,8 @@ void run_lua_file(const char *filename) {
     lua_register(L, "wait_us", wait_us_lua);
     lua_register(L, "get_time_ms", get_time_ms_lua);
     lua_register_icons(L);
+    lua_register_keys(L);
+    lua_register_gamepad_buttons(L);
 
     //   callbacks
     lua_register(L, "register_keyboard_callback", register_keyboard_callback);
