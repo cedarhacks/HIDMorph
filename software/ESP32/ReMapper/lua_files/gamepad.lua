@@ -18,6 +18,11 @@ local space_down = false;
 local enter_down = false;
 local apastr_down = false;
 
+local up_arrow_down = false;
+local down_arrow_down = false;
+local left_arrow_down = false;
+local right_arrow_down = false;
+
 local out_buttons = 0;
 local out_x = 0;
 local out_y = 0;
@@ -27,6 +32,7 @@ local out_hat = 0;
 
 local function update_buttons()
     local b = 0;
+    local h = 0;
 
     -- 0x0001 = B
     -- 0x0002 = A
@@ -56,7 +62,15 @@ local function update_buttons()
     if enter_down then b = b | GAMEPAD_BTN.START end
     if apastr_down then b = b | GAMEPAD_BTN.BACK end
 
+    -- 0x01 = hat up 
+
+    if up_arrow_down then h = GAMEPAD_HAT.UP end
+    if right_arrow_down then h = GAMEPAD_HAT.RIGHT end
+    if down_arrow_down then h = GAMEPAD_HAT.DOWN end
+    if left_arrow_down then h = GAMEPAD_HAT.LEFT end
+
     out_buttons = b;
+    out_hat = h;
 end
 
 local function update_sticks()
@@ -124,6 +138,14 @@ register_keyboard_callback(function(keycode, pressed)
         enter_down = pressed
     elseif keycode == KEY.APOSTROPHE then
         apastr_down = pressed
+    elseif keycode == KEY.UP then
+        up_arrow_down = pressed
+    elseif keycode == KEY.DOWN then
+        down_arrow_down = pressed
+    elseif keycode == KEY.LEFT then
+        left_arrow_down = pressed
+    elseif keycode == KEY.RIGHT then
+        right_arrow_down = pressed
     end
 
     update_buttons();
