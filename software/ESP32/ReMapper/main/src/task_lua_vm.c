@@ -561,37 +561,45 @@ void lua_register_keys(lua_State *L) {
 }
 
 void lua_register_gamepad_buttons(lua_State *L) {
-    // Create BTN = {}
+    // Create GAMEPAD_BTN = {}
     lua_newtable(L);
 
-#define BTN(name, id)        \
-    lua_pushinteger(L, id);  \
+#define GAMEPAD_BTN(name, id) \
+    lua_pushinteger(L, id);   \
     lua_setfield(L, -2, name)
 
+    // Correct mapping based on your notes:
+
     // Face buttons
-    BTN("A",        0);
-    BTN("B",        1);
-    BTN("X",        2);
-    BTN("Y",        3);
+    GAMEPAD_BTN("B",         0x0001);
+    GAMEPAD_BTN("A",         0x0002);
+    // 0x0004 = none
+    GAMEPAD_BTN("Y",         0x0008);
 
-    // Shoulder buttons
-    BTN("LB",       4);
-    BTN("RB",       5);
+    GAMEPAD_BTN("X",         0x0010);
+    // 0x0020 = none
 
-    // Center / system buttons
-    BTN("BACK",     6);   // or SELECT
-    BTN("START",    7);
-    BTN("LSTICK",   8);   // left stick click
-    BTN("RSTICK",   9);   // right stick click
+    // Shoulders
+    GAMEPAD_BTN("LB",        0x0040);
+    GAMEPAD_BTN("RB",        0x0080);
 
-    // Extra / vendor-specific buttons
-    BTN("EXTRA_1",  10);
-    BTN("EXTRA_2",  11);
+    // Center buttons
+    // 0x0100 = none
+    // 0x0200 = none
+    GAMEPAD_BTN("BACK",      0x0400);
+    GAMEPAD_BTN("START",     0x0800);
 
-#undef BTN
+    // System / stick press
+    GAMEPAD_BTN("HOME",      0x1000);
+    GAMEPAD_BTN("LSTICK",    0x2000);
+    GAMEPAD_BTN("RSTICK",    0x4000);
+    // 0x8000 = none
 
-    lua_setglobal(L, "BTN");
+#undef GAMEPAD_BTN
+
+    lua_setglobal(L, "GAMEPAD_BTN");
 }
+
 
 
 void handle_hid_inputs() {
