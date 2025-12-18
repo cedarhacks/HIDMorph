@@ -1,4 +1,4 @@
-25444583152136465
+25446349175482488
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -101198,6 +101198,13 @@ RT6150B-33GQW
 0
 11
 11
+footprints
+SW_DIP_219-4
+
+
+0
+8
+8
 footprints
 USBA_Female
 
