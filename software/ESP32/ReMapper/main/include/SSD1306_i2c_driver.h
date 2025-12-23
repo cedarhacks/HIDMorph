@@ -5,9 +5,9 @@
 #include "esp_log.h"
 #include "driver/i2c_master.h"
 
-#define MAX_COMMANDS (64)
+#define MAX_COMMANDS (32)
 #define SSD1306_WIDTH (128)
-#define SSD1306_HEIGHT (32)
+#define SSD1306_HEIGHT (64)
 #define SSD1306_PAGES ((SSD1306_HEIGHT + 7) / 8)
 
 /// fit into the SSD1306_ naming scheme

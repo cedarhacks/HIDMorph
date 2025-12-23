@@ -9,7 +9,7 @@ void list_selector_init(lv_obj_t *parent, list_selector_t *selector) {
     lv_coord_t parent_width = lv_obj_get_width(parent);
     lv_coord_t parent_height = lv_obj_get_height(parent);
 
-    int button_size = parent_height - 16;
+    int button_size = 20;
 
     lv_obj_t *row = lv_obj_create(parent);
     selector->row = row;

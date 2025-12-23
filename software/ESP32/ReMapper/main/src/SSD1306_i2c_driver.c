@@ -86,7 +86,8 @@ void SSD1306_setup_display(SSD1306_t *inst) {
         comPins = 0x02;
         inst->contrast = 0x8F;
     } else {
-        // Other screen varieties -- TBD
+        comPins = 0x12;
+        inst->contrast = 0xCF;
     }
 
     SSD1306_command(inst, SSD1306_SETCOMPINS);
@@ -164,7 +165,7 @@ void SSD1306_display(SSD1306_t *inst, uint8_t pixels[SSD1306_HEIGHT * SSD1306_WI
             i2c_master_transmit(inst->dev_handle,
                                 out,
                                 bytesOut,
-                                100 / portTICK_PERIOD_MS);
+                                1000 / portTICK_PERIOD_MS);
 
             out[0] = 0x40;
             bytesOut = 1;
@@ -176,7 +177,7 @@ void SSD1306_display(SSD1306_t *inst, uint8_t pixels[SSD1306_HEIGHT * SSD1306_WI
     i2c_master_transmit(inst->dev_handle,
                         out,
                         bytesOut,
-                        100 / portTICK_PERIOD_MS);
+                        1000 / portTICK_PERIOD_MS);
 }
 
 void SSD1306_dim(SSD1306_t *inst, bool dim) {
