@@ -4,6 +4,7 @@
 typedef struct {
     lv_obj_t *row;
     lv_obj_t *button_l;
+    lv_obj_t *button_ok;
     lv_obj_t *button_r;
     lv_obj_t *page;
     int current_i;
