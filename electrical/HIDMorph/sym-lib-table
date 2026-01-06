@@ -1,0 +1,9 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "ESP32-S3-WROOM-1-N8R8")(type "KiCad")(uri "/home/sulicat/git/hardware/HIDMorph/electrical/footprints/ESP32-S3-WROOM-1-N8R8.kicad_sym")(options "")(descr ""))
+  (lib (name "RP2040")(type "KiCad")(uri "/home/sulicat/git/hardware/HIDMorph/electrical/footprints/SC0914_13_.kicad_sym")(options "")(descr ""))
+  (lib (name "RT6150B-33GQW")(type "KiCad")(uri "/home/sulicat/git/hardware/HIDMorph/electrical/footprints/RT6150B-33GQW.kicad_sym")(options "")(descr ""))
+  (lib (name "USBA_Female")(type "KiCad")(uri "/home/sulicat/git/hardware/HIDMorph/electrical/footprints/USBA_Female.kicad_sym")(options "")(descr ""))
+  (lib (name "push_button_SKRPABE010")(type "KiCad")(uri "/home/sulicat/git/hardware/HIDMorph/electrical/footprints/push_button_SKRPABE010.kicad_sym")(options "")(descr ""))
+  (lib (name "SPX1117M3_L")(type "KiCad")(uri "/home/sulicat/git/hardware/HIDMorph/electrical/footprints/SPX1117M3_L.kicad_sym")(options "")(descr ""))
+)
