@@ -1,26 +1,81 @@
 # HIDMorph
 
-## TODO
- - [x] Switch from webserver to file system in programming mode
-   - [x] Programming Mode switch with LED indication - electrical
-   - [x] Show file system when plugged in programming mode - software
- - [x] read/write from the QSPI memory attached on the esp
- - [x] tinyusb mcs usb drive
- - [x] Clean up software to support new boot flow and execution
- - [x] Move USB device code into it's own OS task
-   - [x] Needs to be able to initialize either as a MSC or HID (or both??) 
-   - [x] Neesd to accept commands either for HID or handle the file storage (It will have the handle)
- - [ ] Read and parse files in qspi
- - [x] Write OLED Driver
-   - [x] Done here: https://github.com/cedarhacks/SSD1306_esp32_driver
- - [x] Add LCD to schematic
-   - [x] i2C IO15 data
-   - [x] i2C IO16 CLK
- - [x] Add 1 switch + 2 buttons to schematic
-   - [x] switch to IO1
-   - [x] button 1 to IO2
-   - [x] button 2 to IO3
- - [x] Send V3 to Fab
- - [ ] Start working on webtool to create programs
- - [ ] Finish planning out program execution
- - [ ] Finish laying out full user experience flow
+**HIDMorph** is a programmable USB HID host/device translator built on a dual-MCU architecture (ESP32-S3 + RP2040).  
+It enables real-time translation, remapping, and transformation of USB HID inputs (keyboards, mice, controllers) without requiring firmware recompilation.
+
+The system is designed as an embedded product, combining real-time firmware, USB protocol handling, and custom hardware.
+
+---
+
+## What HIDMorph Does
+
+- Acts as a **USB HID host and USB HID device** simultaneously  
+- Translates HID inputs (e.g. keyboard → joystick, macros, custom mappings) in real time  
+- Supports **runtime-configurable behavior** via a Lua scripting layer  
+- Designed for low-latency, deterministic input handling  
+- Runs entirely on-device (no PC software required after setup)
+
+---
+
+## Architecture Overview
+
+HIDMorph uses a **dual-MCU design** to cleanly separate USB responsibilities:
+
+- **RP2040**
+  - USB Host stack
+  - Enumerates and reads input HID devices
+  - Handles timing-sensitive USB host transactions
+
+- **ESP32-S3**
+  - USB Device stack (HID output)
+  - Runs FreeRTOS-based application logic
+  - Executes Lua scripts for dynamic input translation
+  - Manages on-device filesystem and configuration
+
+Communication between MCUs is handled over a dedicated internal interface designed for low latency and robustness.
+
+*(Architecture diagram coming soon)*
+
+---
+
+## Firmware
+
+- **RTOS:** FreeRTOS  
+- **USB Stack:** TinyUSB  
+- **Languages:** C/C++, Lua  
+- **Features:**
+  - USB HID descriptor management
+  - Class handling for common HID devices
+  - Scriptable runtime for input translation
+  - Fault handling and recovery paths for USB disconnects
+
+---
+
+## Hardware
+
+- Custom PCB designed in KiCad  
+- Dual-MCU architecture (ESP32-S3 + RP2040)  
+- USB host and device interfaces  
+- Designed for iterative hardware bring-up and revision
+
+*(Schematics, PCB renders, and photos will be added as the design stabilizes)*
+
+---
+
+## Project Status
+
+HIDMorph is under **active development**.
+
+Completed:
+- Core dual-MCU architecture
+- USB host/device communication path
+- Base firmware framework
+- Lua runtime integration
+- Initial PCB revisions and bring-up
+
+In progress:
+- Expanded HID device support
+- Improved scripting APIs
+- Documentation and examples
+- Enclosure refinement
+
