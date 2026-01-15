@@ -501,7 +501,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "/home/sulicat/git/hardware/HIDMorph/electrical/HIDMorph/production/",
+      "plot": "./assembly_map.pdf",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "HIDMorph.glb",
